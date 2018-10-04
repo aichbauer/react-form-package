@@ -477,8 +477,8 @@ In our case `data` would hold:
 Meta data gives you an overview of what happened on that field. E.g. if a field is `pristine` you could deside to not send its data to the server since, nothing changed.
 
 Property | Type | Description
----|---|---|---|---
-initialValue | `String` or `Bool` | 
+---|---|---
+initialValue | `String` or `Bool` |
 dirty | `Bool` | `true` if the `value !== initialValue`
 pristine | `Bool` | `true` if the `value === initialValue`
 visited | `Bool` | `true` if this field was focused (`onFocus`)
