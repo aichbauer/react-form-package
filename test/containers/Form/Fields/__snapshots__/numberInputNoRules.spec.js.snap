@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with number input | number input no rules 1`] = `
+<form>
+  <div>
+    <div>
+      number
+    </div>
+    <input
+      className="rfp-input"
+      id="number"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="number"
+      valid={false}
+      value=""
+    />
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

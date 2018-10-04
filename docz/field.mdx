@@ -1,0 +1,54 @@
+---
+name: Field
+route: /react-form-package/field
+order: 5
+---
+
+import { Form, Field, Button } from '../src'
+import { Playground, PropsTable } from 'docz';
+
+# Field
+
+This component has to be a child within the `<Form />` component. This component handles its own state and on any state change it will report it to the `<Form />` component which validates the whole form.
+
+## Basic Usage
+
+```jsx
+import {
+  Form,
+  Field,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an email `<Field />` and a `<Button />` component.
+
+<Playground>
+  <Form>
+    <div>
+      <div>
+        Email
+      </div>
+      <div>
+        <Field id="email" type="email" reuqired />
+      </div>
+    </div>
+    <div>
+      <Button id="submit" type="submit"onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+      >Submit</Button>
+    </div>
+  </Form>
+</Playground>
+
+## Props
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+id | String | true | |
+type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`
+required | Bool | false | false |
+min | String | false | -1
+max | String | false | -1

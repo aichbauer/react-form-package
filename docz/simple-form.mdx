@@ -1,0 +1,112 @@
+---
+name: Simple Form
+route: /react-form-package/simple-form
+order: 2
+---
+
+import { Form, Field, Select, RadioGroup, Button } from '../src'
+import { Playground } from 'docz';
+
+# Simple Form
+
+There are five different components within this package.
+
+```jsx
+import {
+  Button,
+  Field,
+  Form,
+  RadioGroup,
+  Select,
+} from 'react-form-package';
+```
+
+If you are familiar with writing HTML forms than you are all set up. There are no complex data props or functions that you have to call before you can set up a form and validate its input like in most other libraries. Why should you care about writing the validations for your form yourself? An email, a date, a url, and so on, will always have the same structure. `react-form-package` will not only help you by your forms state management, it also will help you validating your forms correctly.
+
+## Basic Usage
+
+* *Every `<Button>`, `<Field>`, `<RadioGroup>`, and `<Select>` component must have an **id property** and a **type property** *
+* *`<Select>` components have `<option>` childs which must have a **value property** *
+* *`<RadioGroup>` components have `<input>` childs which must have an **id property**, **type property**, and **name property** *
+* *If you want the form to valitate inputs and show error messages simply add a **validate prop** on the `<Form>` component *
+
+In this example we use all components and types this library supports:
+
+<Playground>
+  <Form
+      validate
+    >
+      <div>
+        <div>checkbox</div>
+        <Field type="checkbox" id="checkbox" />
+      </div>
+      <div>
+        <div>textarea</div>
+        <Field rows="5" cols="30" type="textarea" id="textarea" />
+      </div>
+      <div>
+        <div>date</div>
+        <Field type="date" id="date" />
+      </div>
+      <div>
+        <div>datetime-local</div>
+        <Field type="datetime-local" id="datetime-local" />
+      </div>
+      <div>
+        <div>email</div>
+        <Field type="email" id="email" />
+      </div>
+      <div>
+        <div>number</div>
+        <Field type="number" id="number" />
+      </div>
+      <div>
+        <div>tel</div>
+        <Field type="tel" id="tel" />
+      </div>
+      <div>
+        <div>text</div>
+        <Field type="text" id="text" />
+      </div>
+      <div>
+        <div>password</div>
+        <Field type="password" id="password" />
+      </div>
+      <div>
+        <div>time</div>
+        <Field type="time" id="time" />
+      </div>
+      <div>
+        <div>url</div>
+        <Field type="url" id="url" />
+      </div>
+      <div>
+        <div>select</div>
+        <Select id="select" type="select">
+          <option disabled value="">--- Choose an option ---</option>
+          <option value="option1">option 1</option>
+          <option value="option2">option 2</option>
+          <option value="option3">option 3</option>
+        </Select>
+      </div>
+      <div>
+        <div>radio</div>
+        <RadioGroup type="radio" id="radio">
+          <input type="radio" name="radio" id="radio1" />
+          radio 1
+          <input type="radio" name="radio" id="radio2" />
+          radio 2
+          <input type="radio" name="radio" id="radio3" />
+          radio 3
+        </RadioGroup>
+      </div>
+      <div>
+        <Button id="submit" type="submit" onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}
+        >submit</Button>
+      </div>
+    </Form>
+</Playground>

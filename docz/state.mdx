@@ -1,0 +1,131 @@
+---
+name: State
+route: /react-form-package/state
+order: 8
+---
+
+# State
+
+> Working with the state data and meta data
+
+A simple Example of how your Form could look like:
+
+```jsx
+<Form>
+  <Field id="email" type="email" required />
+  <Field id="password" type="password" required />
+  <Button
+    id="button"
+    type="submit"
+    onClick={(state) => this.handleOnClick(state)}
+  >
+    Submit
+  </Button>
+</Form>
+```
+
+As you can see the `<Button />` component has a `onClick` property. This property takes a function. The `handleOnClick` function could look something like:
+
+```js
+async handleOnClick(state) {
+  // do something with the state
+  // e.g. send data to a server
+  try {
+    const response = await fetch('https://server.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify(state.data);
+    });
+    // do something with the response
+  } catch(error) {
+    // do something with the error
+  }
+}
+```
+
+As you can see the `state` parameter is an object. It has three different properties.
+
+* **data**: `object`
+* **meta**: `object`
+* **formValid**: `boolean`
+
+In our case `data` would hold:
+
+```json
+{
+  "data": {
+    "email": "",
+    "password": ""
+  }
+}
+```
+
+`meta` would hold:
+
+```json
+{
+  "meta": {
+    "email": {
+      "initialValue": "",
+      "dirty": false,
+      "pristine": true,
+      "visited": false,
+      "touched": false,
+      "value": "",
+      "valid": false,
+      "invalid": true,
+      "rules": {
+        "type": "email",
+        "min": -1,
+        "max": -1,
+        "required": true,
+      }
+    },
+    "password": {
+      "initialValue": "",
+      "dirty": false,
+      "pristine": true,
+      "visited": false,
+      "touched": false,
+      "value": "",
+      "valid": false,
+      "invalid": true,
+      "rules": {
+        "type": "password",
+        "min": -1,
+        "max": -1,
+        "required": true,
+      }
+    }
+  }
+}
+```
+
+`formValid` would hold:
+
+```json
+{
+  "formValid": false
+}
+```
+## Meta Description
+
+Meta data gives you an overview of what happened on that field. E.g. if a field is `pristine` you could deside to not send its data to the server since, nothing changed.
+
+Property | Type | Description
+---|---|---|---|---
+initialValue | `String` or `Bool` | 
+dirty | `Bool` | `true` if the `value !== initialValue`
+pristine | `Bool` | `true` if the `value === initialValue`
+visited | `Bool` | `true` if this field was focused (`onFocus`)
+touched | `Bool` | `true` if this field was blurred (`onBlur`)
+value | `String` or `Bool` |
+valid | `Bool` | `true` if this field is valid (passed all rules)
+invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
+rules | `object` | the rules for the validation of this field
+rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
+rules.min | `Number` | this field has to have at least `min` characters (`Int`)
+rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
+rules.required | `Bool` | this field is required (has to have a value)

@@ -1,0 +1,70 @@
+---
+name: RadioGroup
+route: /react-form-package/radio-group
+order: 6
+---
+
+import { Form, RadioGroup, Button } from '../src'
+import { Playground, PropsTable } from 'docz';
+
+# RadioGroup
+
+This component has to be a child within the `<Form />` component. This component must have `<input />` components with the type="radio" as children. These children components must have a name prop which has to match the parents id. The id of the children will be the value of the `<RadioGroup />` component when clicked.
+
+## Basic Usage
+
+```jsx
+import {
+  Form,
+  RadioGroup,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with a `<RadioGroup />` and a `<Button />` component.
+
+<Playground>
+  <Form>
+    <div>
+      <div>
+        Choose an option
+      </div>
+      <RadioGroup type="radio" id="option">
+        <div>
+          <div>
+            option 1
+          </div>
+          <input type="radio" name="option" id="option1" />
+        </div>
+        <div>
+          <div>
+            option 2
+          </div>
+          <input type="radio" name="option" id="option2" />
+        </div>
+        <div>
+          <div>
+            option 3
+          </div>
+          <input type="radio" name="option" id="option3" />
+        </div>
+      </RadioGroup>
+      <div>
+        <Button id="submit" type="submit" onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}>Submit</Button>
+      </div>
+    </div>
+  </Form>
+</Playground>
+
+## Props
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+id | String | true | | 
+type | String | true | | `radio`
+required | Bool | false | false |
+
+

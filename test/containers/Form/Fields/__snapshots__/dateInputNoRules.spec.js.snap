@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with date input | date input no rules 1`] = `
+<form>
+  <div>
+    <div>
+      date
+    </div>
+    <input
+      className="rfp-input"
+      id="date"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="date"
+      valid={false}
+      value=""
+    />
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

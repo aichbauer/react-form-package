@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with textarea | textarea no rules 1`] = `
+<form>
+  <div>
+    <div>
+      textarea
+    </div>
+    <textarea
+      className="rfp-textarea"
+      id="textarea"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="textarea"
+      valid={false}
+      value=""
+    />
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

@@ -1,0 +1,70 @@
+---
+name: Introduction
+route: /react-form-package/
+order: 0
+---
+
+import { Playground } from 'docz';
+import { Form, Field, Button } from '../src';
+
+# Introduction
+
+> A declarative form component with inbuilt validation and state management
+
+Install
+
+```sh
+$ npm i react-form-package -S
+```
+
+and import the components from `react-form-package` and you are ready to go.
+
+```jsx
+import {
+  Form,
+  Field,
+  Button,
+} from 'react-form-package';
+```
+
+`react-form-package` takes care about input validation, state management and user communication by using a declarative approach. `react-form-package` provides you with the logic and you are responsible for the styling. Write down how your form should look like in a similar struckture as plain HTML and `react-form-package` takes care of the rest.
+
+But see for yourself:
+
+<Playground>
+  <Form
+    validate
+  >
+    <div>
+    Register
+    </div>
+    <div>
+      <div>
+        Email
+      </div>  
+      <Field type="email" id="email" required />
+    </div>
+    <div>
+      <div>
+        Password
+      </div>  
+      <Field type="password" id="password" min="8" required />
+    </div>
+    <div>
+      <div>
+        Confirm Password
+      </div>  
+      <Field type="password" id="password2" min="8" required />
+    </div>
+    <div>
+      <Button type="submit" id="submit" onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}>Register</Button>
+    </div>
+  </Form>
+</Playground>
+
+
+ 

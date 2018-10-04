@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with text input | onChange 1`] = `
+<form>
+  <div>
+    <div>
+      text
+    </div>
+    <input
+      className="rfp-input"
+      id="text"
+      invalid={false}
+      max="8"
+      min="3"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="text"
+      valid={false}
+      value=""
+    />
+  </div>
+</form>
+`;

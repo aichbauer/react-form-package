@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with url input | url input all rules | onChange -> error label 1`] = `
+<form>
+  <div>
+    <div>
+      url
+    </div>
+    <input
+      className="rfp-input"
+      id="url"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="url"
+      valid={false}
+      value=""
+    />
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

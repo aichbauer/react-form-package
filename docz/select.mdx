@@ -1,0 +1,54 @@
+---
+name: Select
+route: /react-form-package/select
+order: 7
+---
+
+import { Form, Select, Button } from '../src'
+import { Playground, PropsTable } from 'docz';
+
+# Select
+
+This component has to be a child within the `<Form />` component. This component must have `<option />` components with an value prop as children.
+
+## Basic Usage
+
+```jsx
+import {
+  Form,
+  Select,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with a `<Select />` and a `<Button />` component.
+
+<Playground>
+  <Form>
+    <div>
+      <div>
+        Select an option
+      </div>
+      <Select id="select" type="select">
+        <option disabled value="">--- Select an option ---</option>
+        <option value="option1">option 1</option>
+        <option value="option2">option 2</option>
+        <option value="option3">option 3</option>
+      </Select>
+      <div>
+        <Button id="submit" type="submit" onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}>Submit</Button>
+      </div>
+    </div>
+  </Form>
+</Playground>
+
+## Props
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+id | String | true | | 
+type | String | true | | `select`
+required | Bool | false | false |

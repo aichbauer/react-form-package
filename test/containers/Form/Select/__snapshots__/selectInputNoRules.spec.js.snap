@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with select input | select input no rules 1`] = `
+<form>
+  <div>
+    <div>
+      select
+    </div>
+    <select
+      className="rfp-select"
+      id="select"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="select"
+      valid={false}
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        -- choose one option --
+      </option>
+      <option
+        value="select1"
+      >
+        select 1
+      </option>
+      <option
+        value="select2"
+      >
+        select 2
+      </option>
+    </select>
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

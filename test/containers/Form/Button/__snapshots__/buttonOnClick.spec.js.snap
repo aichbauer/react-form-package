@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form (validate) with button | click button 1`] = `
+<form>
+  <div>
+    <div>
+      checkbox
+    </div>
+    <input
+      className="rfp-checkbox"
+      id="checkbox"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      type="checkbox"
+      valid={false}
+      value={false}
+    />
+  </div>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

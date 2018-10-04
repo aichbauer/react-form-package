@@ -1,0 +1,16 @@
+.button {
+  margin: 10px 0px;
+  background: #001f3f;
+  border: 1px solid black;
+  padding: 8px 24px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.input {
+  margin: 10px 0px;
+  padding: 8px 3px;
+  border: 1px solid #001f3f;
+  border-radius: 5px;
+}

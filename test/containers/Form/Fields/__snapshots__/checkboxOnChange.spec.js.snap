@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with checkbox input | onChange 1`] = `
+<form>
+  <div>
+    <div>
+      checkbox
+    </div>
+    <input
+      className="rfp-checkbox"
+      id="checkbox"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="checkbox"
+      valid={false}
+      value={false}
+    />
+  </div>
+</form>
+`;
