@@ -37,9 +37,9 @@ const Field = (props) => (
             cols={props.cols}
             valid={validate && data[props.id].touched && data[props.id].valid}
             invalid={validate && data[props.id].touched && data[props.id].invalid}
-            onFocus={(e) => handleOnFocus(e, data[props.id].rules)}
-            onBlur={(e) => handleOnBlur(e, data[props.id].rules)}
-            onChange={(e) => handleOnChange(e, data[props.id].rules)}
+            onFocus={(e) => handleOnFocus(e, props.onFocus)}
+            onBlur={(e) => handleOnBlur(e, props.onBlur)}
+            onChange={(e) => handleOnChange(e, data[props.id].rules, props.onChange)}
           />
           {data[props.id].invalid && data[props.id].touched && (
             <ErrorLabelComponent.type

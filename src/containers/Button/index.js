@@ -1,23 +1,15 @@
 import React from 'react';
 import { Context } from '../Context';
+import { createReturnState } from '../../helpers';
 
 const Button = (props) => (
   <Context.Consumer>
     {(state) => {
       const {
-        data,
         formValid,
         validate,
         ButtonComponent,
       } = state;
-
-      let values = {};
-      Object.entries(data).forEach((entry) => {
-        values = {
-          ...values,
-          [entry[0]]: entry[1].value,
-        };
-      });
 
       return (
         <ButtonComponent.type
@@ -28,7 +20,7 @@ const Button = (props) => (
           onClick={(e) => {
             e.preventDefault();
 
-            return props.onClick({ data: values, meta: data, formValid });
+            return props.onClick(createReturnState(state));
           }}
           disabled={validate ? !formValid : false}
         >
