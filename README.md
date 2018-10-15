@@ -21,6 +21,7 @@
   * [RadioGroup](#radiogroup)
   * [Select](#select)
 * [State](#state)
+* [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
 * [Styling](#styling)
 * [License](#license)
 
@@ -279,8 +280,11 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`
 required | Bool | false | false |
-min | String | false | -1
-max | String | false | -1
+min | String | false | -1 |
+max | String | false | -1 |
+onFocus | Func | false | | get access to the state of the form when the user focus on the input
+onChange | Func | false | | get access to the state of the form when the user changes the input
+onBlur | Func | false | | get access to the state of the form when the user blurs the input
 
 ### RadioGroup
 
@@ -326,6 +330,9 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `radio`
 required | Bool | false | false |
+onFocus | Func | false | | get access to the state of the form when the user focus on the input
+onChange | Func | false | | get access to the state of the form when the user changes the input
+onBlur | Func | false | | get access to the state of the form when the user blurs the input
 
 ### Select
 
@@ -365,6 +372,9 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `select`
 required | Bool | false | false |
+onFocus | Func | false | | get access to the state of the form when the user focus on the input
+onChange | Func | false | | get access to the state of the form when the user changes the input
+onBlur | Func | false | | get access to the state of the form when the user blurs the input
 
 ## State
 
@@ -385,6 +395,8 @@ A simple Example of how your Form could look like:
   </Button>
 </Form>
 ```
+
+> You can also use `onFocus`, `onChange`, and `onBlur` on every `Field`, `Select`, or `RadioGroup` components to get access to the state of the form ([more info](#onfocus-onchange-onblur))
 
 As you can see the `<Button />` component has a `onClick` property. This property takes a function. The `handleOnClick` function could look something like:
 
@@ -492,6 +504,83 @@ rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email
 rules.min | `Number` | this field has to have at least `min` characters (`Int`)
 rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
 rules.required | `Bool` | this field is required (has to have a value)
+
+## onFocus, onChange, onBlur
+
+> get access to the state everytime the user interacts with your form
+
+Sometimes, access to the forms state is needed even before the user submits the form. This can be if you want to store the forms state on the server on every change (e.g. every time the user changes a input or everytime the user blurs an input) or you want to check if the users input is already taken (e.g. a user might not be allowed to use a email or a username that is already taken and you want to give the user a fast respond before the user even submits the form).
+
+You are not able to modify the state on this callbacks since `react-form-package` takes care of the state management, but you can use the state to communicate with a server or change the UI corresponding to the current state.
+
+### onFocus
+
+```jsx
+import {
+  Form,
+  Field,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an email `<Field />` component and a `onFocus` property.
+
+```jsx
+  <Form>
+    {/* do something with the state onFocus */}
+    <Field
+      id="email"
+      type="email"
+      value="test@example.com"
+      onFocus={(state) => console.log(state)}
+    />
+  </Form>
+```
+
+### onChange
+
+```jsx
+import {
+  Form,
+  Field,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an email `<Field />` component and a `onChange` property.
+
+```jsx
+  <Form>
+    {/* do something with the state onChange */}
+    <Field
+      id="email"
+      type="email"
+      value="test@example.com"
+      onChange={(state) => console.log(state)}
+    />
+  </Form>
+```
+
+### onBlur
+
+```jsx
+import {
+  Form,
+  Field,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an email `<Field />` component and a `onBlur` property.
+
+```jsx
+  <Form>
+    {/* do something with the state onBlur */}
+    <Field
+      id="email"
+      type="email"
+      value="test@example.com"
+      onBlur={(state) => console.log(state)}
+    />
+  </Form>
+```
 
 ## Styling
 
