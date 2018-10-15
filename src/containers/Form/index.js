@@ -108,6 +108,8 @@ class Form extends React.Component {
           checked,
           valid,
           invalid: !valid,
+          pristine: value === data.initialValue,
+          dirty: value !== data.initialValue,
         },
       },
     }, () => this.validateForm(cb));
