@@ -12,24 +12,19 @@ configure({ adapter: new Adapter() });
 
 test('Render Form with text input | onFocus', () => {
   const fieldSpy = jest.spyOn(Form.prototype, 'handleOnFocus');
+  const onFocusMock = jest.fn();
   const event = {
     target: {
       id: 'text',
       value: '',
     },
   };
-  const rules = {
-    type: 'text',
-    min: '3',
-    max: '8',
-    required: true,
-  };
 
   const myComponent = (
     <Form>
       <div>
         <div>text</div>
-        <Field type="text" id="text" min="3" max="8" required />
+        <Field type="text" id="text" min="3" max="8" onFocus={() => onFocusMock()} required />
       </div>
     </Form>
   );
@@ -41,13 +36,14 @@ test('Render Form with text input | onFocus', () => {
   expect(state.data.text.value).toBe('');
   expect(state.data.text.valid).toBe(false);
 
-  wrapper.find('input').simulate('focus', event, rules);
+  wrapper.find('input').simulate('focus', event);
   wrapper.update();
 
   state = wrapper.state();
 
   expect(state.data.text.value).toBe('');
   expect(state.data.text.valid).toBe(false);
+  expect(onFocusMock).toHaveBeenCalled();
   expect(fieldSpy).toHaveBeenCalled();
   expect(tree).toMatchSnapshot();
 });

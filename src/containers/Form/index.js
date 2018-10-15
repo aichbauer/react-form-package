@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '../Context';
-import { checkFormInput, getNestedChilds, initialState } from '../../helpers';
+import {
+  checkFormInput, createReturnState, getNestedChilds, initialState,
+} from '../../helpers';
 
 class Form extends React.Component {
   constructor(props) {
@@ -63,7 +65,7 @@ class Form extends React.Component {
     }, () => this.validateForm());
   }
 
-  handleOnFocus(e) {
+  handleOnFocus(e, cb) {
     const {
       id,
       type,
@@ -80,10 +82,10 @@ class Form extends React.Component {
           visited: true,
         },
       },
-    }, () => this.validateForm());
+    }, () => this.validateForm(cb));
   }
 
-  handleOnChange(e, rules) {
+  handleOnChange(e, rules, cb) {
     const {
       id,
       value,
@@ -108,10 +110,10 @@ class Form extends React.Component {
           invalid: !valid,
         },
       },
-    }, () => this.validateForm());
+    }, () => this.validateForm(cb));
   }
 
-  handleOnBlur(e) {
+  handleOnBlur(e, cb) {
     const {
       id,
       type,
@@ -128,10 +130,10 @@ class Form extends React.Component {
           touched: true,
         },
       },
-    }, () => this.validateForm());
+    }, () => this.validateForm(cb));
   }
 
-  validateForm() {
+  validateForm(cb) {
     const { data } = this.state;
     const allFieldValidations = [];
 
@@ -143,6 +145,12 @@ class Form extends React.Component {
     const allFieldsValid = allFieldValidations.every((val) => val);
     this.setState({
       formValid: allFieldsValid,
+    }, () => {
+      const { state } = this;
+
+      if (cb) {
+        cb(createReturnState(state));
+      }
     });
   }
 
