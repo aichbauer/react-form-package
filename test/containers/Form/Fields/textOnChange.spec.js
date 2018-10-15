@@ -10,7 +10,7 @@ import {
 
 configure({ adapter: new Adapter() });
 
-test('Render Form with text input | onChange', () => {
+test('Render Form with text input | onChange | test value, valid, invalid, pristine, dirty', () => {
   const fieldSpy = jest.spyOn(Form.prototype, 'handleOnChange');
   const mock = jest.fn();
   const event = {
@@ -54,6 +54,9 @@ test('Render Form with text input | onChange', () => {
   expect(errorLabelExists).toBe(true);
   expect(state.data.text.value).toBe('hi');
   expect(state.data.text.valid).toBe(false);
+  expect(state.data.text.invalid).toBe(true);
+  expect(state.data.text.pristine).toBe(false);
+  expect(state.data.text.dirty).toBe(true);
   expect(mock).toBeCalledTimes(2);
   expect(fieldSpy).toHaveBeenCalled();
   expect(tree).toMatchSnapshot();
