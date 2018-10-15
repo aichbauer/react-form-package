@@ -12,6 +12,7 @@ configure({ adapter: new Adapter() });
 
 test('Render Form with text input | onChange', () => {
   const fieldSpy = jest.spyOn(Form.prototype, 'handleOnChange');
+  const mock = jest.fn();
   const event = {
     target: {
       id: 'text',
@@ -29,7 +30,7 @@ test('Render Form with text input | onChange', () => {
     <Form>
       <div>
         <div>text</div>
-        <Field type="text" id="text" min="3" max="8" />
+        <Field type="text" id="text" min="3" max="8" onChange={() => mock()} onBlur={() => mock()} />
       </div>
     </Form>
   );
@@ -53,6 +54,7 @@ test('Render Form with text input | onChange', () => {
   expect(errorLabelExists).toBe(true);
   expect(state.data.text.value).toBe('hi');
   expect(state.data.text.valid).toBe(false);
+  expect(mock).toBeCalledTimes(2);
   expect(fieldSpy).toHaveBeenCalled();
   expect(tree).toMatchSnapshot();
 });
