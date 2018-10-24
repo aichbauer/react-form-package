@@ -16,6 +16,10 @@ const RadioGroup = (props) => (
         handleOnBlur,
       } = state;
 
+      if (Object.keys(data).length === 0 && data.constructor === Object) {
+        return null;
+      }
+
       return (
         <React.Fragment>
           <RadioGroupContainerComponent.type

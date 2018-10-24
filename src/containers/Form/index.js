@@ -42,7 +42,7 @@ class Form extends React.Component {
     this.validateForm = this.validateForm.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { children } = this.props;
     const flatChilds = getNestedChilds(children, []);
 

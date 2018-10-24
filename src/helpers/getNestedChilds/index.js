@@ -19,6 +19,9 @@ const getNestedChilds = (children, data) => {
         flatChilds.push(child);
       }
     }
+    if (Array.isArray(child)) {
+      return child.forEach((c) => getNestedChilds(c, flatChilds));
+    }
     if (typeof child !== 'object') {
       return flatChilds;
     }
