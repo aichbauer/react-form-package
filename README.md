@@ -20,6 +20,7 @@
   * [Field](#field)
   * [RadioGroup](#radiogroup)
   * [Select](#select)
+* [Dynamic Fields](#dynamic-fields)
 * [State](#state)
 * [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
 * [Styling](#styling)
@@ -201,6 +202,7 @@ validate| Bool | false | |
 input | Element |  `<input className="rfp-input" />` | |
 checkbox | Element |  `<input className="rfp-checkbox" />` | |
 radio | Element |  `<input className="rfp-radio-group" />` | |
+radioContainer | Element |  `<div className="rfp-radio-group-container" />` | | The Element that wraps the radio elements.
 button | Element |  `<button className="rfp-button" />` | |
 select | Element |  `<select className="rfp-select" />` | |
 textarea | Element | `<textarea className="rfp-textarea" />` | |
@@ -375,6 +377,72 @@ required | Bool | false | false |
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
+
+## Dynamic Fields
+
+Sometimes you need to create your `Form` out of dynamic data, e.g. from data you received from a server. This is mostly the case when using `checkboxes`, `radio groups`, or `select fields`.
+
+For example: you could receive the data from the server and than use `setState` to set the data for your `checkboxes`, `radio groups`, and `select fields` used in your `<Form />` component.
+
+```js
+async componentDidMount() {
+  const response = await getDataFromServer();
+
+  this.setState({
+    checkboxData: response.data.checkboxData,
+    selectData: response.data.selectData,
+    radioData: response.data.radioData,
+  });
+}
+```
+
+Than in your render function you would return something like:
+
+```jsx
+<Form>
+  <div>
+    {checkboxData.map((checkbox) => (
+      <div>
+        <div>{checkbox.name}</div>
+        <Field id={checkbox.id} type="checkbox" />
+      </div>
+    ))}
+  </div>
+  <div>
+    <Select type="select" id="select">
+      <option
+        disabled
+        value=""
+      >
+        --- Select an option ---
+      </option>
+      {selectData.map((selectOption) => (
+        <option value={selectOption.value}>{selectOption.name}</option>
+      ))}  
+    </Select>
+  </div>
+  <div>
+    <RadioGroup type="radio" id="radioID">
+      {radioData.map((radioOption) => (
+        <div>
+          <div>{radioOption.name}</div>
+          <input type="radio" name="radioID" id={radioOption.id} />
+        </div>
+      ))}  
+    </RadioGroup>
+  </div>
+  <div>
+    <Button type="submit" id="submit" onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}>
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
 
 ## State
 
