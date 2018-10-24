@@ -9,10 +9,10 @@ const checkFormInput = (rules, value) => {
 
   switch (rules.type) {
     case 'date':
-      validateArray.push(inputIs.date(value));
+      validateArray.push(inputIs.date(value, 'YYYY-MM-DD'));
       break;
     case 'datetime-local':
-      validateArray.push(inputIs.datetime(value));
+      validateArray.push(inputIs.datetime(value, 'YYYY-MM-DD'));
       break;
     case 'email':
       validateArray.push(inputIs.email(value));
