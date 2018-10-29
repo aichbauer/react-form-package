@@ -1,3 +1,10 @@
+1.3.0 - October, 29 2018
+
+* ac7861c Fix: prop enctype (#10) (Lukas Aichbauer)
+* a3a87ab Docs: fix dependency issue and heading for styling (#9) (Lukas Aichbauer)
+* f142d6d Chore: update dependencies (#7) (Lukas Aichbauer)
+* 046d38f Feat: support new type file for field (#6) (Lukas Aichbauer)
+
 1.2.0 - October, 24 2018
 
 * d4ba0d4 Feat: add support array children (#5) (Lukas Aichbauer)
