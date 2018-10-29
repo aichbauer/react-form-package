@@ -2,7 +2,7 @@
 
 exports[`Render Form with radio input | onFocus | onChange | onBlur 1`] = `
 <form
-  encType="application/x-www-form-urlencoded"
+  enctype="application/x-www-form-urlencoded"
 >
   <div>
     <div>

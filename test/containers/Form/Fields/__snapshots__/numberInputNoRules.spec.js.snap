@@ -2,7 +2,7 @@
 
 exports[`Render Form with number input | number input no rules 1`] = `
 <form
-  encType="application/x-www-form-urlencoded"
+  enctype="application/x-www-form-urlencoded"
 >
   <div>
     <div>

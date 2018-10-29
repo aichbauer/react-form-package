@@ -2,7 +2,7 @@
 
 exports[`Render Form with text input | onFocus 1`] = `
 <form
-  encType="application/x-www-form-urlencoded"
+  enctype="application/x-www-form-urlencoded"
 >
   <div>
     <div>

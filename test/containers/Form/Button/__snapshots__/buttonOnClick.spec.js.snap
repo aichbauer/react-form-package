@@ -2,7 +2,7 @@
 
 exports[`Render Form (validate) with button | click button 1`] = `
 <form
-  encType="application/x-www-form-urlencoded"
+  enctype="application/x-www-form-urlencoded"
 >
   <div>
     <div>
