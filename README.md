@@ -79,10 +79,10 @@ If you are familiar with writing HTML forms than you are all set up. There are n
 
 ### Basic Usage
 
-* *Every `<Button>`, `<Field>`, `<RadioGroup>`, and `<Select>` component must have an **id property** and a **type property** *
-* *`<Select>` components have `<option>` childs which must have a **value property** *
-* *`<RadioGroup>` components have `<input>` childs which must have an **id property**, **type property**, and **name property** *
-* *If you want the form to valitate inputs and show error messages simply add a **validate prop** on the `<Form>` component *
+* Every `<Button>`, `<Field>`, `<RadioGroup>`, and `<Select>` component must have an **id property** and a **type property**
+* `<Select>` components have `<option>` childs which must have a **value property**
+* `<RadioGroup>` components have `<input>` childs which must have an **id property**, **type property**, and **name property**
+* If you want the form to valitate inputs and show error messages simply add a **validate prop** on the `<Form>` component
 
 In this example we use all components and types this library supports:
 
