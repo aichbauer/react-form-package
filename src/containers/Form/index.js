@@ -200,7 +200,7 @@ class Form extends React.Component {
       }}
       >
         <form
-          encType={enctype}
+          enctype={enctype} // eslint-disable-line
         >
           {children}
         </form>

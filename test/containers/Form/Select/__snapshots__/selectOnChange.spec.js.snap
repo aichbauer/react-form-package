@@ -2,7 +2,7 @@
 
 exports[`Render Form with select input | onChange 1`] = `
 <form
-  encType="application/x-www-form-urlencoded"
+  enctype="application/x-www-form-urlencoded"
 >
   <div>
     <div>
