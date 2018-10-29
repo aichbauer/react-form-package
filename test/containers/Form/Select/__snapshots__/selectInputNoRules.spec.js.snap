@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with select input | select input no rules 1`] = `
-<form>
+<form
+  encType="application/x-www-form-urlencoded"
+>
   <div>
     <div>
       select

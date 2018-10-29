@@ -1,0 +1,38 @@
+---
+name: File Upload
+route: /react-form-package/file-upload
+order: 9
+---
+
+import { Form, Button, Field, Select, RadioGroup } from '../src';
+import { Playground, PropsTable } from 'docz';
+import { DynamicFields } from './components/DynamicFields';
+import { data as checkboxData } from './data/checkboxes';
+import { data as selectData } from './data/select';
+import { data as radioData } from './data/radio';
+
+# File Upload
+
+Sometimes you need to upload files with your form, e.g. if you want to upload a profile picture for a user.
+
+Use a `<Field />` with the type `file` and you will get the `FileList` object back as value in the `data` object.
+
+<Playground>
+  <Form
+    validate
+    encType="multipart/form-data"
+  >
+    <Field type="file" id="profilePicture" required />
+    <Button
+      id="submit"
+      type="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </Form>
+</Playground>

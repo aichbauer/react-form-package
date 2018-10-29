@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with radio input | radio input all rules 1`] = `
-<form>
+<form
+  encType="application/x-www-form-urlencoded"
+>
   <div>
     <div>
       radio
