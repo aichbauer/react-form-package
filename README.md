@@ -21,6 +21,7 @@
   * [RadioGroup](#radiogroup)
   * [Select](#select)
 * [Dynamic Fields](#dynamic-fields)
+* [File Upload](#file-upload)
 * [State](#state)
 * [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
 * [Styling](#styling)
@@ -443,6 +444,31 @@ Than in your render function you would return something like:
 </Form>
 ```
 
+## File Upload
+
+Sometimes you need to upload files with your form, e.g. if you want to upload a profile picture for a user.
+
+Use a `<Field />` with the type `file` and you will get the `FileList` object back as value in the `data` object.
+
+```jsx
+<Form
+  validate
+  encType="multipart/form-data"
+>
+  <Field type="file" id="profilePicture" required />
+  <Button
+    id="submit"
+    type="submit"
+    onClick={(state) => {
+      alert(JSON.stringify(state, null, 2));
+      alert('open the console to see the whole state...');
+      console.log(state);
+    }}
+  >
+    Submit
+  </Button>
+</Form>
+```
 
 ## State
 
