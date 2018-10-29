@@ -92,9 +92,11 @@ class Form extends React.Component {
       checked,
       type,
       name,
+      files,
     } = e.target;
     const { data } = this.state;
     const checkbox = type === 'checkbox';
+    const file = type === 'file';
     const myId = type === 'radio' ? name : id;
     const myValue = type === 'radio' ? id : value;
     const valid = checkFormInput(rules, checkbox ? checked : myValue);
@@ -104,7 +106,10 @@ class Form extends React.Component {
         ...data,
         [myId]: {
           ...data[myId],
-          value: checkbox ? checked : myValue,
+          value: checkbox
+            ? checked
+            : myValue,
+          files: file ? files : undefined,
           checked,
           valid,
           invalid: !valid,
@@ -170,7 +175,10 @@ class Form extends React.Component {
       validate,
       formValid,
     } = this.state;
-    const { children } = this.props;
+    const {
+      children,
+      enctype,
+    } = this.props;
 
     return (
       <Context.Provider value={{
@@ -191,7 +199,9 @@ class Form extends React.Component {
         handleOnClick: Form.handleOnClick,
       }}
       >
-        <form>
+        <form
+          encType={enctype}
+        >
           {children}
         </form>
       </Context.Provider>
@@ -209,6 +219,7 @@ Form.defaultProps = {
   select: <select className="rfp-select" />,
   textarea: <textarea className="rfp-textarea" />,
   error: <div className="rfp-error-label" />,
+  enctype: 'application/x-www-form-urlencoded',
 };
 
 Form.propTypes = {
@@ -225,6 +236,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]).isRequired,
+  enctype: PropTypes.string,
 };
 
 export {
