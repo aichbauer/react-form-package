@@ -1,11 +1,11 @@
 {
-  "vendors.js": "/react-form-package/static/js/vendors.5a3991b2.js",
-  "app.js": "/react-form-package/static/js/app.3a8f0d1f.js",
+  "vendors.js": "/react-form-package/static/js/vendors.836420fa.js",
+  "app.js": "/react-form-package/static/js/app.f596b58d.js",
   "docz-button.js": "/react-form-package/static/js/docz-button.2575c5c9.js",
   "docz-dynamic-f-ields.js": "/react-form-package/static/js/docz-dynamic-f-ields.6ebf60b3.js",
   "docz-field.js": "/react-form-package/static/js/docz-field.ec8e1fb3.js",
   "docz-file-upload.js": "/react-form-package/static/js/docz-file-upload.566242a0.js",
-  "docz-form.js": "/react-form-package/static/js/docz-form.a1069490.js",
+  "docz-form.js": "/react-form-package/static/js/docz-form.5bc23490.js",
   "docz-index.js": "/react-form-package/static/js/docz-index.1b36ff60.js",
   "docz-installation.js": "/react-form-package/static/js/docz-installation.6f6c835e.js",
   "docz-on-focus-on-change-on-blur.js": "/react-form-package/static/js/docz-on-focus-on-change-on-blur.83cb3de9.js",
@@ -13,9 +13,9 @@
   "docz-select.js": "/react-form-package/static/js/docz-select.cb144411.js",
   "docz-simple-form.js": "/react-form-package/static/js/docz-simple-form.b4a5b65e.js",
   "docz-state.js": "/react-form-package/static/js/docz-state.d9bcb8b7.js",
-  "docz-styling.css": "/react-form-package/static/css/docz-styling.59cba0c41b3afe8e61a8.css",
-  "docz-styling.js": "/react-form-package/static/js/docz-styling.54208f29.js",
+  "docz-styling.css": "/react-form-package/static/css/docz-styling.3dadfee96863615c12e2.css",
+  "docz-styling.js": "/react-form-package/static/js/docz-styling.e98ff45e.js",
   "docz-why.js": "/react-form-package/static/js/docz-why.d1efffda.js",
-  "runtime~app.js": "/react-form-package/static/js/runtime~app.59cba0c41b3afe8e61a8.js",
+  "runtime~app.js": "/react-form-package/static/js/runtime~app.3dadfee96863615c12e2.js",
   "index.html": "/react-form-package/index.html"
 }
