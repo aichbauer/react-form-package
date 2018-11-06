@@ -1,0 +1,30 @@
+---
+name: Custom Error Messages
+route: /custom-error-messages
+order: 8
+---
+
+import { Form, Button, Field } from '../src';
+import { Playground } from 'docz';
+
+# Custom Error Messages
+
+If you want to display your own error messages, use the `errorMessage` property on the `<Field />`, `<Select/>`, or `<RadioGroup/>` component.
+
+<Playground>
+  <Form>
+    <div>
+      <div>Email</div>
+      <Field id="email" type="email" required errorMessage="This is a custom error message!" />
+    </div>
+    <div>
+      <Button type="submit" id="submit" onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}>
+        Submit
+      </Button>
+    </div>
+  </Form>
+</Playground>
