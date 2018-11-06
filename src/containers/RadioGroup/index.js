@@ -20,6 +20,10 @@ const RadioGroup = (props) => (
         return null;
       }
 
+      if (!data[props.id]) {
+        return null;
+      }
+
       return (
         <React.Fragment>
           <RadioGroupContainerComponent.type
