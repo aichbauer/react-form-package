@@ -48,7 +48,7 @@ const Select = (props) => (
                   whiteSpace: 'pre-line',
                 }}
               >
-                {writeErrorMessage(data[props.id].rules)}
+                {props.errorMessage || writeErrorMessage(data[props.id].rules)}
               </ErrorLabelComponent.type>
             )
           }
