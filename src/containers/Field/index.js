@@ -21,6 +21,11 @@ const Field = (props) => (
       if (Object.keys(data).length === 0 && data.constructor === Object) {
         return null;
       }
+
+      if (!data[props.id]) {
+        return null;
+      }
+
       if (data[props.id].rules.type === 'checkbox') {
         MyInputComponent = CheckboxComponent;
       } else if (data[props.id].rules.type === 'textarea') {
