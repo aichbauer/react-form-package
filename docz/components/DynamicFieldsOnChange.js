@@ -38,7 +38,7 @@ class DynamicFieldsOnChange extends React.Component {
     if (companies[length - 1].name) {
       this.setState({
         companies: companies.concat([companyTemplate]),
-      }, () => this.child.current.componentDidMount());
+      }, () => this.child.current.updateState());
     }
   }
 

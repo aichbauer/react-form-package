@@ -43,6 +43,10 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
+    this.updateState();
+  }
+
+  updateState() {
     const { children } = this.props;
     const flatChilds = getNestedChilds(children, []);
 

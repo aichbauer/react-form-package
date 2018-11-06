@@ -1,9 +1,9 @@
 {
-  "vendors.js": "/react-form-package/static/js/vendors.1f5f6300.js",
-  "app.js": "/react-form-package/static/js/app.4ab545db.js",
+  "vendors.js": "/react-form-package/static/js/vendors.5e35b6fb.js",
+  "app.js": "/react-form-package/static/js/app.91d76d2d.js",
   "docz-button.js": "/react-form-package/static/js/docz-button.2575c5c9.js",
   "docz-dynamic-fields.js": "/react-form-package/static/js/docz-dynamic-fields.3864e07e.js",
-  "docz-dynamic-fields2.js": "/react-form-package/static/js/docz-dynamic-fields2.e5eb4132.js",
+  "docz-dynamic-fields2.js": "/react-form-package/static/js/docz-dynamic-fields2.f371c516.js",
   "docz-field.js": "/react-form-package/static/js/docz-field.4ec0619c.js",
   "docz-file-upload.js": "/react-form-package/static/js/docz-file-upload.3bfac522.js",
   "docz-form.js": "/react-form-package/static/js/docz-form.c69bd6a7.js",
@@ -14,9 +14,9 @@
   "docz-select.js": "/react-form-package/static/js/docz-select.16772c2e.js",
   "docz-simple-form.js": "/react-form-package/static/js/docz-simple-form.8162e25a.js",
   "docz-state.js": "/react-form-package/static/js/docz-state.41854606.js",
-  "docz-styling.css": "/react-form-package/static/css/docz-styling.f5c993e7369c7194d391.css",
+  "docz-styling.css": "/react-form-package/static/css/docz-styling.5801a596d5fdbbb2300d.css",
   "docz-styling.js": "/react-form-package/static/js/docz-styling.1df666ca.js",
   "docz-why.js": "/react-form-package/static/js/docz-why.ceb58090.js",
-  "runtime~app.js": "/react-form-package/static/js/runtime~app.f5c993e7369c7194d391.js",
+  "runtime~app.js": "/react-form-package/static/js/runtime~app.5801a596d5fdbbb2300d.js",
   "index.html": "/react-form-package/index.html"
 }

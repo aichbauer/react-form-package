@@ -510,7 +510,7 @@ class DynamicFieldsOnChange extends React.Component {
     if (companies[length - 1].name) {
       this.setState({
         companies: companies.concat([companyTemplate]),
-      }, () => this.child.current.componentDidMount());
+      }, () => this.child.current.updateState());
     }
   }
 
@@ -656,7 +656,7 @@ class DynamicFieldsOnClick extends React.Component {
     // note that we use a ref here
     this.setState({
       companies: companies.concat([companyTemplate]),
-    }, () => this.child.current.componentDidMount());
+    }, () => this.child.current.updateState());
   }
 
   handleRemoveCompany(idx) {
@@ -668,7 +668,7 @@ class DynamicFieldsOnClick extends React.Component {
     // note that we use a ref here
     this.setState({
       companies: companies.filter((_, index) => idx !== index),
-    }, () => this.child.current.componentDidMount());
+    }, () => this.child.current.updateState());
   }
 
   handleOnChange(formState, id, index) {
