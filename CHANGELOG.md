@@ -1,3 +1,9 @@
+1.4.0 - November, 07 2018
+
+* 2600838 Fix: npm ignore (#14) (Lukas Aichbauer)
+* 0e85e23 Feat: custom error messages (closes #11) (#13) (Lukas Aichbauer)
+* 6c1edd0 Fix: render null if data item not provided to support dynamic fields (#12) (Lukas Aichbauer)
+
 1.3.0 - October, 29 2018
 
 * ac7861c Fix: prop enctype (#10) (Lukas Aichbauer)
