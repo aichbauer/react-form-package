@@ -1,6 +1,7 @@
 import React from 'react';
+import { Error } from '../Error';
 import { Context } from '../Context';
-import { writeErrorMessage } from '../../helpers';
+import { isDataValid } from '../../helpers';
 
 const RadioGroup = (props) => (
   <Context.Consumer>
@@ -16,11 +17,7 @@ const RadioGroup = (props) => (
         handleOnBlur,
       } = state;
 
-      if (Object.keys(data).length === 0 && data.constructor === Object) {
-        return null;
-      }
-
-      if (!data[props.id]) {
+      if (!isDataValid(data, props)) {
         return null;
       }
 
@@ -51,16 +48,12 @@ const RadioGroup = (props) => (
               return child;
             })}
           </RadioGroupContainerComponent.type>
-          {data[props.id].invalid && data[props.id].visited && (
-            <ErrorLabelComponent.type
-              {...ErrorLabelComponent.props}
-              style={{
-                whiteSpace: 'pre-line',
-              }}
-            >
-              {props.errorMessage || writeErrorMessage(data[props.id].rules)}
-            </ErrorLabelComponent.type>
-          )}
+          <Error
+            data={data}
+            id={props.id}
+            errorMessage={props.errorMessage}
+            ErrorLabelComponent={ErrorLabelComponent}
+          />
         </React.Fragment>
       );
     }}
@@ -69,6 +62,4 @@ const RadioGroup = (props) => (
 
 RadioGroup.displayName = 'RadioGroup';
 
-export {
-  RadioGroup,
-};
+export { RadioGroup };

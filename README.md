@@ -802,7 +802,7 @@ Use a `<Field />` with the type `file` and you will get the `FileList` object ba
 ```jsx
 <Form
   validate
-  encType="multipart/form-data"
+  enctype="multipart/form-data"
 >
   <Field type="file" id="profilePicture" required />
   <Button

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Error } from '../Error';
 import { Context } from '../Context';
-import { writeErrorMessage } from '../../helpers';
+import { isDataValid } from '../../helpers';
 
 const Select = (props) => (
   <Context.Consumer>
@@ -15,11 +16,7 @@ const Select = (props) => (
         handleOnBlur,
       } = state;
 
-      if (Object.keys(data).length === 0 && data.constructor === Object) {
-        return null;
-      }
-
-      if (!data[props.id]) {
+      if (!isDataValid(data, props)) {
         return null;
       }
 
@@ -40,18 +37,12 @@ const Select = (props) => (
           >
             {props.children}
           </SelectComponent.type>
-          {
-            data[props.id].invalid && data[props.id].touched && (
-              <ErrorLabelComponent.type
-                {...ErrorLabelComponent.props}
-                style={{
-                  whiteSpace: 'pre-line',
-                }}
-              >
-                {props.errorMessage || writeErrorMessage(data[props.id].rules)}
-              </ErrorLabelComponent.type>
-            )
-          }
+          <Error
+            data={data}
+            id={props.id}
+            errorMessage={props.errorMessage}
+            ErrorLabelComponent={ErrorLabelComponent}
+          />
         </React.Fragment>
       );
     }}
@@ -60,6 +51,4 @@ const Select = (props) => (
 
 Select.displayName = 'Select';
 
-export {
-  Select,
-};
+export { Select };
