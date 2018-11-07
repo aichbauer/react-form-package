@@ -20,6 +20,7 @@
   * [Field](#field)
   * [RadioGroup](#radiogroup)
   * [Select](#select)
+* [Custom Error Messages](#custom-error-messages)
 * [Dynamic Fields](#dynamic-fields)
 * [Dynamic Fields 2](#dynamic-fields-2)
   * [Add new Fields onChange](#add-new-fields-onchange)
@@ -288,6 +289,7 @@ type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `emai
 required | Bool | false | false |
 min | String | false | -1 |
 max | String | false | -1 |
+errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
@@ -336,6 +338,7 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `radio`
 required | Bool | false | false |
+errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
@@ -378,9 +381,23 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `select`
 required | Bool | false | false |
+errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
+
+## Custom Error Messages
+
+If you want to display your own error messages, use the `errorMessage` property on the `<Field />`, `<Select/>`, or `<RadioGroup/>` component.
+
+```jsx
+<Form>
+  <div>
+    <div>Email</div>
+    <Field id="email" type="email" required errorMessage="This is a custom error message!" />
+  </div>
+</Form>
+```
 
 ## Dynamic Fields
 
