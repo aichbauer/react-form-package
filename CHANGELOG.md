@@ -1,3 +1,7 @@
+1.4.1 - November, 07 2018
+
+* 06c92b1 Refactor: duplicate code, typos in docs and readme (#15) (Lukas Aichbauer)
+
 1.4.0 - November, 07 2018
 
 * 2600838 Fix: npm ignore (#14) (Lukas Aichbauer)
