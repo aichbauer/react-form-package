@@ -1,6 +1,7 @@
 import React from 'react';
+import { Error } from '../Error';
 import { Context } from '../Context';
-import { writeErrorMessage } from '../../helpers';
+import { isDataValid } from '../../helpers';
 
 const Field = (props) => (
   <Context.Consumer>
@@ -18,11 +19,7 @@ const Field = (props) => (
       } = state;
       let MyInputComponent;
 
-      if (Object.keys(data).length === 0 && data.constructor === Object) {
-        return null;
-      }
-
-      if (!data[props.id]) {
+      if (!isDataValid(data, props)) {
         return null;
       }
 
@@ -49,16 +46,12 @@ const Field = (props) => (
             onBlur={(e) => handleOnBlur(e, props.onBlur)}
             onChange={(e) => handleOnChange(e, data[props.id].rules, props.onChange)}
           />
-          {data[props.id].invalid && data[props.id].touched && (
-            <ErrorLabelComponent.type
-              {...ErrorLabelComponent.props}
-              style={{
-                whiteSpace: 'pre-line',
-              }}
-            >
-              {props.errorMessage || writeErrorMessage(data[props.id].rules)}
-            </ErrorLabelComponent.type>
-          )}
+          <Error
+            data={data}
+            id={props.id}
+            errorMessage={props.errorMessage}
+            ErrorLabelComponent={ErrorLabelComponent}
+          />
         </React.Fragment>
       );
     }}
@@ -67,6 +60,4 @@ const Field = (props) => (
 
 Field.displayName = 'Field';
 
-export {
-  Field,
-};
+export { Field };

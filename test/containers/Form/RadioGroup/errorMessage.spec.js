@@ -26,7 +26,7 @@ test('Render Form with radio input and custom errorMessage | radio input all rul
 
   const wrapper = mount(myComponent);
 
-  wrapper.find('input').at(0).simulate('focus');
+  wrapper.find('input').at(0).simulate('blur');
   wrapper.update();
 
   const errorMessage = wrapper.find('.rfp-error-label').text();

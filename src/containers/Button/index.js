@@ -33,6 +33,4 @@ const Button = (props) => (
 
 Button.displayName = 'Button';
 
-export {
-  Button,
-};
+export { Button };

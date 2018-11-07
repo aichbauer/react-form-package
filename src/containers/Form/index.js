@@ -39,34 +39,12 @@ class Form extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.setInitialState = this.setInitialState.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
 
   componentDidMount() {
     this.updateState();
-  }
-
-  updateState() {
-    const { children } = this.props;
-    const flatChilds = getNestedChilds(children, []);
-
-    this.setInitialState(flatChilds);
-  }
-
-  setInitialState(children) {
-    let data = {};
-    children.forEach((child) => {
-      data = {
-        ...data,
-        [child.props.id]: {
-          ...initialState(child.props),
-        },
-      };
-    });
-
-    this.setState({
-      data,
-    }, () => this.validateForm());
   }
 
   handleOnFocus(e, cb) {
@@ -144,6 +122,29 @@ class Form extends React.Component {
     }, () => this.validateForm(cb));
   }
 
+  setInitialState(children) {
+    let data = {};
+    children.forEach((child) => {
+      data = {
+        ...data,
+        [child.props.id]: {
+          ...initialState(child.props),
+        },
+      };
+    });
+
+    this.setState({
+      data,
+    }, () => this.validateForm());
+  }
+
+  updateState() {
+    const { children } = this.props;
+    const flatChilds = getNestedChilds(children, []);
+
+    this.setInitialState(flatChilds);
+  }
+
   validateForm(cb) {
     const { data } = this.state;
     const allFieldValidations = [];
@@ -200,7 +201,6 @@ class Form extends React.Component {
         handleOnFocus: this.handleOnFocus,
         handleOnChange: this.handleOnChange,
         handleOnBlur: this.handleOnBlur,
-        handleOnClick: Form.handleOnClick,
       }}
       >
         <form
@@ -243,6 +243,4 @@ Form.propTypes = {
   enctype: PropTypes.string,
 };
 
-export {
-  Form,
-};
+export { Form };
