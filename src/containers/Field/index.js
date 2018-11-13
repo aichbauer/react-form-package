@@ -37,6 +37,7 @@ const Field = (props) => (
             {...MyInputComponent.props}
             {...props}
             checked={data[props.id].checked}
+            defaultChecked={data[props.id].checked}
             value={data[props.id].value}
             rows={props.rows}
             cols={props.cols}

@@ -11,6 +11,7 @@ exports[`Render Form with checkbox input | onChange 1`] = `
     <input
       checked={false}
       className="rfp-checkbox"
+      defaultChecked={false}
       id="checkbox"
       invalid={false}
       onBlur={[Function]}
