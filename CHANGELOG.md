@@ -1,3 +1,7 @@
+1.4.3 - November, 13 2018
+
+* 200e419 Fix: add defaultChecked on Field (#18) (Lukas Aichbauer)
+
 1.4.2 - November, 13 2018
 
 * 5fd28a8 Fix: add missing checked to initialState (#17) (Lukas Aichbauer)
