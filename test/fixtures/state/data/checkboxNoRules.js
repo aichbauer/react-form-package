@@ -5,6 +5,7 @@ const checkboxNoRules = {
   data: {
     checkbox: {
       initialValue: false,
+      checked: false,
       dirty: false,
       pristine: true,
       visited: false,

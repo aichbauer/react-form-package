@@ -9,6 +9,7 @@ exports[`Render Form with checkbox input | onChange 1`] = `
       checkbox
     </div>
     <input
+      checked={false}
       className="rfp-checkbox"
       id="checkbox"
       invalid={false}

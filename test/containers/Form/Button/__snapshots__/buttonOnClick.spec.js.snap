@@ -9,6 +9,7 @@ exports[`Render Form (validate) with button | click button 1`] = `
       checkbox
     </div>
     <input
+      checked={false}
       className="rfp-checkbox"
       id="checkbox"
       invalid={false}
