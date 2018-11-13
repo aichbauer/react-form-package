@@ -1,3 +1,7 @@
+1.4.2 - November, 13 2018
+
+* 5fd28a8 Fix: add missing checked to initialState (#17) (Lukas Aichbauer)
+
 1.4.1 - November, 07 2018
 
 * 06c92b1 Refactor: duplicate code, typos in docs and readme (#15) (Lukas Aichbauer)
