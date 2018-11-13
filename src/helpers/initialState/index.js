@@ -4,6 +4,9 @@ const initialState = (props) => {
   const value = props.type === 'checkbox'
     ? props.checked || false
     : props.value || '';
+  const checked = props.type === 'checkbox'
+    ? props.checked || false
+    : undefined;
   const rules = {
     type: props.type,
     min: props.min || -1,
@@ -18,6 +21,7 @@ const initialState = (props) => {
     pristine: true,
     visited: false,
     touched: false,
+    checked,
     value,
     valid,
     invalid: !valid,
