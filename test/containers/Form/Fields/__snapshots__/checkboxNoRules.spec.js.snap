@@ -9,6 +9,7 @@ exports[`Render Form with checkbox | checkbox no rules 1`] = `
       checkbox
     </div>
     <input
+      checked={false}
       className="rfp-checkbox"
       id="checkbox"
       invalid={false}
