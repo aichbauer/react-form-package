@@ -1,113 +1,97 @@
 import React from 'react';
-import {
-  Form,
-  Field,
-  Button,
-} from '../../src';
-
-const companyTemplate = {
-  name: '',
-};
+import { Form, Button, Field } from '../../src';
 
 class DynamicFieldsOnChange extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: '',
       companies: [
-        companyTemplate,
+        {
+          id: 'company-0',
+        },
       ],
     };
 
-    // our reference to our form
-    // so that we are able to update
-    // the form state
-    this.child = React.createRef();
+    this.addField = this.addField.bind(this);
+    this.removeField = this.removeField.bind(this);
+    this.calculateAvailableId = this.calculateAvailableId.bind(this);
   }
 
-  handleAddCompany() {
-    const { companies } = this.state;
-    const { length } = companies;
+  calculateAvailableId() {
+    const {
+      companies,
+    } = this.state;
 
-    // if the last field is not empty add a new one
-    // in the callback of our setState we create
-    // the new state of our form via the new children
-    // in this component
-    // note that we use a ref here
-    if (companies[length - 1].name) {
+    const arr = companies.map((item) => parseInt(item.id.split('-')[1], 10));
+
+    let currentHighestId = Math.max(...arr);
+    currentHighestId = currentHighestId !== -Infinity ? currentHighestId : 0;
+
+    const highestAvailableId = currentHighestId + 1;
+
+    return highestAvailableId;
+  }
+
+  addField(state, id) {
+    const {
+      companies,
+    } = this.state;
+
+    const highestAvailableId = this.calculateAvailableId();
+
+    if (state.data[id] && parseInt(id.split('-')[1], 10) + 1 === highestAvailableId) {
       this.setState({
-        companies: companies.concat([companyTemplate]),
-      }, () => this.child.current.updateState());
+        companies: companies.concat({ id: `company-${highestAvailableId}` }),
+      });
     }
   }
 
-  handleOnChange(formState, id, index) {
-    const { companies } = this.state;
-    const myValue = formState.data[id];
+  removeField(idx) {
+    const {
+      companies,
+    } = this.state;
 
-    // if it is a dynamic field change the
-    // value based on the index of this array
-    if (!isNaN(index)) {
-      const newCompanies = companies.map((company, idx) => {
-        if (idx !== index) {
-          return company;
-        }
-
-        const newCompany = {
-          ...company,
-          name: myValue,
-        };
-
-        return newCompany;
-      });
-
-      // in the callback we add a new field
-      return this.setState({
-        companies: newCompanies,
-      }, () => this.handleAddCompany());
-    }
-
-    // else update the other fields
-    // based on the id
-    return this.setState({
-      [id]: myValue,
+    this.setState({
+      companies: companies.filter((_, index) => idx !== index),
     });
   }
 
   render() {
     const {
-      text,
       companies,
     } = this.state;
 
-    // - we need to pass the values
-    //   of the state of this component
-    // - we need to add our handleOnChange
-    // - we need to set our ref
+    const highestAvailableId = this.calculateAvailableId();
+
     return (
-      <Form
-        ref={this.child}
-      >
-        <div>
-          <Field
-            type="text"
-            id="text"
-            value={text}
-            placeholder="Not a dynamic field"
-            onChange={(state) => this.handleOnChange(state, 'text')}
-          />
-        </div>
-        {/* render our dynamic fields */}
+      <Form>
         {companies.map((company, idx) => (
           <div>
             <Field
-              id={`company-${idx}`}
-              value={company.name}
-              placeholder={`Company ${idx}`}
+              id={company.id}
+              placeholder={`Company ${company.id.split('-')[1]}`}
               type="text"
-              onChange={(state) => this.handleOnChange(state, `company-${idx}`, idx)}
+              required
+              dynamic
+              field={{
+                id: `company-${highestAvailableId}`,
+                type: 'text',
+                required: true,
+              }}
+              onChange={(state) => this.addField(state, company.id)}
             />
+            {companies.length > 1 && (
+              <Button
+                id="removeField"
+                rfpRole="removeField"
+                type="button"
+                fieldId={company.id}
+                onClick={() => this.removeField(idx)}
+              >
+                Remove Company
+              </Button>
+            )}
           </div>
         ))}
         <div>
@@ -120,7 +104,7 @@ class DynamicFieldsOnChange extends React.Component {
               console.log(state);
             }}
           >
-            Submit
+            submit
           </Button>
         </div>
       </Form>
