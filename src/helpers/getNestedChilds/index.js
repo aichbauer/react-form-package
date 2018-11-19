@@ -13,6 +13,7 @@ const getNestedChilds = (children, data) => {
     if (typeof type === 'function') {
       if (
         type.displayName === 'Field'
+        || type.displayName === 'FieldWrapper'
         || type.displayName === 'Select'
         || type.displayName === 'RadioGroup'
       ) {

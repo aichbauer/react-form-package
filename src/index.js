@@ -1,6 +1,7 @@
 import {
   Form,
   Field,
+  FieldWrapper,
   Button,
   Select,
   RadioGroup,
@@ -9,6 +10,7 @@ import {
 export {
   Form,
   Field,
+  FieldWrapper,
   Button,
   Select,
   RadioGroup,
