@@ -12,7 +12,7 @@ import { textInputAllRules } from '../../../fixtures';
 
 configure({ adapter: new Adapter() });
 
-test('Render Form with text input | text input all rules', () => {
+test('Render Form with text input | FieldWrapper | text input all rules', () => {
   const fieldWrapperOnChangeSpy = jest.spyOn(Form.prototype, 'handleOnChange');
   const fieldWrapperOnFocusSpy = jest.spyOn(Form.prototype, 'handleOnFocus');
   const fieldWrapperOnBlurSpy = jest.spyOn(Form.prototype, 'handleOnBlur');
@@ -62,7 +62,6 @@ test('Render Form with text input | text input all rules', () => {
   wrapper.update();
 
   state = wrapper.state();
-  console.log(state);
 
   expect(state.data.text.value).toBe('hello');
   expect(state.data.text.valid).toBe(true);
