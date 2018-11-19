@@ -1,3 +1,7 @@
+1.6.0 - November, 19 2018
+
+* 8de229c Feat: handle state of dynamic fields (#20) (Lukas Aichbauer)
+
 1.5.0 - November, 19 2018
 
 * 0b2b332 Feat: use state from third party components with FieldWrapper (#19) (Lukas Aichbauer)
