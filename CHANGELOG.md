@@ -1,3 +1,7 @@
+1.5.0 - November, 19 2018
+
+* 0b2b332 Feat: use state from third party components with FieldWrapper (#19) (Lukas Aichbauer)
+
 1.4.3 - November, 13 2018
 
 * 200e419 Fix: add defaultChecked on Field (#18) (Lukas Aichbauer)
