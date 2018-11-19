@@ -41,6 +41,8 @@ class Form extends React.Component {
     this.setInitialState = this.setInitialState.bind(this);
     this.updateState = this.updateState.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.addField = this.addField.bind(this);
+    this.removeField = this.removeField.bind(this);
   }
 
   componentDidMount() {
@@ -67,7 +69,7 @@ class Form extends React.Component {
     }, () => this.validateForm(cb));
   }
 
-  handleOnChange(e, rules, cb) {
+  handleOnChange(e, rules, options, cb) {
     const {
       id,
       value,
@@ -82,22 +84,39 @@ class Form extends React.Component {
     const myId = type === 'radio' ? name : id;
     const myValue = type === 'radio' ? id : value;
     const valid = checkFormInput(rules, checkbox ? checked : myValue);
+    let newData = {
+      ...data,
+      [myId]: {
+        ...data[myId],
+        value: checkbox
+          ? checked
+          : myValue,
+        files: file ? files : undefined,
+        checked,
+        valid,
+        invalid: !valid,
+        pristine: value === data[myId].initialValue,
+        dirty: value !== data[myId].initialValue,
+      },
+    };
+
+    if (
+      options
+      && myValue
+    ) {
+      if (options.dynamic) {
+        newData = {
+          ...newData,
+          [options.field.id]: {
+            ...initialState(options.field),
+          },
+        };
+      }
+    }
 
     this.setState({
       data: {
-        ...data,
-        [myId]: {
-          ...data[myId],
-          value: checkbox
-            ? checked
-            : myValue,
-          files: file ? files : undefined,
-          checked,
-          valid,
-          invalid: !valid,
-          pristine: value === data.initialValue,
-          dirty: value !== data.initialValue,
-        },
+        ...newData,
       },
     }, () => this.validateForm(cb));
   }
@@ -135,6 +154,33 @@ class Form extends React.Component {
 
     this.setState({
       data,
+    }, () => this.validateForm());
+  }
+
+  addField(field) {
+    const { data } = this.state;
+
+    this.setState({
+      data: {
+        ...data,
+        [field.id]: {
+          ...initialState(field),
+        },
+      },
+    }, () => this.validateForm());
+  }
+
+  removeField(fieldId) {
+    const { data } = this.state;
+    const {
+      [fieldId]: _,
+      ...newData
+    } = data;
+
+    this.setState({
+      data: {
+        ...newData,
+      },
     }, () => this.validateForm());
   }
 
@@ -201,6 +247,8 @@ class Form extends React.Component {
         handleOnFocus: this.handleOnFocus,
         handleOnChange: this.handleOnChange,
         handleOnBlur: this.handleOnBlur,
+        addField: this.addField,
+        removeField: this.removeField,
       }}
       >
         <form
