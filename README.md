@@ -848,7 +848,7 @@ Than in your render function you would return something like:
 
 Sometimes you do not know how many fields your form should have, so you need a way to add dynamic fields on user events, e.g. on a button click if a user should decide if a new field is needed, or on a change of a field, e.g. when a field is filled a new field should appear.
 
-## Add new Fields onClick
+### Add new Fields onClick
 
 First off, import your components.
 
