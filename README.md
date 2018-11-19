@@ -11,45 +11,28 @@
 ## Table of Contents
 
 * [Documentation](https://aichbauer.github.io/react-form-package)
-* [Why?](#why)
 * [Installation](#installation)
 * [Simple Form](#simple-form)
 * [Components](#components)
   * [Form](#form)
   * [Button](#button)
   * [Field](#field)
+  * [FieldWrapper](#fieldwrapper)
   * [RadioGroup](#radiogroup)
   * [Select](#select)
+* [State](#state)
 * [Custom Error Messages](#custom-error-messages)
+* [Styling](#styling)
 * [Dynamic Fields](#dynamic-fields)
 * [Dynamic Fields 2](#dynamic-fields-2)
   * [Add new Fields onChange](#add-new-fields-onchange)
   * [Add new Fields onClick](#add-new-fields-onclick)
-* [File Upload](#file-upload)
-* [State](#state)
 * [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
-* [Styling](#styling)
+* [Third Party Components](#third-party-components)
+  * [Autocomplete with Downshift](#autocomplete)
+* [File Upload](#file-upload)
+* [Why?](#why)
 * [License](#license)
-
-## Why?
-
-> TL;DR: I wanted a form with inbuilt validation and state management that a developer can use only by knowing HTML
-
-Forms! A pain in the ass for a user when they are not well developed. Mostly because developing forms is a pain in the ass too.
-
-Why is developing good forms not easy?
-
-Because
-
-* of a lot of communication between the user and the program
-* there are a lot of changes in the state of a program
-* of the validation of the user input
-
-I wanted a form that a developer can use only by knowing HTML. Most frontend developers know how a valid HTML form looks like on first sight but no frontend developer knows how a JavaScript library works when its been used for the first time. That is the reason why `react-form-package` was created. By using `react-form-package` you create a similar structure to a valid HTML form. Thats it. Input validation, form state management, and user communication is all handled by `react-form-package`.
-
-### Why not use formik or react-final-form
-
-Most of the `form libraries` I found were using `render props` or `higher order components`, which is not a ideal set up for a form because when the forms are getting more complex the more confusing the code will get. A form should be declarative, and what is more declartive than a plain HTML form? Not a `render prop hell` or `higher order confusion`. Also I did not find any library that came with an inbuilt validation system. Why do you need this? You should not consider writing your own validations if an email is always validated the same way, or the structure of a url is always the same. Writing your validations yourself can mislead you to produce duplicate code and this could lead to more bugs. What is also important: being flexible with styling. This is also not always easy with libararies. `react-form-package` only brings the logic and you choose how to style it. `CSS-in-JS`, `CSS`, or the `style prop`, it is up to you.
 
 ## Installation
 
@@ -67,7 +50,7 @@ $ yarn add react-form-package
 
 > For more detailed information you can take a look at the [documentation](https://aichbauer.github.io/react-form-package)
 
-There are five different components within this package.
+There are five (six) different components within this package. The `<FieldWrapper />` component is only here for edge cases, e.g. working with third party components. So for this simple example we stick to these five:
 
 ```jsx
 import {
@@ -294,6 +277,67 @@ onFocus | Func | false | | get access to the state of the form when the user foc
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
 
+### FieldWrapper
+
+> This component is here for edge cases where you get the state from another component and you have to pass it to the `<Form />` component manually, e.g. third party components.
+
+This component has to be a child within the `<Form />` component. This component exposes three additional props to its child component so that you are able to use third party components.
+
+#### Basic Usage
+
+```jsx
+import {
+  Form,
+  FieldWrapper,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an `<FieldWrapper />` and a `<Button />` component.
+
+Take a look into the [Third Party Components Section](/third-party-components) to see how you can use this component properly.
+
+```jsx
+  <Form>
+    <div>
+      <FieldWrapper type="text" id="fieldwrapper">
+        {/*
+          Render a child component that gets access to
+
+          onFocus
+          onBlur
+          onChange
+        */}
+      </FieldWrapper>
+    <div>
+      <Button id="submit" type="submit" onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+      >Submit</Button>
+    </div>
+  </Form>
+```
+
+#### Props
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+id | String | true | |
+type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
+required | Bool | false | false |
+min | String | false | -1 |
+max | String | false | -1 |
+errorMessage | String | false | | define your own custom error message for the input
+
+#### Props that get exposed to the child component
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+onFocus | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+onChange | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+onBlur | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+
 ### RadioGroup
 
 This component has to be a child within the `<Form />` component. This component must have `<input />` components with the type="radio" as children. These children components must have a name prop which has to match the parents id. The id of the children will be the value of the `<RadioGroup />` component when clicked.
@@ -386,6 +430,135 @@ onFocus | Func | false | | get access to the state of the form when the user foc
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
 
+## State
+
+> Working with the state data and meta data
+
+A simple Example of how your Form could look like:
+
+```jsx
+<Form>
+  <Field id="email" type="email" required />
+  <Field id="password" type="password" required />
+  <Button
+    id="button"
+    type="submit"
+    onClick={(state) => this.handleOnClick(state)}
+  >
+    Submit
+  </Button>
+</Form>
+```
+
+> You can also use `onFocus`, `onChange`, and `onBlur` on every `Field`, `Select`, or `RadioGroup` components to get access to the state of the form ([more info](#onfocus-onchange-onblur))
+
+As you can see the `<Button />` component has a `onClick` property. This property takes a function. The `handleOnClick` function could look something like:
+
+```js
+async handleOnClick(state) {
+  // do something with the state
+  // e.g. send data to a server
+  try {
+    const response = await fetch('https://server.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify(state.data);
+    });
+    // do something with the response
+  } catch(error) {
+    // do something with the error
+  }
+}
+```
+
+As you can see the `state` parameter is an object. It has three different properties.
+
+* **data**: `object`
+* **meta**: `object`
+* **formValid**: `boolean`
+
+In our case `data` would hold:
+
+```json
+{
+  "data": {
+    "email": "",
+    "password": ""
+  }
+}
+```
+
+`meta` would hold:
+
+```json
+{
+  "meta": {
+    "email": {
+      "initialValue": "",
+      "dirty": false,
+      "pristine": true,
+      "visited": false,
+      "touched": false,
+      "value": "",
+      "valid": false,
+      "invalid": true,
+      "rules": {
+        "type": "email",
+        "min": -1,
+        "max": -1,
+        "required": true,
+      }
+    },
+    "password": {
+      "initialValue": "",
+      "dirty": false,
+      "pristine": true,
+      "visited": false,
+      "touched": false,
+      "value": "",
+      "valid": false,
+      "invalid": true,
+      "rules": {
+        "type": "password",
+        "min": -1,
+        "max": -1,
+        "required": true,
+      }
+    }
+  }
+}
+```
+
+`formValid` would hold:
+
+```json
+{
+  "formValid": false
+}
+```
+
+### Meta Description
+
+Meta data gives you an overview of what happened on that field. E.g. if a field is `pristine` you could deside to not send its data to the server since, nothing changed.
+
+Property | Type | Description
+---|---|---
+initialValue | `String` or `Bool` |
+dirty | `Bool` | `true` if the `value !== initialValue`
+pristine | `Bool` | `true` if the `value === initialValue`
+visited | `Bool` | `true` if this field was focused (`onFocus`)
+touched | `Bool` | `true` if this field was blurred (`onBlur`)
+value | `String` or `Bool` |
+valid | `Bool` | `true` if this field is valid (passed all rules)
+invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
+rules | `object` | the rules for the validation of this field
+rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
+rules.min | `Number` | this field has to have at least `min` characters (`Int`)
+rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
+rules.required | `Bool` | this field is required (has to have a value)
+
 ## Custom Error Messages
 
 If you want to display your own error messages, use the `errorMessage` property on the `<Field />`, `<Select/>`, or `<RadioGroup/>` component.
@@ -397,6 +570,208 @@ If you want to display your own error messages, use the `errorMessage` property 
     <Field id="email" type="email" required errorMessage="This is a custom error message!" />
   </div>
 </Form>
+```
+
+## Styling
+
+To style this form you have three different options, all requires to pass a React component to a form prop.
+
+### CSS-in-JS
+
+> In this section we will use a library that uses `styled-components` to style our form
+
+First you have to import the this library and the Form Components you want to use for your styling. In this example we will use [styled-bootstrap-components](https://aichbauer.github.io/styled-bootstrap-components).
+
+```jsx
+import {
+ Form,
+ Field,
+ Button,
+} from 'react-form-package';
+import {
+  Label,
+  FormGroup,
+  FormControl,
+  Column,
+  Button as Btn,
+} from 'styled-bootstrap-components';
+```
+
+The next step is to create you form and pass the styled components as props to the `<Form />` component
+
+```jsx
+  <Form
+    input={<FormControl />}
+    button={<Btn primary mt="3px" mb="3px" />}
+  >
+    <FormGroup row nomb>
+      <Column sm={6}>
+        <FormGroup>
+          <Label>Email</Label>
+          <Field id="email" type="email" placeholder="Email" />
+        </FormGroup>
+      </Column>
+      <Column sm={12}>
+        <Button id="submit" type="submit" onClick={(state) => console.log(state)} primary>Submit</Button>
+      </Column>
+    </FormGroup>
+  </Form>
+```
+
+### style prop
+
+> In this section we will use a the `style` prop to style our form
+
+To style your form pass components to the `<Form />` component that are styled with the style tag. When you create your own `<input />`, `<button />` components do not forget do bind functions like `onClick`, `onChange`, `onFocus`, `onBlur`. This functions are needed to make `react-form-package` work properly.
+
+```jsx
+const MyButton = (props) => (
+  <button
+    type="submit"
+    style={{
+      margin: '10px 0px',
+      padding: '8px 24px',
+      borderRadius: '5px',
+      border: 'none',
+      background: '#7FDBFF',
+      color: '#001f3f',
+      cursor: 'pointer',
+    }}
+    onClick={props.onClick}
+  >
+    {props.children}
+  </button>
+);
+
+const MyInput = (props) => (
+  <input
+    style={{
+      margin: '10px 0px',
+      padding: '8px 3px',
+      border: '1px solid #7FDBFF',
+      borderRadius: '5px',
+      color: 'black',
+    }}
+    value={props.value}
+    placeholder={props.placeholder}
+    onChange={props.onChange}
+    onBlur={props.onBlur}
+    onFocus={props.onFocus}
+  />
+);
+```
+
+The next step is to simply create you form and pass the styled components as props to the `<Form />` component
+
+```jsx
+  <Form
+    button={<MyButton />}
+    input={<MyInput />}
+  >
+    <div>
+      Email
+    </div>
+    <Field type="email" id="email2" placeholder="Email" />
+    <Button type="submit" id="submit2" onClick={(state) => console.log(state)}>Submit</Button>
+  </Form>
+```
+
+### CSS and className
+
+> In this section we will use a the `className` prop and a css file to style our form
+
+To style your form pass components to the `<Form />` component that have `className` prop and use css files (make sure to have an appropriate loader for your bundler).
+
+```css
+.button {
+  background: #001f3f;
+  border: 1px solid black;
+  padding: 8px 24px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.input {
+  margin: 10px 0px;
+  padding: 8px 3px;
+  border: 1px solid #001f3f;
+  border-radius: 5px;
+}
+```
+
+Import your `CSS file` to your application and make sure you have a loader for css.
+
+```jsx
+import './style.css';
+
+const MyClassNameButton = (props) => (
+  <button
+    clssName="button"
+  >
+    {children}
+  </button>
+);
+
+const MyClassNameInput = (props) => (
+  <input
+    className="input"
+    value={props.value}
+    placeholder={props.placeholder}
+    onChange={props.onChange}
+    onBlur={props.onBlur}
+    onFocus={props.onFocus}
+  />
+);
+```
+
+The next step is to create you form and pass the styled components as props to the `<Form />` component.
+
+```jsx
+  <Form
+    button={<MyClassNameButton />}
+    input={<MyClassNameInput />}
+  >
+    <div>
+      Email
+    </div>
+    <Field type="email" id="email2" placeholder="Email" />
+    <Button type="submit" id="submit2" onClick={(state) => console.log(state)}>Submit</Button>
+  </Form>
+```
+
+### Passing props
+
+To actually make your own components working with `react-form-package` you have to pass some props.
+
+#### components
+
+* The `Prop` is the prop on the `<Form />` component.
+* `HTML` is the actual HTML element to use.
+* `Props` are the props you have to pass these components e.g. `id={prop.id} or id={this.prop.id}` or  `onChange={prop.onChange} or onChange={this.prop.onChange}`.
+* `Info` shows you which props you have to bind.
+
+Prop | HTML | Props | Info
+---|--- | --- | ---
+input | input | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
+checkbox | input | `id`,`type`, `onChange`, `onBlur`, `onFocus` |
+radio | div | `id`,`type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<input type="radio" value="someValue" name="theIdRadioGroup" />` and handles their state
+button | input | `id`, `type`, `onClick`, `children` |
+select | select | `id`, `type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<option value="someValue" />` and handles their state
+textarea | textarea | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
+
+A `textarea` example:
+
+```jsx
+const myTextarea = (props) => (
+  <textarea
+    id={props.id}
+    type={props.type}
+    onChange={props.onChange}
+    onBlur={props.onBlur}
+    onFocus={props.onFocus}
+  />
+);
 ```
 
 ## Dynamic Fields
@@ -793,161 +1168,6 @@ export { DynamicFieldsOnClick };
 
 Now render this Component. Everytime you click on the button `Add Company` you get a new field, and everytime you click on the button `Remove Company` you remove the corresponding field.
 
-## File Upload
-
-Sometimes you need to upload files with your form, e.g. if you want to upload a profile picture for a user.
-
-Use a `<Field />` with the type `file` and you will get the `FileList` object back as value in the `data` object.
-
-```jsx
-<Form
-  validate
-  enctype="multipart/form-data"
->
-  <Field type="file" id="profilePicture" required />
-  <Button
-    id="submit"
-    type="submit"
-    onClick={(state) => {
-      alert(JSON.stringify(state, null, 2));
-      alert('open the console to see the whole state...');
-      console.log(state);
-    }}
-  >
-    Submit
-  </Button>
-</Form>
-```
-
-## State
-
-> Working with the state data and meta data
-
-A simple Example of how your Form could look like:
-
-```jsx
-<Form>
-  <Field id="email" type="email" required />
-  <Field id="password" type="password" required />
-  <Button
-    id="button"
-    type="submit"
-    onClick={(state) => this.handleOnClick(state)}
-  >
-    Submit
-  </Button>
-</Form>
-```
-
-> You can also use `onFocus`, `onChange`, and `onBlur` on every `Field`, `Select`, or `RadioGroup` components to get access to the state of the form ([more info](#onfocus-onchange-onblur))
-
-As you can see the `<Button />` component has a `onClick` property. This property takes a function. The `handleOnClick` function could look something like:
-
-```js
-async handleOnClick(state) {
-  // do something with the state
-  // e.g. send data to a server
-  try {
-    const response = await fetch('https://server.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify(state.data);
-    });
-    // do something with the response
-  } catch(error) {
-    // do something with the error
-  }
-}
-```
-
-As you can see the `state` parameter is an object. It has three different properties.
-
-* **data**: `object`
-* **meta**: `object`
-* **formValid**: `boolean`
-
-In our case `data` would hold:
-
-```json
-{
-  "data": {
-    "email": "",
-    "password": ""
-  }
-}
-```
-
-`meta` would hold:
-
-```json
-{
-  "meta": {
-    "email": {
-      "initialValue": "",
-      "dirty": false,
-      "pristine": true,
-      "visited": false,
-      "touched": false,
-      "value": "",
-      "valid": false,
-      "invalid": true,
-      "rules": {
-        "type": "email",
-        "min": -1,
-        "max": -1,
-        "required": true,
-      }
-    },
-    "password": {
-      "initialValue": "",
-      "dirty": false,
-      "pristine": true,
-      "visited": false,
-      "touched": false,
-      "value": "",
-      "valid": false,
-      "invalid": true,
-      "rules": {
-        "type": "password",
-        "min": -1,
-        "max": -1,
-        "required": true,
-      }
-    }
-  }
-}
-```
-
-`formValid` would hold:
-
-```json
-{
-  "formValid": false
-}
-```
-
-### Meta Description
-
-Meta data gives you an overview of what happened on that field. E.g. if a field is `pristine` you could deside to not send its data to the server since, nothing changed.
-
-Property | Type | Description
----|---|---
-initialValue | `String` or `Bool` |
-dirty | `Bool` | `true` if the `value !== initialValue`
-pristine | `Bool` | `true` if the `value === initialValue`
-visited | `Bool` | `true` if this field was focused (`onFocus`)
-touched | `Bool` | `true` if this field was blurred (`onBlur`)
-value | `String` or `Bool` |
-valid | `Bool` | `true` if this field is valid (passed all rules)
-invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
-rules | `object` | the rules for the validation of this field
-rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
-rules.min | `Number` | this field has to have at least `min` characters (`Int`)
-rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
-rules.required | `Bool` | this field is required (has to have a value)
-
 ## onFocus, onChange, onBlur
 
 > get access to the state everytime the user interacts with your form
@@ -1025,207 +1245,182 @@ Render a `<Form />` with an email `<Field />` component and a `onBlur` property.
   </Form>
 ```
 
-## Styling
+## Third Party Components
 
-To style this form you have three different options, all requires to pass a React component to a form prop.
+> Working with third party components
 
-### CSS-in-JS
+Sometimes you need to work with third party components to make something work properly, e.g. you need an autocompletion. `react-form-package` does not provide an autocompletion by default, but luckily you can use third party components within `react-form-package` and keep all the functionality.
 
-> In this section we will use a library that uses `styled-components` to style our form
+To give you an example of how to create a autocompletion form we use [downshift](https://github.com/paypal/downshift#readme).
 
-First you have to import the this library and the Form Components you want to use for your styling. In this example we will use [styled-bootstrap-components](https://aichbauer.github.io/styled-bootstrap-components).
+`react-form-package` has a `<FieldWrapper />` component. This component exposes three props to the child component: `onFocus`, `onBlur`, and `onChange`.
+
+This props are functions that takes exactly one argument: `value`. Which should be a `string` for input fields or a `boolean` for a checkbox.
+
+### Autocomplete
+
+First off, import your components.
+
+```js
+import React from 'react';
+import Downshift from 'downshift';
+```
+
+The next step is to create a `Autocomplete` component.
+
+We use the standard example from the [downshift](https://github.com/paypal/downshift#readme) documentation.
+
+We use the exposed function props to change the state of the `<Form />`. take a look at the `onChange` function of the `<Downshift />` component, or the `onFocus` and `onBlur` function on the input component.
 
 ```jsx
+// ./Autocomplete.js
+
+const items = [
+  { value: 'apple' },
+  { value: 'pear' },
+  { value: 'orange' },
+  { value: 'grape' },
+  { value: 'banana' },
+];
+
+const Autocomplete = (props) => (
+  <Downshift
+    // here we are using the onChange function
+    onChange={(item) => props.onChange(item.value)}
+    itemToString={(item) => (item ? item.value : '')}
+  >
+    {({
+      getInputProps,
+      getItemProps,
+      getLabelProps,
+      getMenuProps,
+      isOpen,
+      inputValue,
+      highlightedIndex,
+      selectedItem,
+    }) => (
+      <div>
+        <label {...getLabelProps()}>Enter a fruit: </label>
+        <input
+          {...getInputProps()}
+          // here we are using the onFocus and onBlur function
+          onFocus={(e) => props.onFocus(e.target.value)}
+          onBlur={(e) => props.onBlur(e.target.value)}
+          placeholder="apple"
+        />
+        <ul {...getMenuProps()}>
+          {isOpen
+            ? items
+              .filter((item) => !inputValue || item.value.includes(inputValue))
+              .map((item, index) => (
+                <li
+                  {...getItemProps({
+                    key: item.value,
+                    index,
+                    item,
+                    style: {
+                      backgroundColor:
+                        highlightedIndex === index ? 'lightgray' : 'white',
+                      fontWeight: selectedItem === item ? 'bold' : 'normal',
+                    },
+                  })}
+                >
+                  {item.value}
+                </li>
+              ))
+            : null}
+        </ul>
+      </div>
+    )}
+  </Downshift>
+);
+
+export { Autocomplete };
+```
+
+Now we have to import all components that we need and use our `<FieldWrapper />` component inside the `<Form />` component.
+
+```js
+import React from 'react';
+import { Autocomplete } from './Autocomplete';
 import {
- Form,
- Field,
- Button,
+  Form,
+  FieldWrapper,
+  Button,
 } from 'react-form-package';
-import {
-  Label,
-  FormGroup,
-  FormControl,
-  Column,
-  Button as Btn,
-} from 'styled-bootstrap-components';
 ```
 
-The next step is to create you form and pass the styled components as props to the `<Form />` component
+If you visit the focus and blur the input now there will be a error message, telling you that this field is required. If you type something and select a fruit from the autocompletion you will be able to submit the form.
 
 ```jsx
-  <Form
-    input={<FormControl />}
-    button={<Btn primary mt="3px" mb="3px" />}
-  >
-    <FormGroup row nomb>
-      <Column sm={6}>
-        <FormGroup>
-          <Label>Email</Label>
-          <Field id="email" type="email" placeholder="Email" />
-        </FormGroup>
-      </Column>
-      <Column sm={12}>
-        <Button id="submit" type="submit" onClick={(state) => console.log(state)} primary>Submit</Button>
-      </Column>
-    </FormGroup>
-  </Form>
+<Form
+  validate
+>
+  <div>
+  <FieldWrapper type="text" id="autocomplete" required>
+    <Autocomplete />
+  </FieldWrapper>
+  </div>
+  <div>
+    <Button 
+      type="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
 ```
 
-### style prop
+## File Upload
 
-> In this section we will use a the `style` prop to style our form
+Sometimes you need to upload files with your form, e.g. if you want to upload a profile picture for a user.
 
-To style your form pass components to the `<Form />` component that are styled with the style tag. When you create your own `<input />`, `<button />` components do not forget do bind functions like `onClick`, `onChange`, `onFocus`, `onBlur`. This functions are needed to make `react-form-package` work properly.
+Use a `<Field />` with the type `file` and you will get the `FileList` object back as value in the `data` object.
 
 ```jsx
-const MyButton = (props) => (
-  <button
+<Form
+  validate
+  enctype="multipart/form-data"
+>
+  <Field type="file" id="profilePicture" required />
+  <Button
+    id="submit"
     type="submit"
-    style={{
-      margin: '10px 0px',
-      padding: '8px 24px',
-      borderRadius: '5px',
-      border: 'none',
-      background: '#7FDBFF',
-      color: '#001f3f',
-      cursor: 'pointer',
+    onClick={(state) => {
+      alert(JSON.stringify(state, null, 2));
+      alert('open the console to see the whole state...');
+      console.log(state);
     }}
-    onClick={props.onClick}
   >
-    {props.children}
-  </button>
-);
-
-const MyInput = (props) => (
-  <input
-    style={{
-      margin: '10px 0px',
-      padding: '8px 3px',
-      border: '1px solid #7FDBFF',
-      borderRadius: '5px',
-      color: 'black',
-    }}
-    value={props.value}
-    placeholder={props.placeholder}
-    onChange={props.onChange}
-    onBlur={props.onBlur}
-    onFocus={props.onFocus}
-  />
-);
+    Submit
+  </Button>
+</Form>
 ```
 
-The next step is to simply create you form and pass the styled components as props to the `<Form />` component
+## Why?
 
-```jsx
-  <Form
-    button={<MyButton />}
-    input={<MyInput />}
-  >
-    <div>
-      Email
-    </div>
-    <Field type="email" id="email2" placeholder="Email" />
-    <Button type="submit" id="submit2" onClick={(state) => console.log(state)}>Submit</Button>
-  </Form>
-```
+> TL;DR: I wanted a form with inbuilt validation and state management that a developer can use only by knowing HTML
 
-### CSS and className
+Forms! A pain in the ass for a user when they are not well developed. Mostly because developing forms is a pain in the ass too.
 
-> In this section we will use a the `className` prop and a css file to style our form
+Why is developing good forms not easy?
 
-To style your form pass components to the `<Form />` component that have `className` prop and use css files (make sure to have an appropriate loader for your bundler).
+Because
 
-```css
-.button {
-  background: #001f3f;
-  border: 1px solid black;
-  padding: 8px 24px;
-  border-radius: 3px;
-  color: white;
-  cursor: pointer;
-}
+* of a lot of communication between the user and the program
+* there are a lot of changes in the state of a program
+* of the validation of the user input
 
-.input {
-  margin: 10px 0px;
-  padding: 8px 3px;
-  border: 1px solid #001f3f;
-  border-radius: 5px;
-}
-```
+I wanted a form that a developer can use only by knowing HTML. Most frontend developers know how a valid HTML form looks like on first sight but no frontend developer knows how a JavaScript library works when its been used for the first time. That is the reason why `react-form-package` was created. By using `react-form-package` you create a similar structure to a valid HTML form. Thats it. Input validation, form state management, and user communication is all handled by `react-form-package`.
 
-Import your `CSS file` to your application and make sure you have a loader for css.
+### Why not use formik or react-final-form
 
-```jsx
-import './style.css';
-
-const MyClassNameButton = (props) => (
-  <button
-    clssName="button"
-  >
-    {children}
-  </button>
-);
-
-const MyClassNameInput = (props) => (
-  <input
-    className="input"
-    value={props.value}
-    placeholder={props.placeholder}
-    onChange={props.onChange}
-    onBlur={props.onBlur}
-    onFocus={props.onFocus}
-  />
-);
-```
-
-The next step is to create you form and pass the styled components as props to the `<Form />` component.
-
-```jsx
-  <Form
-    button={<MyClassNameButton />}
-    input={<MyClassNameInput />}
-  >
-    <div>
-      Email
-    </div>
-    <Field type="email" id="email2" placeholder="Email" />
-    <Button type="submit" id="submit2" onClick={(state) => console.log(state)}>Submit</Button>
-  </Form>
-```
-
-### Passing props
-
-To actually make your own components working with `react-form-package` you have to pass some props.
-
-#### components
-
-* The `Prop` is the prop on the `<Form />` component.
-* `HTML` is the actual HTML element to use.
-* `Props` are the props you have to pass these components e.g. `id={prop.id} or id={this.prop.id}` or  `onChange={prop.onChange} or onChange={this.prop.onChange}`.
-* `Info` shows you which props you have to bind.
-
-Prop | HTML | Props | Info
----|--- | --- | ---
-input | input | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
-checkbox | input | `id`,`type`, `onChange`, `onBlur`, `onFocus` |
-radio | div | `id`,`type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<input type="radio" value="someValue" name="theIdRadioGroup" />` and handles their state
-button | input | `id`, `type`, `onClick`, `children` |
-select | select | `id`, `type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<option value="someValue" />` and handles their state
-textarea | textarea | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
-
-A `textarea` example:
-
-```jsx
-const myTextarea = (props) => (
-  <textarea
-    id={props.id}
-    type={props.type}
-    onChange={props.onChange}
-    onBlur={props.onBlur}
-    onFocus={props.onFocus}
-  />
-);
-```
+Most of the `form libraries` I found were using `render props` or `higher order components`, which is not a ideal set up for a form because when the forms are getting more complex the more confusing the code will get. A form should be declarative, and what is more declartive than a plain HTML form? Not a `render prop hell` or `higher order confusion`. Also I did not find any library that came with an inbuilt validation system. Why do you need this? You should not consider writing your own validations if an email is always validated the same way, or the structure of a url is always the same. Writing your validations yourself can mislead you to produce duplicate code and this could lead to more bugs. What is also important: being flexible with styling. This is also not always easy with libararies. `react-form-package` only brings the logic and you choose how to style it. `CSS-in-JS`, `CSS`, or the `style prop`, it is up to you.
 
 ## License
 
