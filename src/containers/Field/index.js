@@ -45,7 +45,15 @@ const Field = (props) => (
             invalid={validate && data[props.id].touched && data[props.id].invalid}
             onFocus={(e) => handleOnFocus(e, props.onFocus)}
             onBlur={(e) => handleOnBlur(e, props.onBlur)}
-            onChange={(e) => handleOnChange(e, data[props.id].rules, props.onChange)}
+            onChange={(e) => handleOnChange(
+              e,
+              data[props.id].rules,
+              {
+                dynamic: props.dynamic,
+                field: props.field,
+              },
+              props.onChange,
+            )}
           />
           <Error
             data={data}

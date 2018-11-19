@@ -9,6 +9,8 @@ const Button = (props) => (
         formValid,
         validate,
         ButtonComponent,
+        addField,
+        removeField,
       } = state;
 
       return (
@@ -20,9 +22,24 @@ const Button = (props) => (
           onClick={(e) => {
             e.preventDefault();
 
-            return props.onClick(createReturnState(state));
+            if (props.rfpRole === 'addField') {
+              addField(props.field);
+              if (props.onClick) {
+                props.onClick();
+              }
+            }
+            if (props.rfpRole === 'removeField') {
+              if (props.onClick) {
+                props.onClick();
+              }
+              removeField(props.fieldId);
+            }
+
+            if (!props.rfpRole) {
+              props.onClick(createReturnState(state));
+            }
           }}
-          disabled={validate ? !formValid : false}
+          disabled={validate && !props.rfpRole ? !formValid : false}
         >
           {props.children}
         </ButtonComponent.type>
