@@ -157,30 +157,58 @@ class Form extends React.Component {
     }, () => this.validateForm());
   }
 
-  addField(field) {
+  addField(fields) {
     const { data } = this.state;
+
+    let fieldsArr;
+    let newFields = {};
+
+    if (!Array.isArray(fields)) {
+      fieldsArr = [fields];
+    } else {
+      fieldsArr = fields;
+    }
+
+    fieldsArr.forEach((field) => {
+      newFields = {
+        ...newFields,
+        [field.id]: {
+          ...initialState(field),
+        },
+      };
+    });
 
     this.setState({
       data: {
         ...data,
-        [field.id]: {
-          ...initialState(field),
-        },
+        ...newFields,
       },
     }, () => this.validateForm());
   }
 
-  removeField(fieldId) {
+  removeField(fieldIds) {
     const { data } = this.state;
-    const {
-      [fieldId]: _,
-      ...newData
-    } = data;
+
+    let fieldIdsArr;
+    let newFields = {};
+
+    if (!Array.isArray(fieldIds)) {
+      fieldIdsArr = [fieldIds];
+    } else {
+      fieldIdsArr = fieldIds;
+    }
+
+    Object.keys((data)).forEach((d) => {
+      if (!fieldIdsArr.includes(d)) {
+        newFields = {
+          ...newFields,
+          [d]: data[d],
+        };
+      }
+    });
 
     this.setState({
-      data: {
-        ...newData,
-      },
+      data: newFields,
     }, () => this.validateForm());
   }
 
