@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with text input | text input all rules 1`] = `
+<form
+  enctype="application/x-www-form-urlencoded"
+>
+  <input
+    bindTo="households"
+    bindToCallback={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "1-2",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    className="rfp-input"
+    id="housenumbers"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="2-7"
+    type="text"
+    valid={false}
+    value=""
+  />
+  <input
+    className="rfp-input"
+    id="households"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="6"
+    type="number"
+    valid={false}
+    value=""
+  />
+</form>
+`;
