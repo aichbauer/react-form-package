@@ -1,0 +1,181 @@
+---
+name: Dynamic Fields 3
+route: /dynamic-field-3
+order: 15
+---
+
+import { Form, Button, Field, Select, RadioGroup } from '../src';
+import { Playground } from 'docz';
+import { MultipleDynamicFields } from './components/MultipleDynamicFields';
+
+# Dynamic Fields
+
+When you have a part of your form that consists of multiple fields that needs to be dynamic, e.g. `streetname` and `housenumber`. >ou can add multiple fields to the state of the `<Form />` component by simle passing an array of objects to the `field` property instead of a single object. The same way you can remove multiple fields from state of the `<Form />` component, by passing an array of strings to the `fieldId` property instead of a single string.
+
+## Add multiple dynamic fields to the state
+
+First off, import your components.
+
+```js
+import React from 'react';
+import {
+  Form,
+  Field,
+  Button,
+} from 'react-form-package';
+```
+
+Now create your component:
+
+```jsx
+class MultipleDynamicFields extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      companies: [
+        {
+          id: 'street-0',
+        },
+      ],
+    };
+
+    this.addField = this.addField.bind(this);
+    this.removeField = this.removeField.bind(this);
+    this.calculateAvailableId = this.calculateAvailableId.bind(this);
+  }
+
+  calculateAvailableId() {
+    const {
+      companies,
+    } = this.state;
+
+    const arr = companies.map((item) => parseInt(item.id.split('-')[1], 10));
+
+    let currentHighestId = Math.max(...arr);
+    currentHighestId = currentHighestId !== -Infinity ? currentHighestId : 0;
+
+    const highestAvailableId = currentHighestId + 1;
+
+    return highestAvailableId;
+  }
+
+  addField() {
+    const {
+      companies,
+    } = this.state;
+
+    const highestAvailableId = this.calculateAvailableId();
+
+    this.setState({
+      companies: companies.concat({ id: `street-${highestAvailableId}` }),
+    });
+  }
+
+  removeField(idx) {
+    const {
+      companies,
+    } = this.state;
+
+    this.setState({
+      companies: companies.filter((_, index) => idx !== index),
+    });
+  }
+
+  render() {
+    const {
+      companies,
+    } = this.state;
+
+    const highestAvailableId = this.calculateAvailableId();
+
+    return (
+      <Form
+        validate
+      >
+        {companies.map((street, idx) => (
+          <div>
+            <div>
+              <Field
+                id={`${street.id}`}
+                placeholder="Street name"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <Field
+                id={`housenumber-${street.id.split('-')[1]}`}
+                placeholder="House number"
+                type="number"
+                required
+              />
+            </div>
+            <Button
+              id="removeField"
+              rfpRole="removeField"
+              type="button"
+              // pass multiple fieldIds 
+              // in an array to the 
+              // fieldId
+              fieldId={[
+                `${street.id}`,
+                `housenumber-${street.id.split('-')[1]}`,
+              ]}
+              onClick={() => this.removeField(idx)}
+            >
+              Remove Company
+            </Button>
+          </div>
+        ))}
+        <div>
+          <Button
+            id="addField"
+            rfpRole="addField"
+            type="button"
+            // pass multiple field objects 
+            // in an array to the 
+            // field property
+            field={[
+              {
+                id: `street-${highestAvailableId}`,
+                type: 'text',
+                required: true,
+              },
+              {
+                id: `housenumber-${highestAvailableId}`,
+                type: 'number',
+                required: true,
+              },
+            ]}
+            onClick={() => this.addField()}
+          >
+            Add Company Field
+          </Button>
+        </div>
+        <div>
+          <Button
+            id="submit"
+            type="submit"
+            onClick={(state) => {
+              alert(JSON.stringify(state, null, 2));
+              alert('open the console to see the whole state...');
+              console.log(state);
+            }}
+          >
+            submit
+          </Button>
+        </div>
+      </Form>
+    );
+  }
+}
+
+export { MultipleDynamicFields };
+```
+
+Now lets render this component and see how you can add and remove multiple fields.
+
+<Playground>
+  <MultipleDynamicFields />
+</Playground>
