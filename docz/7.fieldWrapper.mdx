@@ -1,0 +1,69 @@
+---
+name: FieldWrapper
+route: /field-wrapper
+order: 7
+---
+
+import { Form, FieldWrapper, Button } from '../src'
+import { Playground } from 'docz';
+
+# FieldWrapper
+
+> This component is here for edge cases where you get the state from another component and you have to pass it to the `<Form />` component manually, e.g. third party components.
+
+This component has to be a child within the `<Form />` component. This component exposes three additional props to its child component so that you are able to use third party components.
+
+## Basic Usage
+
+```jsx
+import {
+  Form,
+  FieldWrapper,
+} from 'react-form-package';
+```
+
+Render a `<Form />` with an `<FieldWrapper />` and a `<Button />` component.
+
+Take a look into the [Third Party Components Section](/third-party-components) to see how you can use this component properly.
+
+```jsx
+  <Form>
+    <div>
+      <FieldWrapper type="text" id="fieldwrapper">
+        {/*
+          Render a child component that gets access to
+
+          onFocus
+          onBlur
+          onChange
+        */}
+      </FieldWrapper>
+    <div>
+      <Button id="submit" type="submit" onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+      >Submit</Button>
+    </div>
+  </Form>
+```
+
+## Props
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+id | String | true | |
+type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
+required | Bool | false | false |
+min | String | false | -1 |
+max | String | false | -1 |
+errorMessage | String | false | | define your own custom error message for the input
+
+## Props that get exposed to the child component
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+onFocus | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+onChange | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+onBlur | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
