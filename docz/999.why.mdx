@@ -1,0 +1,25 @@
+---
+name: Why
+route: /why
+order: 999
+---
+
+# Why?
+
+> TL;DR: I wanted a form with inbuilt validation and state management that a developer can use only by knowing HTML
+
+Forms! A pain in the ass for a user when they are not well developed. Mostly because developing forms is a pain in the ass too.
+
+Why is developing good forms not easy?
+
+Because
+
+* of a lot of communication between the user and the program
+* there are a lot of changes in the state of a program
+* of the validation of the user input
+
+I wanted a form that a developer can use only by knowing HTML. Most frontend developers know how a valid HTML form looks like on first sight but no frontend developer knows how a JavaScript library works when its been used for the first time. That is the reason why `react-form-package` was created. By using `react-form-package` you create a similar structure to a valid HTML form. Thats it. Input validation, form state management, and user communication is all handled by `react-form-package`.
+
+### Why not use formik or react-final-form
+
+Most of the `form libraries` I found were using `render props` or `higher order components`, which is not a ideal set up for a form because when the forms are getting more complex the more confusing the code will get. A form should be declarative, and what is more declartive than a plain HTML form? Not a `render prop hell` or `higher order confusion`. Also I did not find any library that came with an inbuilt validation system. Why do you need this? You should not consider writing your own validations if an email is always validated the same way, or the structure of a url is always the same. Writing your validations yourself can mislead you to produce duplicate code and this could lead to more bugs. What is also important: being flexible with styling. This is also not always easy with libararies. `react-form-package` only brings the logic and you choose how to style it. `CSS-in-JS`, `CSS`, or the `style prop`, it is up to you.

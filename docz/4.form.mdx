@@ -1,0 +1,55 @@
+---
+name: Form
+route: /form
+order: 4
+---
+
+import { Form } from '../src'
+import { Playground } from 'docz';
+
+# Form
+
+This component is a wrapper for all the other components in this library. This component handles the global state for the form itself.
+
+## Basic Usage
+
+Render a `<Form />` component.
+
+```jsx
+import { Form } from 'react-form-package';
+
+const myForm = (props) => (
+  <Form>
+    {/*
+      here comes your form
+      mix HTML with other
+      components from this
+      library: e.g.
+      <Button />
+      <Field />
+      <RadioGroup />
+      <Select />
+    */}
+  </Form>
+);
+```
+
+## Props
+
+You are able to pass components styled with `css-in-js` libraries, `className` props, or `style` props to have a styled form. If you want to validate your form and show error messages add the `validate` prop.
+
+The `<Form />` component actually renders every child within itself. This means you can create nested structures and style the form the way you need it.
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+validate| Bool | false | |
+input | Element |  `<input className="rfp-input" />` | |
+checkbox | Element |  `<input className="rfp-checkbox" />` | |
+radio | Element |  `<input className="rfp-radio-group" />` | |
+radioContainer | Element |  `<div className="rfp-radio-group-container" />` | | The Element that wraps the radio elements.
+button | Element |  `<button className="rfp-button" />` | |
+select | Element |  `<select className="rfp-select" />` | |
+textarea | Element | `<textarea className="rfp-textarea" />` | |
+error | Element | `<div className="rfp-error-label" />` | |
+
+

@@ -1,0 +1,96 @@
+---
+name: Bind Input Fields
+route: /bind-input-fields
+order: 17
+---
+
+import { Form, Field, Button } from '../src';
+import { Playground } from 'docz';
+
+# Bind Input Fields
+
+Sometimes a input value depends on another input value, e.g. the use inputs a range of house numbers and you have to calculate the dependend household count. So that the user is able to skip some fields but is also able to chnage the value if the user knows it better.
+
+## Bind an input value to another input value
+
+To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+bindTo | String | false | | the `id` of the field you want to manipulate
+bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
+
+### Basic Usage
+
+In our example we bind our first `housenumbers` input to the second `households` input. As long as the bound input field (`bindTo`, in our example the households field) is untouched (not blurred) the `binToCallback` will be executed `onChange` of the field where we have the `bindTo` and `bindToCallback` properties. The `bindToCallback` expects a String as return value, and gets the input value of the current input field `housenumbers`.
+
+<Playground>
+  <Form>
+    <div>
+      <div>
+        House numbers:
+      </div>
+      <Field 
+        id="housenumbers" 
+        type="text" 
+        placeholder="2-7"
+        // bind this field to field with id `households`
+        bindTo="households"
+        // when this field changes set the value of the 
+        // bound field (`households`) to the result of 
+        // this function, either a string or a boolean
+        bindToCallback={
+          (value) => {
+            const numbers = value.includes('-')
+              ? value.split('-')
+              : value;
+
+            if (!Array.isArray(numbers)) {
+              return '1';
+            }
+
+            const number1 = parseInt(numbers[0]);
+            const number2 = parseInt(numbers[1]);
+
+            if (!number2 || number2 === number1) {
+              return '1';
+            }
+
+            if (number2 < number1) {
+              return '0';
+            }
+
+            const households = (number2 - number1 + 1).toString();
+
+            return households;
+          }
+        }
+      />
+    </div>
+    <div>
+      <div>
+        Households:
+      </div>
+      <Field 
+        id="households"
+        type="number"
+        placeholder="6"
+      />
+    </div>
+    <div>
+      <Button
+        id="submit"
+        type="submit"
+        onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}
+      >
+        Submit
+      </Button>
+    </div>
+  </Form>
+</Playground>
+
+

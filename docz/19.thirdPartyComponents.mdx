@@ -1,0 +1,141 @@
+---
+name: Third Party Components
+route: /third-party-components
+order: 19
+---
+
+import { Form, Field, FieldWrapper, Select, RadioGroup, Button } from '../src';
+import Downshift from 'downshift';
+import { Playground } from 'docz';
+import { Autocomplete } from './components/Autocomplete';
+
+# Third Party Components
+
+> Working with third party components
+
+Sometimes you need to work with third party components to make something work properly, e.g. you need an autocompletion. This `react-form-package` does not provide an autocompletion by default, but luckily you can use third party components within `react-form-package` and keep all the functionality.
+
+To give you an example of how to create a autocompletion form we use [downshift](https://github.com/paypal/downshift#readme).
+
+`react-form-package` has a `<FieldWrapper />` component. This component exposes three props to the child component: `onFocus`, `onBlur`, and `onChange`.
+
+This props are functions that takes exactly one argument: `value`. Which should be a `string` for input fields or a `boolean` for a checkbox.
+
+## Autocomplete
+
+First off, import your components.
+
+```js
+import React from 'react';
+import Downshift from 'downshift';
+```
+
+The next step is to create a `Autocomplete` component.
+
+We use the standard example from the [downshift](https://github.com/paypal/downshift#readme) documentation.
+
+We use the exposed function props to change the state of the `<Form />`. take a look at the `onChange` function of the `<Downshift />` component, or the `onFocus` and `onBlur` function on the input component.
+
+```jsx
+// ./Autocomplete.js
+
+const items = [
+  { value: 'apple' },
+  { value: 'pear' },
+  { value: 'orange' },
+  { value: 'grape' },
+  { value: 'banana' },
+];
+
+const Autocomplete = (props) => (
+  <Downshift
+    // here we are using the onChange function
+    onChange={(item) => props.onChange(item.value)}
+    itemToString={(item) => (item ? item.value : '')}
+  >
+    {({
+      getInputProps,
+      getItemProps,
+      getLabelProps,
+      getMenuProps,
+      isOpen,
+      inputValue,
+      highlightedIndex,
+      selectedItem,
+    }) => (
+      <div>
+        <label {...getLabelProps()}>Enter a fruit: </label>
+        <input
+          {...getInputProps()} 
+          // here we are using the onFocus and onBlur function
+          onFocus={(e) => props.onFocus(e.target.value)}
+          onBlur={(e) => props.onBlur(e.target.value)}
+          placeholder="apple"
+        />
+        <ul {...getMenuProps()}>
+          {isOpen
+            ? items
+              .filter((item) => !inputValue || item.value.includes(inputValue))
+              .map((item, index) => (
+                <li
+                  {...getItemProps({
+                    key: item.value,
+                    index,
+                    item,
+                    style: {
+                      backgroundColor:
+                        highlightedIndex === index ? 'lightgray' : 'white',
+                      fontWeight: selectedItem === item ? 'bold' : 'normal',
+                    },
+                  })}
+                >
+                  {item.value}
+                </li>
+              ))
+            : null}
+        </ul>
+      </div>
+    )}
+  </Downshift>
+);
+
+export { Autocomplete };
+```
+
+Now we have to import all components that we need and use our `<FieldWrapper />` component inside the `<Form />` component.
+
+```js
+import React from 'react';
+import { Autocomplete } from './Autocomplete';
+import {
+  Form,
+  FieldWrapper,
+  Button,
+} from 'react-form-package';
+```
+
+If you visit the focus and blur the input now there will be a error message, telling you that this field is required. If you type something and select a fruit from the autocompletion you will be able to submit the form.
+
+<Playground>
+  <Form
+    validate
+  >
+    <div>
+    <FieldWrapper type="text" id="autocomplete" required>
+      <Autocomplete />
+    </FieldWrapper>
+    </div>
+    <div>
+      <Button 
+        type="submit"
+        onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}
+      >
+        Submit
+      </Button>
+    </div>
+  </Form>
+</Playground>
