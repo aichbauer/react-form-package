@@ -1,3 +1,7 @@
+1.9.0 - November, 20 2018
+
+* 8c942e2 Feat: support to bind input fields via bindTo and bindToCallback props (#23) (Lukas Aichbauer)
+
 1.8.0 - November, 20 2018
 
 * 38922b7 Feat: support to add and remove multiple fields (#22) (Lukas Aichbauer)
