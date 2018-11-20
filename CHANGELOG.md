@@ -1,3 +1,7 @@
+1.8.0 - November, 20 2018
+
+* 38922b7 Feat: support to add and remove multiple fields (#22) (Lukas Aichbauer)
+
 1.7.0 - November, 20 2018
 
 * 6094ddc Feat: match property to support regex validation (closes #16) (#21) (Lukas Aichbauer)
