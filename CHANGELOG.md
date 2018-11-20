@@ -1,3 +1,7 @@
+1.7.0 - November, 20 2018
+
+* 6094ddc Feat: match property to support regex validation (closes #16) (#21) (Lukas Aichbauer)
+
 1.6.0 - November, 19 2018
 
 * 8de229c Feat: handle state of dynamic fields (#20) (Lukas Aichbauer)
