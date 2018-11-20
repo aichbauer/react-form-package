@@ -51,6 +51,8 @@ const Field = (props) => (
               {
                 dynamic: props.dynamic,
                 field: props.field,
+                bindTo: props.bindTo,
+                bindToCallback: props.bindToCallback,
               },
               props.onChange,
             )}

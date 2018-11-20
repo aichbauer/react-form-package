@@ -84,6 +84,7 @@ class Form extends React.Component {
     const myId = type === 'radio' ? name : id;
     const myValue = type === 'radio' ? id : value;
     const valid = checkFormInput(rules, checkbox ? checked : myValue);
+
     let newData = {
       ...data,
       [myId]: {
@@ -100,15 +101,31 @@ class Form extends React.Component {
       },
     };
 
-    if (
-      options
-      && myValue
-    ) {
-      if (options.dynamic) {
+    if (options) {
+      if (options.dynamic && myValue) {
         newData = {
           ...newData,
           [options.field.id]: {
             ...initialState(options.field),
+          },
+        };
+      }
+      if (options.bindTo && myValue) {
+        const boundValue = !newData[options.bindTo].touched
+          ? options.bindToCallback(myValue)
+          : newData[options.bindTo].value;
+        const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue);
+        const boundPristine = boundValue === newData[options.bindTo].initialValue;
+
+        newData = {
+          ...newData,
+          [options.bindTo]: {
+            ...newData[options.bindTo],
+            value: boundValue,
+            valid: boundValid,
+            invalid: !boundValid,
+            pristine: boundPristine,
+            dirty: !boundPristine,
           },
         };
       }
