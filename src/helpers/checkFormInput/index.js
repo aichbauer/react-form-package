@@ -49,6 +49,15 @@ const checkFormInput = (rules, value) => {
   if (rules.required && rules.type !== 'checkbox') {
     validateArray.push(inputIs.filled(value));
   }
+  if (rules.match) {
+    console.log('value');
+    console.log(value);
+    console.log('rules.match');
+    console.log(rules.match);
+    console.log('inputIs.valid(value, rules.match)');
+    console.log(inputIs.valid(value, rules.match));
+    validateArray.push(inputIs.valid(value, rules.match));
+  }
 
   const valid = validateArray.every((val) => val);
 
