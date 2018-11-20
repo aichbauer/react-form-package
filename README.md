@@ -29,6 +29,7 @@
   * [Add new Fields onClick](#add-new-fields-onclick)
   * [Add new Fields onChange](#add-new-fields-onchange)
 * [Dynamic Fields 3](#dynamic-fields-3)
+* [Bind Input Fields](#bind-input-fields)
 * [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
 * [Third Party Components](#third-party-components)
   * [Autocomplete with Downshift](#autocomplete)
@@ -236,9 +237,9 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `submit`
 onClick | Func | false | | returns the state of the form
-rfpRole | String | false | | only needed for [dynamically added fields](/dynamic-field-2), either `addField` or `removeField`
-fieldId | String | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
-field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`
+rfpRole | String | false | | only needed for [dynamically added fields](#dynamic-field-2), either `addField` or `removeField`
+fieldId | String | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
+field | Object | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`
 
 ### Field
 
@@ -282,8 +283,10 @@ errorMessage | String | false | | define your own custom error message for the i
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
-dynamic | Bool | false | | only needed for [dynamically added fields](/dynamic-field-2)
-field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2). This object holds at least `id`, `type`, and may hold `min`, `max`, `required`
+dynamic | Bool | false | | only needed for [dynamically added fields](#dynamic-field-2)
+field | Object | false | | only needed for [dynamically added fields](#dynamic-field-2). This object holds at least `id`, `type`, and may hold `min`, `max`, `required`
+bintTo | String | false | | only needed for [binding input fields](#bind-input-fields). The id of the inpu you want to manipulate
+bindToCallback | Func | false | | only needed for [binding input fields](#bind-input-fields). The callback to set the target's (`bindTo`) input value, which gets called `onChange`
 
 ### FieldWrapper
 
@@ -302,7 +305,7 @@ import {
 
 Render a `<Form />` with an `<FieldWrapper />` and a `<Button />` component.
 
-Take a look into the [Third Party Components Section](/third-party-components) to see how you can use this component properly.
+Take a look into the [Third Party Components Section](#third-party-components) to see how you can use this component properly.
 
 ```jsx
   <Form>
@@ -394,6 +397,8 @@ errorMessage | String | false | | define your own custom error message for the i
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
+bintTo | String | false | | only needed for [binding input fields](#bind-input-fields). The id of the inpu you want to manipulate
+bindToCallback | Func | false | | only needed for [binding input fields](#bind-input-fields). The callback to set the target's (`bindTo`) input value, which gets called `onChange`
 
 ### Select
 
@@ -437,6 +442,8 @@ errorMessage | String | false | | define your own custom error message for the i
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
+bintTo | String | false | | only needed for [binding input fields](#bind-input-fields). The id of the inpu you want to manipulate
+bindToCallback | Func | false | | only needed for [binding input fields](#bind-input-fields). The callback to set the target's (`bindTo`) input value, which gets called `onChange`
 
 ## Form Validation
 
@@ -593,8 +600,7 @@ Example with the match property:
 </Form>
 ```
 
-This is just a simple example, off course you are able to pass any regular expression you would like. If you would like to customize the error messages take a look at [custom error messages](/custom-error-messages)
-
+This is just a simple example, off course you are able to pass any regular expression you would like. If you would like to customize the error messages take a look at [custom error messages](#custom-error-messages)
 
 ## State
 
@@ -1483,6 +1489,92 @@ export { MultipleDynamicFields };
 ```
 
 Now lets render this component and see how you can add and remove multiple fields.
+
+## Bind Input Fields
+
+Sometimes a input value depends on another input value, e.g. the use inputs a range of house numbers and you have to calculate the dependend household count. So that the user is able to skip some fields but is also able to chnage the value if the user knows it better.
+
+### Bind an input value to another input value
+
+To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+bindTo | String | false | | the `id` of the field you want to maipulate
+bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
+
+#### Basic Usage
+
+In our example we bind our first `housenumbers` input to the second `households` input. As long as the bound input field (`bindTo`, in our example the households field) is untouched (not blurred) the `binToCallback` will be executed `onChange` of the field where we have the `bindTo` and `bindToCallback` properties. The `bindToCallback` expects a String as return value, and gets the input value of the current input field `housenumbers`.
+
+```jsx
+<Form>
+  <div>
+    <div>
+      House numbers:
+    </div>
+    <Field
+      id="housenumbers"
+      type="text"
+      placeholder="2-7"
+      // bind this field to field with id `households`
+      bindTo="households"
+      // when this field changes set the value of the
+      // bound field (`households`) to the result of
+      // this function, either a string or a boolean
+      bindToCallback={
+        (value) => {
+          const numbers = value.includes('-')
+            ? value.split('-')
+            : value;
+
+          if (!Array.isArray(numbers)) {
+            return '1';
+          }
+
+          const number1 = parseInt(numbers[0]);
+          const number2 = parseInt(numbers[1]);
+
+          if (!number2 || number2 === number1) {
+            return '1';
+          }
+
+          if (number2 < number1) {
+            return '0';
+          }
+
+          const households = (number2 - number1 + 1).toString();
+
+          return households;
+        }
+      }
+    />
+  </div>
+  <div>
+    <div>
+      Households:
+    </div>
+    <Field 
+      id="households"
+      type="number"
+      placeholder="6"
+    />
+  </div>
+  <div>
+    <Button
+      id="submit"
+      type="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
 
 ## onFocus, onChange, onBlur
 
