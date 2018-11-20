@@ -12,6 +12,7 @@ exports[`Render Form with text input | text input all rules 1`] = `
       className="rfp-input"
       id="text"
       invalid={false}
+      match={/react/}
       max="8"
       min="3"
       onBlur={[Function]}
