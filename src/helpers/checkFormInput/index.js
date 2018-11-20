@@ -50,12 +50,6 @@ const checkFormInput = (rules, value) => {
     validateArray.push(inputIs.filled(value));
   }
   if (rules.match) {
-    console.log('value');
-    console.log(value);
-    console.log('rules.match');
-    console.log(rules.match);
-    console.log('inputIs.valid(value, rules.match)');
-    console.log(inputIs.valid(value, rules.match));
     validateArray.push(inputIs.valid(value, rules.match));
   }
 
