@@ -20,6 +20,7 @@
   * [FieldWrapper](#fieldwrapper)
   * [RadioGroup](#radiogroup)
   * [Select](#select)
+* [Form Validation](#form-validation)
 * [State](#state)
 * [Custom Error Messages](#custom-error-messages)
 * [Styling](#styling)
@@ -275,6 +276,7 @@ type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `emai
 required | Bool | false | false |
 min | String | false | -1 |
 max | String | false | -1 |
+match | RegEx | false | | the input value has to match the `regular expression`
 errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
@@ -434,6 +436,164 @@ errorMessage | String | false | | define your own custom error message for the i
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
+
+## Form Validation
+
+Almost any form needs validation in some way. Fortunatly `react-form-package` comes with an declarative inbuild validation system.
+
+What does decalrative mean in that way?
+
+### Basic Example
+
+If you want that your input field only allows valid emails you can add the type `email` to the `<Field />` component. If you also set `validate` property on the `<Form />` component the button only allowes to submit if the form is completely valid.
+
+In the next example you are able to submit the form if the input is empty (because this field is not required) and if the input value is set to a valid email, but not if the input value is not a valid email.
+
+```jsx
+<Form
+  validate
+>
+  <div>
+    Email
+    <div>
+      <Field type="email" id="email" />
+    </div>
+  </div>
+  <div>
+    <Button
+      type="submit"
+      id="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
+If you add the property `required` to the `<Field />` component, everything stays the same except that you are not able to submit the form if the input value is empty.
+
+```jsx
+<Form
+  validate
+>
+  <div>
+    Email
+    <div>
+      <Field type="email" id="email" required />
+    </div>
+  </div>
+  <div>
+    <Button
+      type="submit"
+      id="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
+### Type validation
+
+A `<Field />` component can have diffferent `type` properties.
+
+Additionally to the validation, if the browser supports HTML5 input types the input fields will be displayed as them, only allowing numbers by default if the type is set to `number`, etc. If the browser does not support HTML5 it will automatically uses a text input that keeps the validation. If the user inputs a non numeric character in a `number` input it will display the the error message and you cannot submit the form.
+
+Type| Description 
+---|---
+`checkbox` | `no` additional validation
+`date` | validates if the input value matches the format `YYYY-MM-DD`
+`textarea` | `no` additional validation
+`datetime-local` | validates if the input value matches the format `YYYY-MM-DDTHH:MM`
+`email` | validates if the input value matches the `standard email format`
+`number` | validates if the input value matches a `valid number`
+`tel` | validates if the input value matches the `standard phone number format`
+`text` | `no` additional validation
+`password` | `no` additional validation
+`time` | validates if the input value matches the format `HH:MM`
+`url` | validates if the input value matches the `standard url format`
+`file` | `no` additional validation
+
+### Additional rules
+
+If you are using a `<Field />` component you can also add some additional rules for the validation.
+`required` will work on all components, the `<Field />`, the `<RadioGroup />`, and the `<Select />`
+
+Property | Type | Description 
+---|---|---
+`required` | Bool | validates if the `input value is not empty`
+`min` | String | validates if the input value is at least `min characters long`
+`max` | String | validates if the input value is at least `max characters long`
+`match` | Regex | validates if the input value matches the `regular expression`
+
+Example with the `required`, `min`, and `max` properties:
+
+```jsx
+<Form
+  validate
+>
+  <div>
+    Text required, min, max
+    <div>
+      <Field type="text" id="text" min="2" max="5" required />
+    </div>
+  </div>
+  <div>
+    <Button
+      type="submit"
+      id="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
+Example with the match property:
+
+```jsx
+<Form
+  validate
+>
+  <div>
+    Text required and has to match "react"
+    <div>
+      <Field type="text" id="text" match={/react/} required />
+    </div>
+  </div>
+  <div>
+    <Button
+      type="submit"
+      id="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
+This is just a simple example, off course you are able to pass any regular expression you would like. If you would like to customize the error messages take a look at [custom error messages](/custom-error-messages)
+
 
 ## State
 

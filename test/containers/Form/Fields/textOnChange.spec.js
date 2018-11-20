@@ -30,7 +30,7 @@ test('Render Form with text input | onChange | test value, valid, invalid, prist
     <Form>
       <div>
         <div>text</div>
-        <Field type="text" id="text" min="3" max="8" onChange={() => mock()} onBlur={() => mock()} />
+        <Field type="text" id="text" min="3" max="8" match={/react/} onChange={() => mock()} onBlur={() => mock()} />
       </div>
     </Form>
   );

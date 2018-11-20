@@ -6,6 +6,7 @@ const writeErrorMessage = (rules) => {
     required,
     max,
     min,
+    match,
   } = rules;
   let message = '';
 
@@ -43,6 +44,9 @@ const writeErrorMessage = (rules) => {
   }
   if (max && max !== -1) {
     message += `${warningMessage().maxChar(max)} \n`;
+  }
+  if (match) {
+    message += `${warningMessage().exactly(match.toString())} \n`;
   }
 
   return message;

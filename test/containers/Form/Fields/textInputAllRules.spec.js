@@ -17,7 +17,7 @@ test('Render Form with text input | text input all rules', () => {
     <Form>
       <div>
         <div>text</div>
-        <Field type="text" id="text" min="3" max="8" required />
+        <Field type="text" id="text" min="3" max="8" required match={/react/} />
       </div>
       <div>
         <Button id="submit" type="submit" onClick={(state) => state}>submit</Button>

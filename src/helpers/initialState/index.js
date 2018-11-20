@@ -12,6 +12,7 @@ const initialState = (props) => {
     min: props.min || -1,
     max: props.max || -1,
     required: props.required || false,
+    match: props.match,
   };
   const valid = checkFormInput(rules, value);
 
