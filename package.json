@@ -5,6 +5,7 @@
   "main": "./lib/index.js",
   "license": "MIT",
   "private": false,
+  "author": "Lukas Aichbauer <l.aichbauer@gmail.com> (https://lukasaichbauer.com/)",
   "scripts": {
     "docz:dev": "docz dev",
     "docz:build": "docz build",
