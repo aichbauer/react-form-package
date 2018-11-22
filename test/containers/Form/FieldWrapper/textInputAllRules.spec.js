@@ -13,6 +13,7 @@ import { textInputAllRules } from '../../../fixtures';
 configure({ adapter: new Adapter() });
 
 test('Render Form with text input | FieldWrapper | text input all rules', () => {
+  const mock = jest.fn();
   const fieldWrapperOnChangeSpy = jest.spyOn(Form.prototype, 'handleOnChange');
   const fieldWrapperOnFocusSpy = jest.spyOn(Form.prototype, 'handleOnFocus');
   const fieldWrapperOnBlurSpy = jest.spyOn(Form.prototype, 'handleOnBlur');
@@ -42,7 +43,7 @@ test('Render Form with text input | FieldWrapper | text input all rules', () => 
     <Form>
       <div>
         <div>text</div>
-        <FieldWrapper type="text" id="text" min="3" max="8" required>
+        <FieldWrapper onChange={() => mock()} type="text" id="text" min="3" max="8" required>
           <CustomInput />
         </FieldWrapper>
       </div>
@@ -68,5 +69,6 @@ test('Render Form with text input | FieldWrapper | text input all rules', () => 
   expect(fieldWrapperOnChangeSpy).toHaveBeenCalled();
   expect(fieldWrapperOnFocusSpy).toHaveBeenCalled();
   expect(fieldWrapperOnBlurSpy).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalled();
   expect(tree).toMatchSnapshot();
 });
