@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with text input | preOnChange | manipulate the input value to be duplicated 1`] = `
+<form
+  enctype="application/x-www-form-urlencoded"
+>
+  <div>
+    <div>
+      text
+    </div>
+    <input
+      className="rfp-input"
+      id="text"
+      invalid={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      preOnChange={[Function]}
+      type="text"
+      valid={false}
+      value=""
+    />
+  </div>
+</form>
+`;
