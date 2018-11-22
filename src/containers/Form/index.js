@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '../Context';
 import {
-  checkFormInput, createReturnState, getNestedChilds, initialState,
+  checkFormInput,
+  createReturnState,
+  getNestedChilds,
+  initialState,
 } from '../../helpers';
 
 class Form extends React.Component {
@@ -81,17 +84,26 @@ class Form extends React.Component {
     const { data } = this.state;
     const checkbox = type === 'checkbox';
     const file = type === 'file';
-    const myId = type === 'radio' ? name : id;
-    const myValue = type === 'radio' ? id : value;
-    const valid = checkFormInput(rules, checkbox ? checked : myValue, data);
+    const radio = type === 'radio';
+    const myId = radio
+      ? name
+      : id;
+    let myValue = radio
+      ? id
+      : value;
+    myValue = checkbox
+      ? checked
+      : myValue;
+    myValue = options.preOnChange
+      ? options.preOnChange(myValue)
+      : myValue;
+    const valid = checkFormInput(rules, myValue, data);
 
     let newData = {
       ...data,
       [myId]: {
         ...data[myId],
-        value: checkbox
-          ? checked
-          : myValue,
+        value: myValue,
         files: file ? files : undefined,
         checked,
         valid,
@@ -101,34 +113,32 @@ class Form extends React.Component {
       },
     };
 
-    if (options) {
-      if (options.dynamic && myValue) {
-        newData = {
-          ...newData,
-          [options.field.id]: {
-            ...initialState(options.field),
-          },
-        };
-      }
-      if (options.bindTo && myValue) {
-        const boundValue = !newData[options.bindTo].touched
-          ? options.bindToCallback(myValue)
-          : newData[options.bindTo].value;
-        const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue, data);
-        const boundPristine = boundValue === newData[options.bindTo].initialValue;
+    if (options.dynamic && myValue) {
+      newData = {
+        ...newData,
+        [options.field.id]: {
+          ...initialState(options.field),
+        },
+      };
+    }
+    if (options.bindTo && myValue) {
+      const boundValue = !newData[options.bindTo].touched
+        ? options.bindToCallback(myValue)
+        : newData[options.bindTo].value;
+      const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue, data);
+      const boundPristine = boundValue === newData[options.bindTo].initialValue;
 
-        newData = {
-          ...newData,
-          [options.bindTo]: {
-            ...newData[options.bindTo],
-            value: boundValue,
-            valid: boundValid,
-            invalid: !boundValid,
-            pristine: boundPristine,
-            dirty: !boundPristine,
-          },
-        };
-      }
+      newData = {
+        ...newData,
+        [options.bindTo]: {
+          ...newData[options.bindTo],
+          value: boundValue,
+          valid: boundValid,
+          invalid: !boundValid,
+          pristine: boundPristine,
+          dirty: !boundPristine,
+        },
+      };
     }
 
     this.setState({
