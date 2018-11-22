@@ -78,6 +78,7 @@
     "styled-system": "^3.0.2"
   },
   "dependencies": {
+    "autocapitalize": "^1.0.0",
     "input-is": "^2.0.0",
     "prop-types": "^15.6.2",
     "warning-message": "^1.1.0"
