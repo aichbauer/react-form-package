@@ -1,7 +1,7 @@
 ---
 name: onFocus, onChange, onBlur
 route: /on-focus-on-change-on-blur
-order: 18
+order: 19
 ---
 
 import { Form, Field } from '../src'
@@ -13,7 +13,7 @@ import { Playground } from 'docz';
 
 Sometimes, access to the forms state is needed even before the user submits the form. This can be if you want to store the forms state on the server on every change (e.g. every time the user changes a input or everytime the user blurs an input) or you want to check if the users input is already taken (e.g. a user might not be allowed to use a email or a username that is already taken and you want to give the user a fast respond before the user even submits the form).
 
-You are not able to modify the state on this callbacks since `react-form-package` takes care of the state management, but you can use the state to communicate with a server or change the UI corresponding to the current state.
+You are not able to modify the state on this callbacks since `react-form-package` takes care of the state management, but you can use the state to communicate with a server or change the UI corresponding to the current state. If you have an edge case where you have to modify the state of the input use `preOnChange` (see [State Manipulation](/state-manipulation)).
 
 ## onFocus
 

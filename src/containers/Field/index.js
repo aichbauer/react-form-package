@@ -53,6 +53,7 @@ const Field = (props) => (
                 field: props.field,
                 bindTo: props.bindTo,
                 bindToCallback: props.bindToCallback,
+                preOnChange: props.preOnChange,
               },
               props.onChange,
             )}

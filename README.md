@@ -22,6 +22,7 @@
   * [Select](#select)
 * [Form Validation](#form-validation)
 * [State](#state)
+* [State Manipulation](#state-manipulation)
 * [Custom Error Messages](#custom-error-messages)
 * [Styling](#styling)
 * [Dynamic Fields](#dynamic-fields)
@@ -280,6 +281,7 @@ min | String | false | -1 |
 max | String | false | -1 |
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
+preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
 errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
@@ -342,6 +344,7 @@ min | String | false | -1 |
 max | String | false | -1 |
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
+preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
 errorMessage | String | false | | define your own custom error message for the input
 
 #### Props that get exposed to the child component
@@ -396,6 +399,7 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `radio`
 required | Bool | false | false |
+preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
 errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
@@ -441,6 +445,7 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `select`
 required | Bool | false | false |
+preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
 errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
@@ -745,6 +750,48 @@ rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email
 rules.min | `Number` | this field has to have at least `min` characters (`Int`)
 rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
 rules.required | `Bool` | this field is required (has to have a value)
+
+## State Manipulation
+
+> How to manipulate the state before it is validated
+
+Sometimes you need to manipulate the value of a input. It is not recommended, but there are some edge cases and situations where this comes in handy, e.g. you have an input and you have to ensure that the user capitalizes the first letter, e.g. on names.
+
+For this use cases there is a property called `preOnChange`. This property takes a function that returns the new value of the input. You can only manipulate the value of the current input field.
+
+The next example manipulates the input value that it always capitalizes the first letter of every word in the input field.
+
+```jsx
+<Form
+  validate
+>
+  <div>
+    <div>
+      Name:
+    </div>
+    <Field 
+      id="name"
+      type="text"
+      // `value` is the current value of the input field
+      preOnChange={(value) => autocapitalize(value, 'words')}
+      required
+    />
+  </div>
+  <div>
+    <Button
+      id="submit"
+      type="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
 
 ## Custom Error Messages
 
@@ -1597,7 +1644,7 @@ In our example we bind our first `housenumbers` input to the second `households`
 
 Sometimes, access to the forms state is needed even before the user submits the form. This can be if you want to store the forms state on the server on every change (e.g. every time the user changes a input or everytime the user blurs an input) or you want to check if the users input is already taken (e.g. a user might not be allowed to use a email or a username that is already taken and you want to give the user a fast respond before the user even submits the form).
 
-You are not able to modify the state on this callbacks since `react-form-package` takes care of the state management, but you can use the state to communicate with a server or change the UI corresponding to the current state.
+You are not able to modify the state on this callbacks since `react-form-package` takes care of the state management, but you can use the state to communicate with a server or change the UI corresponding to the current state.  If you have an edge case where you have to modify the state of the input use `preOnChange` (see [State Manipulation](#state-manipulation)).
 
 ### onFocus
 

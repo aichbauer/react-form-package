@@ -49,6 +49,7 @@ const FieldWrapper = (props) => (
               field: props.field,
               bindTo: props.bindTo,
               bindToCallback: props.bindToCallback,
+              preOnChange: props.preOnChange,
             },
             props.onChange,
           ),
@@ -80,6 +81,7 @@ FieldWrapper.defaultProps = {
   field: undefined,
   bindTo: undefined,
   bindToCallback: undefined,
+  preOnChange: undefined,
 };
 
 FieldWrapper.propTypes = {
@@ -96,6 +98,7 @@ FieldWrapper.propTypes = {
   ]),
   bindTo: PropTypes.string,
   bindToCallback: PropTypes.func,
+  preOnChange: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
