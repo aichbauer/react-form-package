@@ -54,13 +54,13 @@ But see for yourself:
       <div>
         Password
       </div>  
-      <Field type="password" id="password" min="8" required />
+      <Field type="password" id="password" min="8" sameAs="password2" required />
     </div>
     <div>
       <div>
         Confirm Password
       </div>  
-      <Field type="password" id="password2" min="8" required />
+      <Field type="password" id="password2" min="8" sameAs="password" required />
     </div>
     <div>
       <Button type="submit" id="submit" onClick={(state) => {
