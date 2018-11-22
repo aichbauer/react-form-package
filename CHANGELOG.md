@@ -1,3 +1,9 @@
+1.10.0 - November, 22 2018
+
+* c81ff8e Feat: input value manipulation with preOnChange (#26) (Lukas Aichbauer)
+* 18b2b95 Fix: onChange on fieldWrapper (#25) (Lukas Aichbauer)
+* d774763 Feat: validation for input values to be the sameAs another input value (#24) (Lukas Aichbauer)
+
 1.9.0 - November, 20 2018
 
 * 8c942e2 Feat: support to bind input fields via bindTo and bindToCallback props (#23) (Lukas Aichbauer)
