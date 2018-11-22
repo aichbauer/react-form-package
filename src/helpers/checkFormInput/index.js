@@ -1,10 +1,18 @@
 import inputIs from 'input-is';
 
-const checkFormInput = (rules, value) => {
+const checkFormInput = (rules, value, data) => {
   const validateArray = [];
 
   if (!rules.required && !value) {
     return true;
+  }
+
+  if (!data) {
+    return false;
+  }
+
+  if (rules.sameAs && data[rules.sameAs].value) {
+    validateArray.push(value === data[rules.sameAs].value);
   }
 
   switch (rules.type) {

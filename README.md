@@ -279,6 +279,7 @@ required | Bool | false | false |
 min | String | false | -1 |
 max | String | false | -1 |
 match | RegEx | false | | the input value has to match the `regular expression`
+sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 errorMessage | String | false | | define your own custom error message for the input
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
@@ -339,6 +340,8 @@ type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `emai
 required | Bool | false | false |
 min | String | false | -1 |
 max | String | false | -1 |
+match | RegEx | false | | the input value has to match the `regular expression`
+sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 errorMessage | String | false | | define your own custom error message for the input
 
 #### Props that get exposed to the child component
@@ -537,14 +540,14 @@ Type| Description
 If you are using a `<Field />` component you can also add some additional rules for the validation.
 `required` will work on all components, the `<Field />`, the `<RadioGroup />`, and the `<Select />`
 
-Property | Type | Description 
+Property | Type | Description
 ---|---|---
 `required` | Bool | validates if the `input value is not empty`
 `min` | String | validates if the input value is at least `min characters long`
 `max` | String | validates if the input value is at least `max characters long`
 `match` | Regex | validates if the input value matches the `regular expression`
 
-Example with the `required`, `min`, and `max` properties:
+Example with the `required`, `min`, `max`, and `sameAs` properties:
 
 ```jsx
 <Form
@@ -554,6 +557,18 @@ Example with the `required`, `min`, and `max` properties:
     Text required, min, max
     <div>
       <Field type="text" id="text" min="2" max="5" required />
+    </div>
+  </div>
+  <div>
+    Password has to be the same as password 2
+    <div>
+      <Field type="password" id="password" sameAs="password2" required />
+    </div>
+  </div>
+  <div>
+    Password 2 has to be the same as password
+    <div>
+      <Field type="password" id="password2" sameAs="password" required />
     </div>
   </div>
   <div>

@@ -10,6 +10,10 @@ const writeErrorMessage = (rules) => {
   } = rules;
   let message = '';
 
+  if (rules.sameAs) {
+    message += `${`The value of this input has to be the same as in input: ${rules.sameAs}`} \n`;
+  }
+
   switch (type) {
     case 'date':
       message += `${warningMessage().date()} \n`;

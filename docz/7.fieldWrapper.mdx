@@ -58,6 +58,8 @@ type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `emai
 required | Bool | false | false |
 min | String | false | -1 |
 max | String | false | -1 |
+match | RegEx | false | | the input value has to match the `regular expression`
+sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 errorMessage | String | false | | define your own custom error message for the input
 
 ## Props that get exposed to the child component

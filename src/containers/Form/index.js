@@ -83,7 +83,7 @@ class Form extends React.Component {
     const file = type === 'file';
     const myId = type === 'radio' ? name : id;
     const myValue = type === 'radio' ? id : value;
-    const valid = checkFormInput(rules, checkbox ? checked : myValue);
+    const valid = checkFormInput(rules, checkbox ? checked : myValue, data);
 
     let newData = {
       ...data,
@@ -114,7 +114,7 @@ class Form extends React.Component {
         const boundValue = !newData[options.bindTo].touched
           ? options.bindToCallback(myValue)
           : newData[options.bindTo].value;
-        const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue);
+        const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue, data);
         const boundPristine = boundValue === newData[options.bindTo].initialValue;
 
         newData = {
