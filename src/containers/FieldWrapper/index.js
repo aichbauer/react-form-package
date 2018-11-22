@@ -44,6 +44,12 @@ const FieldWrapper = (props) => (
           onChange: (input) => handleOnChange(
             e(input),
             data[props.id].rules,
+            {
+              dynamic: props.dynamic,
+              field: props.field,
+              bindTo: props.bindTo,
+              bindToCallback: props.bindToCallback,
+            },
             props.onChange,
           ),
         })
@@ -70,6 +76,10 @@ FieldWrapper.defaultProps = {
   onChange: undefined,
   onBlur: undefined,
   onFocus: undefined,
+  dynamic: false,
+  field: undefined,
+  bindTo: undefined,
+  bindToCallback: undefined,
 };
 
 FieldWrapper.propTypes = {
@@ -79,6 +89,13 @@ FieldWrapper.propTypes = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  dynamic: PropTypes.bool,
+  field: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.object,
+  ]),
+  bindTo: PropTypes.string,
+  bindToCallback: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
