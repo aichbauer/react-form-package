@@ -65,8 +65,11 @@ errorMessage | String | false | | define your own custom error message for the i
 
 ## Props that get exposed to the child component
 
+To see how you can use this properties take a look at [Third Party Components](/third-party-components)
+
 Property | Type | Required | Default | Description
 ---|---|---|---|---
 onFocus | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
 onChange | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
 onBlur | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+meta | Object | false | | get access to the state of the `<FieldWrapper />` component (see [State](/state))
