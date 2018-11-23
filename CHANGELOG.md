@@ -1,3 +1,7 @@
+1.11.0 - November, 23 2018
+
+* 2afd826 Feat: expose meta object to field wrapper (#28) (Lukas Aichbauer)
+
 1.10.1 - November, 23 2018
 
 * 7674ef9 Chore: mv autocapitalize to devDep (#27) (Lukas Aichbauer)
