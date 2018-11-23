@@ -36,6 +36,7 @@ test('Render Form with text input | FieldWrapper | text input all rules', () => 
       onChange={(e) => props.onChange(e.target.value)}
       onFocus={(e) => props.onFocus(e.target.value)}
       onBlur={(e) => props.onBlur(e.target.value)}
+      meta={props.meta}
     />
   );
 
@@ -52,8 +53,13 @@ test('Render Form with text input | FieldWrapper | text input all rules', () => 
 
   const tree = renderer.create(myComponent).toJSON();
   const wrapper = mount(myComponent);
+  const exposedPropsOnCustomComponent = wrapper.find('input').props();
   let state = wrapper.state();
 
+  expect(exposedPropsOnCustomComponent).toHaveProperty('onChange');
+  expect(exposedPropsOnCustomComponent).toHaveProperty('onFocus');
+  expect(exposedPropsOnCustomComponent).toHaveProperty('onBlur');
+  expect(exposedPropsOnCustomComponent).toHaveProperty('meta');
   expect(state.data.text.value).toBe('');
   expect(state.data.text.valid).toBe(false);
 
