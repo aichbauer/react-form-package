@@ -42,6 +42,8 @@ test('Render Form with password input | onChange | test if input has to match sa
   let state = wrapper.state();
   let errorLabelExists = wrapper.exists('.rfp-error-label');
 
+  expect(state.data.password.value).toBe('12345');
+  expect(state.data.password.valid).toBe(false);
   expect(state.data.password2.value).toBe('');
   expect(state.data.password2.valid).toBe(true);
   expect(errorLabelExists).toBe(false);
@@ -53,7 +55,9 @@ test('Render Form with password input | onChange | test if input has to match sa
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');
 
+  expect(state.data.password.value).toBe('12345');
   expect(state.data.password2.value).toBe('1234');
+  expect(state.data.password.valid).toBe(false);
   expect(state.data.password2.valid).toBe(false);
   expect(errorLabelExists).toBe(true);
 
@@ -64,6 +68,8 @@ test('Render Form with password input | onChange | test if input has to match sa
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');
 
+  expect(state.data.password.value).toBe('12345');
+  expect(state.data.password.valid).toBe(true);
   expect(state.data.password2.value).toBe('12345');
   expect(state.data.password2.valid).toBe(true);
   expect(errorLabelExists).toBe(false);
