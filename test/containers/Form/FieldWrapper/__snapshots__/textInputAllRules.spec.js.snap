@@ -9,6 +9,27 @@ exports[`Render Form with text input | FieldWrapper | text input all rules 1`] =
       text
     </div>
     <input
+      meta={
+        Object {
+          "checked": undefined,
+          "dirty": false,
+          "initialValue": "",
+          "invalid": true,
+          "pristine": true,
+          "rules": Object {
+            "match": undefined,
+            "max": "8",
+            "min": "3",
+            "required": true,
+            "sameAs": undefined,
+            "type": "text",
+          },
+          "touched": false,
+          "valid": false,
+          "value": "",
+          "visited": false,
+        }
+      }
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}

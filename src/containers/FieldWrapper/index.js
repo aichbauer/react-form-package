@@ -53,6 +53,7 @@ const FieldWrapper = (props) => (
             },
             props.onChange,
           ),
+          meta: data[props.id],
         })
       ));
 

@@ -349,11 +349,14 @@ errorMessage | String | false | | define your own custom error message for the i
 
 #### Props that get exposed to the child component
 
+To see how you can use this properties take a look at [Third Party Components](#third-party-components)
+
 Property | Type | Required | Default | Description
 ---|---|---|---|---
 onFocus | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
 onChange | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
 onBlur | Func | false | | pass your `value` to this function to update the state of the `<Form />` component
+meta | Object | false | | get access to the state of the `<FieldWrapper />` component (see [State](#state))
 
 ### RadioGroup
 
@@ -1719,28 +1722,32 @@ Render a `<Form />` with an email `<Field />` component and a `onBlur` property.
 
 > Working with third party components
 
-Sometimes you need to work with third party components to make something work properly, e.g. you need an autocompletion. `react-form-package` does not provide an autocompletion by default, but luckily you can use third party components within `react-form-package` and keep all the functionality.
+Sometimes you need to work with third party components to make something work properly, e.g. you need an autocompletion. This `react-form-package` does not provide an autocompletion by default, but luckily you can use third party components within `react-form-package` and keep all the functionality.
 
 To give you an example of how to create a autocompletion form we use [downshift](https://github.com/paypal/downshift#readme).
 
-`react-form-package` has a `<FieldWrapper />` component. This component exposes three props to the child component: `onFocus`, `onBlur`, and `onChange`.
+`react-form-package` has a `<FieldWrapper />` component. This component exposes four props to the child component: `onFocus`, `onBlur`, `onChange` and `meta`.
 
 This props are functions that takes exactly one argument: `value`. Which should be a `string` for input fields or a `boolean` for a checkbox.
 
-### Autocomplete
+## Autocomplete
 
 First off, import your components.
 
 ```js
 import React from 'react';
 import Downshift from 'downshift';
+import {
+  FormControl,
+  Label,
+} from 'styled-bootstrap-components';
 ```
 
 The next step is to create a `Autocomplete` component.
 
 We use the standard example from the [downshift](https://github.com/paypal/downshift#readme) documentation.
 
-We use the exposed function props to change the state of the `<Form />`. take a look at the `onChange` function of the `<Downshift />` component, or the `onFocus` and `onBlur` function on the input component.
+We use the exposed function props to change the state of the `<Form />`. Take a look at the `onChange` function of the `<Downshift />` component, or the `onFocus` and `onBlur` function on the input component, or the `meta` data used on the `<FormControl />` component.
 
 ```jsx
 // ./Autocomplete.js
@@ -1770,13 +1777,17 @@ const Autocomplete = (props) => (
       selectedItem,
     }) => (
       <div>
-        <label {...getLabelProps()}>Enter a fruit: </label>
-        <input
-          {...getInputProps()}
-          // here we are using the onFocus and onBlur function
-          onFocus={(e) => props.onFocus(e.target.value)}
-          onBlur={(e) => props.onBlur(e.target.value)}
-          placeholder="apple"
+        <Label {...getLabelProps()}>Enter a fruit: </Label>
+        <FormControl
+          {...getInputProps({
+            // here we are using the onFocus and onBlur function
+            onFocus: (e) => props.onFocus(e.target.value),
+            onBlur: (e) => props.onBlur(e.target.value),
+            placeholder: 'apple',
+          })}
+          // here we are using the meta data
+          valid={props.meta.touched ? props.meta.valid : undefined}
+          invalid={props.meta.touched ? props.meta.invalid : undefined}
         />
         <ul {...getMenuProps()}>
           {isOpen
@@ -1820,7 +1831,7 @@ import {
 } from 'react-form-package';
 ```
 
-If you visit the focus and blur the input now there will be a error message, telling you that this field is required. If you type something and select a fruit from the autocompletion you will be able to submit the form.
+If you visit the focus and blur the input now there will be a error message, telling you that this field is required. If you type something and select a fruit from the autocompletion you will be able to submit the form. If the field was touched and the field is invalid it will use a red border, if the field was touched and the field is valid it will use a green border.
 
 ```jsx
 <Form
