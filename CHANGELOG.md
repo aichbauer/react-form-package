@@ -1,3 +1,7 @@
+1.11.1 - November, 23 2018
+
+* 27ab9fb Fix: sync the validation of fields with sameAs property (#29) (Lukas Aichbauer)
+
 1.11.0 - November, 23 2018
 
 * 2afd826 Feat: expose meta object to field wrapper (#28) (Lukas Aichbauer)
