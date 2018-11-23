@@ -140,6 +140,16 @@ class Form extends React.Component {
         },
       };
     }
+    if (rules.sameAs) {
+      newData = {
+        ...newData,
+        [rules.sameAs]: {
+          ...newData[rules.sameAs],
+          valid,
+          invalid: !valid,
+        },
+      };
+    }
 
     this.setState({
       data: {
