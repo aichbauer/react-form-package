@@ -1,3 +1,7 @@
+1.10.1 - November, 23 2018
+
+* 7674ef9 Chore: mv autocapitalize to devDep (#27) (Lukas Aichbauer)
+
 1.10.0 - November, 22 2018
 
 * c81ff8e Feat: input value manipulation with preOnChange (#26) (Lukas Aichbauer)
