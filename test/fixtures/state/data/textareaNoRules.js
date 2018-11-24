@@ -14,8 +14,6 @@ const textareaNoRules = {
       invalid: false,
       rules: {
         type: 'textarea',
-        min: -1,
-        max: -1,
         required: false,
       },
     },

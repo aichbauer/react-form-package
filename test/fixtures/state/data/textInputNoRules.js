@@ -14,8 +14,6 @@ const textInputNoRules = {
       invalid: false,
       rules: {
         type: 'text',
-        min: -1,
-        max: -1,
         required: false,
       },
     },
