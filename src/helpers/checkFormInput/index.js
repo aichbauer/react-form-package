@@ -15,9 +15,10 @@ const checkFormInput = (rules, value, data) => {
   if (!data) {
     return false;
   }
-
-  if (rules.sameAs && data[rules.sameAs].value) {
+  if (rules.sameAs && data[rules.sameAs]) {
     validateArray.push(value === data[rules.sameAs].value);
+  } else if (rules.sameAs && !data[rules.sameAs]) {
+    validateArray.push(false);
   }
 
   switch (rules.type) {

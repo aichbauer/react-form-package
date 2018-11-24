@@ -1,6 +1,6 @@
 import { checkFormInput } from '../checkFormInput';
 
-const initialState = (props) => {
+const initialState = (props, data) => {
   const text = props.type === 'text'
     || props.type === 'textarea';
   const password = props.type === 'password';
@@ -34,7 +34,8 @@ const initialState = (props) => {
     match: props.match,
     sameAs: props.sameAs,
   };
-  const valid = checkFormInput(rules, value);
+
+  const valid = checkFormInput(rules, value, data);
 
   return ({
     initialValue: value,

@@ -117,7 +117,7 @@ class Form extends React.Component {
       newData = {
         ...newData,
         [options.field.id]: {
-          ...initialState(options.field),
+          ...initialState(options.field, data),
         },
       };
     }
@@ -184,7 +184,7 @@ class Form extends React.Component {
       data = {
         ...data,
         [child.props.id]: {
-          ...initialState(child.props),
+          ...initialState(child.props, data),
         },
       };
     });
@@ -210,7 +210,7 @@ class Form extends React.Component {
       newFields = {
         ...newFields,
         [field.id]: {
-          ...initialState(field),
+          ...initialState(field, data),
         },
       };
     });
@@ -259,14 +259,34 @@ class Form extends React.Component {
   validateForm(cb) {
     const { data } = this.state;
     const allFieldValidations = [];
+    let newData = {
+      ...data,
+    };
 
     Object.keys(data).forEach((key) => {
-      const oneValid = data[key].valid;
+      let oneValid = false;
+
+      if (data[key].rules.sameAs) {
+        oneValid = checkFormInput(data[key].rules, data[key].value, data);
+        newData = {
+          ...newData,
+          [key]: {
+            ...data[key],
+            valid: oneValid,
+            invalid: !oneValid,
+          },
+        };
+      } else {
+        oneValid = data[key].valid;
+      }
+
       allFieldValidations.push(oneValid);
     });
 
     const allFieldsValid = allFieldValidations.every((val) => val);
+
     this.setState({
+      data: newData,
       formValid: allFieldsValid,
     }, () => {
       const { state } = this;
