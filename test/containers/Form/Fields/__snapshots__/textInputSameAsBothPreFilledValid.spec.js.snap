@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with two text inputs and pre filled value | sameAs | both should be valid 1`] = `
+<form
+  enctype="application/x-www-form-urlencoded"
+>
+  <input
+    className="rfp-input"
+    id="text"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    required={true}
+    sameAs="text2"
+    type="text"
+    valid={false}
+    value="Test"
+  />
+  <input
+    className="rfp-input"
+    id="text2"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    required={true}
+    sameAs="text"
+    type="text"
+    valid={false}
+    value="Test"
+  />
+</form>
+`;
