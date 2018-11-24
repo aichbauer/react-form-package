@@ -102,10 +102,10 @@ If you are using a `<Field />` component you can also add some additional rules 
 Property | Type | Description 
 ---|---|---
 `required` | Bool | validates if the `input value is not empty`
-`min` | String | validates if the input value is at least `min characters long`
-`max` | String | validates if the input value is at least `max characters long`
+`min` | String | `text`, `textarea`, `password`: validates if the input value is at least `min characters long`; `number`: validates if the input value is at least `min`
+`max` | String | `text`, `textarea`, `password`: validates if the input value is maximum `max characters long`; `number`: validates if the input value is maximum `max`
 `match` | Regex | validates if the input value matches the `regular expression`
-`sameAs` | String | validates if the input of this field has the same value as specified in `sameAs`
+`sameAs` | String | validates if the input of this field has the same value as the field specified in `sameAs`
 
 Example with the `required`, `min`, `max`, and `sameAs` properties:
 
@@ -117,6 +117,12 @@ Example with the `required`, `min`, `max`, and `sameAs` properties:
       Text required, min, max
       <div>
         <Field type="text" id="text" min="2" max="5" required />
+      </div>
+    </div>
+    <div>
+      Number required, min, max
+      <div>
+        <Field type="number" id="number" min="2" max="5" required />
       </div>
     </div>
     <div>

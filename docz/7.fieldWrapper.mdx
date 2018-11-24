@@ -56,8 +56,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
 required | Bool | false | false |
-min | String | false | -1 |
-max | String | false | -1 |
+min | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
+max | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](/state-manipulation))

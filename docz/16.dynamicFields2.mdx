@@ -38,7 +38,7 @@ To update the state of the `<Form />` component, you need to add a `rfpRole` pro
 
 The `rfpRole` takes a string which is either `addField` or `removeField`. 
 
-If you use the `<Button />` component to add a new field to the state of the form component you need to provide a `field` property which takes an object that represents your new `<Field />` component. This object has to have at least a `id` and a `type`, but you can extend this object with rules like: `min`, `max`, and `required`.
+If you use the `<Button />` component to add a new field to the state of the form component you need to provide a `field` property which takes an object that represents your new `<Field />` component. This object has to have at least a `id` and a `type`, but you can extend this object with rules like: `min`, `max`, `required`, `match`, and `sameAs`.
 
 If you use the `<Button />` component to add remove an existing field from the state of the form component you need to provide a `fieldId` property which takes a string: the `id` of the field you want to remove.
 
