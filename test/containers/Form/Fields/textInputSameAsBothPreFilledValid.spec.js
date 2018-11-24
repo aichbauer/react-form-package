@@ -18,14 +18,10 @@ test('Render Form with two text inputs and pre filled value | sameAs | both shou
     </Form>
   );
 
-  console.log('__________ BEFORE ___________');
-
   const tree = renderer.create(myComponent).toJSON();
   const wrapper = mount(myComponent);
   wrapper.update();
   const state = wrapper.state();
-
-  console.log('____ AFTER ____ AFTER ____');
 
   expect(state.data.text.value).toBe('Test');
   expect(state.data.text.valid).toBe(true);
