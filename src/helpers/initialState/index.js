@@ -5,6 +5,7 @@ const initialState = (props) => {
     || props.type === 'textarea';
   const password = props.type === 'password';
   const number = props.type === 'number';
+  const date = props.type === 'date';
   const value = props.type === 'checkbox'
     ? props.checked || false
     : props.value || '';
@@ -20,8 +21,10 @@ const initialState = (props) => {
   } else if (number) {
     max = props.max && parseInt(props.max, 10);
     min = props.min && parseInt(props.min, 10);
+  } else if (date) {
+    max = props.max; // eslint-disable-line
+    min = props.min; // eslint-disable-line
   }
-
 
   const rules = {
     type: props.type,
