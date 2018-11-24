@@ -14,6 +14,8 @@ const numberInputAllRules = {
       invalid: true,
       rules: {
         type: 'number',
+        max: 4,
+        min: 2,
         required: true,
       },
     },

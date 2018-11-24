@@ -55,7 +55,7 @@ As you can see the `state` parameter is an object. It has three different proper
 
 In our case `data` would hold:
 
-```json
+```js
 {
   "data": {
     "email": "",
@@ -66,7 +66,7 @@ In our case `data` would hold:
 
 `meta` would hold:
 
-```json
+```js
 {
   "meta": {
     "email": {
@@ -80,8 +80,10 @@ In our case `data` would hold:
       "invalid": true,
       "rules": {
         "type": "email",
-        "min": -1,
-        "max": -1,
+        "min": undefined,
+        "max": undefined,
+        "sameAs": undefined,
+        "match": undefined,
         "required": true,
       }
     },
@@ -96,8 +98,10 @@ In our case `data` would hold:
       "invalid": true,
       "rules": {
         "type": "password",
-        "min": -1,
-        "max": -1,
+        "min": undefined,
+        "max": undefined,
+        "sameAs": undefined,
+        "match": undefined,
         "required": true,
       }
     }
@@ -107,11 +111,12 @@ In our case `data` would hold:
 
 `formValid` would hold:
 
-```json
+```js
 {
   "formValid": false
 }
 ```
+
 ## Meta Description
 
 Meta data gives you an overview of what happened on that field. E.g. if a field is `pristine` you could deside to not send its data to the server since, nothing changed.
@@ -128,6 +133,8 @@ valid | `Bool` | `true` if this field is valid (passed all rules)
 invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
 rules | `object` | the rules for the validation of this field
 rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
-rules.min | `Number` | this field has to have at least `min` characters (`Int`)
-rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
+rules.min | `Number` |  `text`, `textarea`, `password`: this field has to have at least `min` characters (`Int`); `number`: this field has to be at least `min`
+rules.max | `Number` |  `text`, `textarea`, `password`: this field has to have maximum `max` characters (`Int`); `number`: this field has to be maximum `max`
+rules.match | `RegEx` | thie fields has to match the regular expression
+rules.sameAs | `String` | thie fields has to have the same value as the field with id `sameAs` (e.g. password fields)
 rules.required | `Bool` | this field is required (has to have a value)

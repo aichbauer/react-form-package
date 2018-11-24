@@ -11,6 +11,7 @@ const writeErrorMessage = (rules) => {
   const text = type === 'text'
     || type === 'textarea';
   const password = type === 'password';
+  const number = type === 'number';
 
   let message = '';
 
@@ -47,25 +48,21 @@ const writeErrorMessage = (rules) => {
   if (required) {
     message += `${warningMessage().requiredField()} \n`;
   }
-  if (
-    (
-      text
-      || password
-    )
+  if ((text || password)
     && min
-    && min !== -1
   ) {
     message += `${warningMessage().minChar(min)} \n`;
   }
-  if (
-    (
-      text
-      || password
-    )
+  if ((text || password)
     && max
-    && max !== -1
   ) {
     message += `${warningMessage().maxChar(max)} \n`;
+  }
+  if (number && min && min !== -1) {
+    message += `The input has to be min. ${min}! \n`;
+  }
+  if (number && max && max !== -1) {
+    message += `The input has to be max. ${max}! \n`;
   }
   if (match) {
     message += `${warningMessage().exactly(match.toString())} \n`;

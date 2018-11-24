@@ -4,6 +4,7 @@ const initialState = (props) => {
   const text = props.type === 'text'
     || props.type === 'textarea';
   const password = props.type === 'password';
+  const number = props.type === 'number';
   const value = props.type === 'checkbox'
     ? props.checked || false
     : props.value || '';
@@ -11,12 +12,16 @@ const initialState = (props) => {
     ? props.checked || false
     : undefined;
 
-  const min = text || password
-    ? parseInt(props.min, 10) || -1
-    : undefined;
-  const max = text || password
-    ? parseInt(props.max, 10) || -1
-    : undefined;
+  let max;
+  let min;
+  if (text || password) {
+    max = props.max && parseInt(props.max, 10);
+    min = props.min && parseInt(props.min, 10);
+  } else if (number) {
+    max = props.max && parseInt(props.max, 10);
+    min = props.min && parseInt(props.min, 10);
+  }
+
 
   const rules = {
     type: props.type,

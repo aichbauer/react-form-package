@@ -240,7 +240,7 @@ type | String | true | | `submit`
 onClick | Func | false | | returns the state of the form
 rfpRole | String | false | | only needed for [dynamically added fields](#dynamic-field-2), either `addField` or `removeField`
 fieldId | String | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
-field | Object | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`
+field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`, `match`, `sameAs`
 
 ### Field
 
@@ -277,8 +277,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
 required | Bool | false | false |
-min | String | false | -1 |
-max | String | false | -1 |
+min | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
+max | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
@@ -340,8 +340,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
 required | Bool | false | false |
-min | String | false | -1 |
-max | String | false | -1 |
+min | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
+max | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
@@ -551,9 +551,10 @@ If you are using a `<Field />` component you can also add some additional rules 
 Property | Type | Description
 ---|---|---
 `required` | Bool | validates if the `input value is not empty`
-`min` | String | validates if the input value is at least `min characters long`
-`max` | String | validates if the input value is at least `max characters long`
+`min` | String | `text`, `textarea`, `password`: validates if the input value is at least `min characters long`; `number`: validates if the input value is at least `min`
+`max` | String | `text`, `textarea`, `password`: validates if the input value is maximum `max characters long`; `number`: validates if the input value is maximum `max`
 `match` | Regex | validates if the input value matches the `regular expression`
+`sameAs` | String | validates if the input of this field has the same value as the field specified in `sameAs`
 
 Example with the `required`, `min`, `max`, and `sameAs` properties:
 
@@ -565,6 +566,12 @@ Example with the `required`, `min`, `max`, and `sameAs` properties:
     Text required, min, max
     <div>
       <Field type="text" id="text" min="2" max="5" required />
+    </div>
+  </div>
+  <div>
+    Number required, min, max
+    <div>
+      <Field type="number" id="number" min="2" max="5" required />
     </div>
   </div>
   <div>
@@ -676,7 +683,7 @@ As you can see the `state` parameter is an object. It has three different proper
 
 In our case `data` would hold:
 
-```json
+```js
 {
   "data": {
     "email": "",
@@ -687,7 +694,7 @@ In our case `data` would hold:
 
 `meta` would hold:
 
-```json
+```js
 {
   "meta": {
     "email": {
@@ -701,8 +708,10 @@ In our case `data` would hold:
       "invalid": true,
       "rules": {
         "type": "email",
-        "min": -1,
-        "max": -1,
+        "min": undefined,
+        "max": undefined,
+        "sameAs": undefined,
+        "match": undefined,
         "required": true,
       }
     },
@@ -717,8 +726,10 @@ In our case `data` would hold:
       "invalid": true,
       "rules": {
         "type": "password",
-        "min": -1,
-        "max": -1,
+        "min": undefined,
+        "max": undefined,
+        "sameAs": undefined,
+        "match": undefined,
         "required": true,
       }
     }
@@ -728,7 +739,7 @@ In our case `data` would hold:
 
 `formValid` would hold:
 
-```json
+```js
 {
   "formValid": false
 }
@@ -750,8 +761,10 @@ valid | `Bool` | `true` if this field is valid (passed all rules)
 invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
 rules | `object` | the rules for the validation of this field
 rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
-rules.min | `Number` | this field has to have at least `min` characters (`Int`)
-rules.max | `Number` | this field has to have at maximum `max` characters (`Int`)
+rules.min | `Number` |  `text`, `textarea`, `password`: this field has to have at least `min` characters (`Int`); `number`: this field has to be at least `min`
+rules.max | `Number` |  `text`, `textarea`, `password`: this field has to have maximum `max` characters (`Int`); `number`: this field has to be maximum `max`
+rules.match | `RegEx` | thie fields has to match the regular expression
+rules.sameAs | `String` | thie fields has to have the same value as the field with id `sameAs` (e.g. password fields)
 rules.required | `Bool` | this field is required (has to have a value)
 
 ## State Manipulation
@@ -1105,7 +1118,7 @@ To update the state of the `<Form />` component, you need to add a `rfpRole` pro
 
 The `rfpRole` takes a string which is either `addField` or `removeField`. 
 
-If you use the `<Button />` component to add a new field to the state of the form component you need to provide a `field` property which takes an object that represents your new `<Field />` component. This object has to have at least a `id` and a `type`, but you can extend this object with rules like: `min`, `max`, and `required`.
+If you use the `<Button />` component to add a new field to the state of the form component you need to provide a `field` property which takes an object that represents your new `<Field />` component. This object has to have at least a `id` and a `type`, but you can extend this object with rules like: `min`, `max`, `required`, `match`, and `sameAs`.
 
 If you use the `<Button />` component to add remove an existing field from the state of the form component you need to provide a `fieldId` property which takes a string: the `id` of the field you want to remove.
 

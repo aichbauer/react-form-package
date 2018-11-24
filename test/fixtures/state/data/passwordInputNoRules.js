@@ -14,8 +14,6 @@ const passwordInputNoRules = {
       invalid: false,
       rules: {
         type: 'password',
-        min: -1,
-        max: -1,
         required: false,
       },
     },
