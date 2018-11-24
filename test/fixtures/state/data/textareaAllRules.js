@@ -14,8 +14,8 @@ const textareaAllRules = {
       invalid: true,
       rules: {
         type: 'textarea',
-        min: '30',
-        max: '40',
+        min: 30,
+        max: 40,
         required: true,
       },
     },

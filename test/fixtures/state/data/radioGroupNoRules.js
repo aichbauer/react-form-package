@@ -14,8 +14,6 @@ const radioGroupNoRules = {
       invalid: false,
       rules: {
         type: 'radio',
-        min: -1,
-        max: -1,
         required: false,
       },
     },

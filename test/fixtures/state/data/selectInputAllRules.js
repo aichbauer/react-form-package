@@ -14,8 +14,6 @@ const selectInputAllRules = {
       invalid: true,
       rules: {
         type: 'select',
-        min: -1,
-        max: -1,
         required: true,
       },
     },
