@@ -133,8 +133,8 @@ valid | `Bool` | `true` if this field is valid (passed all rules)
 invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
 rules | `object` | the rules for the validation of this field
 rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
-rules.min | `Number` |  `text`, `textarea`, `password`: this field has to have at least `min` characters (`Int`); `number`: this field has to be at least `min`
-rules.max | `Number` |  `text`, `textarea`, `password`: this field has to have maximum `max` characters (`Int`); `number`: this field has to be maximum `max`
+rules.min | `Number` or `String` (YYYY-MM-DD) |  `text`, `textarea`, `password`: this field has to have at least `min` characters; `number`, `date`: this field has to be at least `min`
+rules.max | `Number` or `String` (YYYY-MM-DD) |  `text`, `textarea`, `password`: this field has to have maximum `max` characters; `number`, `date`: this field has to be maximum `max`
 rules.match | `RegEx` | thie fields has to match the regular expression
 rules.sameAs | `String` | thie fields has to have the same value as the field with id `sameAs` (e.g. password fields)
 rules.required | `Bool` | this field is required (has to have a value)

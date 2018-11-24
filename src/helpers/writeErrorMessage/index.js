@@ -12,6 +12,7 @@ const writeErrorMessage = (rules) => {
     || type === 'textarea';
   const password = type === 'password';
   const number = type === 'number';
+  const date = type === 'date';
 
   let message = '';
 
@@ -58,10 +59,10 @@ const writeErrorMessage = (rules) => {
   ) {
     message += `${warningMessage().maxChar(max)} \n`;
   }
-  if (number && min && min !== -1) {
+  if ((number || date) && min) {
     message += `The input has to be min. ${min}! \n`;
   }
-  if (number && max && max !== -1) {
+  if ((number || date) && max) {
     message += `The input has to be max. ${max}! \n`;
   }
   if (match) {
