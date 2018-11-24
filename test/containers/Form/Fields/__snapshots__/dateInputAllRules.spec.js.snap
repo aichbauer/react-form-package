@@ -12,6 +12,8 @@ exports[`Render Form with date input | date input all rules | onChange -> error 
       className="rfp-input"
       id="date"
       invalid={false}
+      max="2018-12-10"
+      min="2018-10-10"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}

@@ -17,13 +17,19 @@ test('Render Form with date input | date input all rules | onChange -> error lab
   const event = {
     target: {
       id: 'date',
-      value: 'h',
+      value: '2019-12-10',
+    },
+  };
+  const event2 = {
+    target: {
+      id: 'date',
+      value: '2018-11-10',
     },
   };
   const rules = {
     type: 'date',
-    min: -1,
-    max: -1,
+    min: '2018-10-10',
+    max: '2018-12-10',
     required: true,
   };
 
@@ -31,7 +37,7 @@ test('Render Form with date input | date input all rules | onChange -> error lab
     <Form>
       <div>
         <div>date</div>
-        <Field type="date" id="date" required />
+        <Field type="date" id="date" min="2018-10-10" max="2018-12-10" required />
       </div>
       <div>
         <Button id="submit" type="submit" onClick={(state) => state}>submit</Button>
@@ -56,8 +62,20 @@ test('Render Form with date input | date input all rules | onChange -> error lab
   errorLabelExists = wrapper.exists('.rfp-error-label');
 
   expect(errorLabelExists).toBe(true);
-  expect(state.data.date.value).toBe('h');
+  expect(state.data.date.value).toBe('2019-12-10');
   expect(state.data.date.valid).toBe(false);
+
+  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('change', event2, rules);
+  wrapper.find('input').simulate('blur');
+  wrapper.update();
+
+  state = wrapper.state();
+  errorLabelExists = wrapper.exists('.rfp-error-label');
+
+  expect(errorLabelExists).toBe(false);
+  expect(state.data.date.value).toBe('2018-11-10');
+  expect(state.data.date.valid).toBe(true);
   expect(fieldSpy).toHaveBeenCalled();
   expect(tree).toMatchSnapshot();
 });

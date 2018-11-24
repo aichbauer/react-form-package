@@ -14,6 +14,8 @@ const dateInputAllRules = {
       invalid: true,
       rules: {
         type: 'date',
+        max: '2018-12-10',
+        min: '2018-10-10',
         required: true,
       },
     },
