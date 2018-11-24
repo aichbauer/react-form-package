@@ -277,8 +277,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
 required | Bool | false | false |
-min | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
-max | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
+min | String (digit or date (YYYY-MM-DD)) | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`, `date`: has to be at least `min`
+max | String (digit or date (YYYY-MM-DD)) | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`, `date`: has to be at least `min`
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
@@ -340,8 +340,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `file`
 required | Bool | false | false |
-min | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
-max | String | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`: has to be at least `min`
+min | String (digit or date (YYYY-MM-DD)) | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`, `date`: has to be at least `min`
+max | String (digit or date (YYYY-MM-DD)) | false | | `text`, `textarea`, `password`: has to have at least `min` characters; `number`, `date`: has to be at least `min`
 match | RegEx | false | | the input value has to match the `regular expression`
 sameAs | String | the input value has to have the same value as the input field with the id specified in `sameAs`
 preOnChange | Func | false | | manipulate the state before its validated (see [State Manipulation](#state-manipulation))
@@ -551,8 +551,8 @@ If you are using a `<Field />` component you can also add some additional rules 
 Property | Type | Description
 ---|---|---
 `required` | Bool | validates if the `input value is not empty`
-`min` | String | `text`, `textarea`, `password`: validates if the input value is at least `min characters long`; `number`: validates if the input value is at least `min`
-`max` | String | `text`, `textarea`, `password`: validates if the input value is maximum `max characters long`; `number`: validates if the input value is maximum `max`
+`min` | String (digit or date (YYYY-MM-DD)) | `text`, `textarea`, `password`: validates if the input value is at least `min characters long`; `number`, `date`: validates if the input value is at least `min`
+`max` | String (digit or date (YYYY-MM-DD)) | `text`, `textarea`, `password`: validates if the input value is maximum `max characters long`; `number`, `date`: validates if the input value is maximum `max`
 `match` | Regex | validates if the input value matches the `regular expression`
 `sameAs` | String | validates if the input of this field has the same value as the field specified in `sameAs`
 
@@ -572,6 +572,12 @@ Example with the `required`, `min`, `max`, and `sameAs` properties:
     Number required, min, max
     <div>
       <Field type="number" id="number" min="2" max="5" required />
+    </div>
+  </div>
+  <div>
+    Date required, min, max
+    <div>
+      <Field type="date" id="date" min="2018-12-12" max="2018-12-24" required />
     </div>
   </div>
   <div>
@@ -761,8 +767,8 @@ valid | `Bool` | `true` if this field is valid (passed all rules)
 invalid | `Bool` | `true` if this field is invalid (failed at least one rules)
 rules | `object` | the rules for the validation of this field
 rules.type | `String` | `checkbox`, `date`, `textarea`, `datetime-local`, `email`, `number`, `tel`, `text`, `password`, `time`, `url`, `radio`, `select`
-rules.min | `Number` |  `text`, `textarea`, `password`: this field has to have at least `min` characters (`Int`); `number`: this field has to be at least `min`
-rules.max | `Number` |  `text`, `textarea`, `password`: this field has to have maximum `max` characters (`Int`); `number`: this field has to be maximum `max`
+rules.min | `Number` or `String` (YYYY-MM-DD) |  `text`, `textarea`, `password`: this field has to have at least `min` characters; `number`, `date`: this field has to be at least `min`
+rules.max | `Number` or `String` (YYYY-MM-DD) |  `text`, `textarea`, `password`: this field has to have maximum `max` characters; `number`, `date`: this field has to be maximum `max`
 rules.match | `RegEx` | thie fields has to match the regular expression
 rules.sameAs | `String` | thie fields has to have the same value as the field with id `sameAs` (e.g. password fields)
 rules.required | `Bool` | this field is required (has to have a value)
