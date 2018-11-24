@@ -5,6 +5,7 @@ const checkFormInput = (rules, value, data) => {
   const text = rules.type === 'text'
     || rules.type === 'textarea';
   const password = rules.type === 'password';
+  const number = rules.type === 'number';
 
   if (!rules.required && !value) {
     return true;
@@ -48,25 +49,21 @@ const checkFormInput = (rules, value, data) => {
       break;
   }
 
-  if (
-    (
-      text
-      || password
-    )
+  if ((text || password)
     && rules.min
-    && rules.min !== -1
   ) {
     validateArray.push(inputIs.min(value, rules.min));
   }
-  if (
-    (
-      text
-      || password
-    )
+  if ((text || password)
     && rules.max
-    && rules.max !== -1
   ) {
     validateArray.push(inputIs.max(value, rules.max));
+  }
+  if (number && rules.min) {
+    validateArray.push(value >= rules.min);
+  }
+  if (number && rules.max) {
+    validateArray.push(value <= rules.max);
   }
   if (rules.required && rules.type === 'checkbox') {
     validateArray.push(value);
