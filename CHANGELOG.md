@@ -1,3 +1,7 @@
+1.12.1 - November, 24 2018
+
+* ecd07ff Fix: initial state (#33) (Lukas Aichbauer)
+
 1.12.0 - November, 24 2018
 
 * 629a538 Feat: min, max props on date fields (#32) (Lukas Aichbauer)
