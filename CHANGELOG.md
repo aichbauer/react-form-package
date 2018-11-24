@@ -1,3 +1,9 @@
+1.12.0 - November, 24 2018
+
+* 629a538 Feat: min, max props on date fields (#32) (Lukas Aichbauer)
+* 8f5420b Feat: min, max prop for number fields (#31) (Lukas Aichbauer)
+* 4c714f2 Fix: min, max always a number and only for text or password (#30) (Lukas Aichbauer)
+
 1.11.1 - November, 23 2018
 
 * 27ab9fb Fix: sync the validation of fields with sameAs property (#29) (Lukas Aichbauer)
