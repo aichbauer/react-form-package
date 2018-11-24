@@ -20,7 +20,6 @@ test('Render Form with two text inputs and pre filled value | sameAs | both shou
 
   const tree = renderer.create(myComponent).toJSON();
   const wrapper = mount(myComponent);
-  wrapper.update();
   const state = wrapper.state();
 
   expect(state.data.text.value).toBe('Test');
