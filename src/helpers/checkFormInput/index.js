@@ -2,6 +2,9 @@ import inputIs from 'input-is';
 
 const checkFormInput = (rules, value, data) => {
   const validateArray = [];
+  const text = rules.type === 'text'
+    || rules.type === 'textarea';
+  const password = rules.type === 'password';
 
   if (!rules.required && !value) {
     return true;
@@ -45,10 +48,24 @@ const checkFormInput = (rules, value, data) => {
       break;
   }
 
-  if (rules.min && rules.min !== -1) {
+  if (
+    (
+      text
+      || password
+    )
+    && rules.min
+    && rules.min !== -1
+  ) {
     validateArray.push(inputIs.min(value, rules.min));
   }
-  if (rules.max && rules.max !== -1) {
+  if (
+    (
+      text
+      || password
+    )
+    && rules.max
+    && rules.max !== -1
+  ) {
     validateArray.push(inputIs.max(value, rules.max));
   }
   if (rules.required && rules.type === 'checkbox') {

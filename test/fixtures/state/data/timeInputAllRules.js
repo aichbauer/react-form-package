@@ -14,8 +14,6 @@ const timeInputAllRules = {
       invalid: true,
       rules: {
         type: 'time',
-        min: -1,
-        max: -1,
         required: true,
       },
     },

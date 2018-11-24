@@ -8,6 +8,10 @@ const writeErrorMessage = (rules) => {
     min,
     match,
   } = rules;
+  const text = type === 'text'
+    || type === 'textarea';
+  const password = type === 'password';
+
   let message = '';
 
   if (rules.sameAs) {
@@ -43,10 +47,24 @@ const writeErrorMessage = (rules) => {
   if (required) {
     message += `${warningMessage().requiredField()} \n`;
   }
-  if (min && min !== -1) {
+  if (
+    (
+      text
+      || password
+    )
+    && min
+    && min !== -1
+  ) {
     message += `${warningMessage().minChar(min)} \n`;
   }
-  if (max && max !== -1) {
+  if (
+    (
+      text
+      || password
+    )
+    && max
+    && max !== -1
+  ) {
     message += `${warningMessage().maxChar(max)} \n`;
   }
   if (match) {

@@ -15,8 +15,8 @@ const textInputAllRules = {
       rules: {
         match: /react/,
         type: 'text',
-        min: '3',
-        max: '8',
+        min: 3,
+        max: 8,
         required: true,
       },
     },

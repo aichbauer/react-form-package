@@ -15,8 +15,6 @@ const checkboxNoRules = {
       invalid: false,
       rules: {
         type: 'checkbox',
-        min: -1,
-        max: -1,
         required: false,
       },
     },

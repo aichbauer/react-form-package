@@ -14,8 +14,6 @@ const emailInputNoRules = {
       invalid: false,
       rules: {
         type: 'email',
-        min: -1,
-        max: -1,
         required: false,
       },
     },

@@ -14,8 +14,6 @@ const datetimeInputAllRules = {
       valid: false,
       rules: {
         type: 'datetime-local',
-        min: -1,
-        max: -1,
         required: true,
       },
     },

@@ -14,8 +14,8 @@ const passwordInputAllRules = {
       invalid: true,
       rules: {
         type: 'password',
-        min: '8',
-        max: '15',
+        min: 8,
+        max: 15,
         required: true,
       },
     },

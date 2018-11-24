@@ -14,8 +14,6 @@ const urlInputNoRules = {
       invalid: false,
       rules: {
         type: 'url',
-        min: -1,
-        max: -1,
         required: false,
       },
     },

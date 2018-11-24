@@ -14,8 +14,6 @@ const telInputNoRules = {
       invalid: false,
       rules: {
         type: 'tel',
-        min: -1,
-        max: -1,
         required: false,
       },
     },
