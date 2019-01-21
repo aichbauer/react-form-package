@@ -356,7 +356,7 @@ Form.defaultProps = {
   select: <select className="rfp-select" />,
   textarea: <textarea className="rfp-textarea" />,
   error: <div className="rfp-error-label" />,
-  enctype: 'application/x-www-form-urlencoded',
+  encType: undefined,
 };
 
 Form.propTypes = {
@@ -373,7 +373,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]).isRequired,
-  enctype: PropTypes.string,
+  encType: PropTypes.string,
 };
 
 export { Form };
