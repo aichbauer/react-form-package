@@ -54,7 +54,6 @@
     "autocapitalize": "^1.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
-    "babel-plugin-react-remove-properties": "^0.2.5",
     "docz": "^0.11.0",
     "docz-plugin-css": "^0.11.0",
     "downshift": "^3.1.5",
@@ -76,7 +75,7 @@
     "styled-components": "^3.4.5",
     "styled-form-component": "^2.0.0",
     "styled-grid-system-component": "^2.0.0",
-    "styled-system": "^3.0.2"
+    "styled-system": "^3.2.1"
   },
   "dependencies": {
     "input-is": "^2.0.0",
