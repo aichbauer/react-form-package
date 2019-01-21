@@ -1,3 +1,8 @@
+1.12.2 - January, 21 2019
+
+* 514f090 Refactor: props and dependencies (#35) (Lukas Aichbauer)
+* d4db8d1 Fix: preOnChange for type file to use files not value (#34) (Lukas Aichbauer)
+
 1.12.1 - November, 24 2018
 
 * ecd07ff Fix: initial state (#33) (Lukas Aichbauer)
