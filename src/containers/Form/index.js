@@ -94,9 +94,16 @@ class Form extends React.Component {
     myValue = checkbox
       ? checked
       : myValue;
-    myValue = options.preOnChange
-      ? options.preOnChange(myValue)
-      : myValue;
+    let myFiles = files;
+    if (!files) {
+      myValue = options.preOnChange
+        ? options.preOnChange(myValue)
+        : myValue;
+    } else {
+      myFiles = options.preOnChange
+        ? options.preOnChange(files)
+        : files;
+    }
     const valid = checkFormInput(rules, myValue, data);
 
     let newData = {
@@ -104,7 +111,7 @@ class Form extends React.Component {
       [myId]: {
         ...data[myId],
         value: myValue,
-        files: file ? files : undefined,
+        files: file ? myFiles : undefined,
         checked,
         valid,
         invalid: !valid,
