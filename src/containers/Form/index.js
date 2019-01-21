@@ -313,7 +313,7 @@ class Form extends React.Component {
     } = this.state;
     const {
       children,
-      enctype,
+      encType,
     } = this.props;
 
     return (
@@ -337,7 +337,7 @@ class Form extends React.Component {
       }}
       >
         <form
-          enctype={enctype} // eslint-disable-line
+          encType={encType}
         >
           {children}
         </form>
