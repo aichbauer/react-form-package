@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with datetime-local input | datetime-local input no rules 1`] = `
-<form
-  enctype="application/x-www-form-urlencoded"
->
+<form>
   <div>
     <div>
       datetime-local
