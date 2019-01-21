@@ -320,7 +320,7 @@ class Form extends React.Component {
     } = this.state;
     const {
       children,
-      enctype,
+      encType,
     } = this.props;
 
     return (
@@ -344,7 +344,7 @@ class Form extends React.Component {
       }}
       >
         <form
-          enctype={enctype} // eslint-disable-line
+          encType={encType}
         >
           {children}
         </form>
@@ -363,7 +363,7 @@ Form.defaultProps = {
   select: <select className="rfp-select" />,
   textarea: <textarea className="rfp-textarea" />,
   error: <div className="rfp-error-label" />,
-  enctype: 'application/x-www-form-urlencoded',
+  encType: undefined,
 };
 
 Form.propTypes = {
@@ -380,7 +380,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]).isRequired,
-  enctype: PropTypes.string,
+  encType: PropTypes.string,
 };
 
 export { Form };

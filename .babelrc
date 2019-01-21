@@ -4,10 +4,6 @@
     "@babel/react"
   ],
   "plugins": [
-    "@babel/plugin-syntax-object-rest-spread",
-    [
-      "babel-plugin-react-remove-properties",
-      {}
-    ]
+    "@babel/plugin-syntax-object-rest-spread"
   ]
 }
