@@ -223,6 +223,8 @@ const myForm = (props) => (
       id="submit"
       type="submit"
       onClick={state => alert(JSON.stringify(state, null, 2))}
+      onMouseEnter={(e, state) => console.log(e, state)}
+      onMouseLeave={(e, state) => console.log(e, state)}
     >
       Click me to see the state of the form
     </Button>
@@ -238,6 +240,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `submit`
 onClick | Func | false | | returns the state of the form
+onMouseEnter | Func | false | | returns the event and the state of the form
+onMouseLeave | Func | false | | returns the event and the state of the form (does not work on `disabled` buttons)
 rfpRole | String | false | | only needed for [dynamically added fields](#dynamic-field-2), either `addField` or `removeField`
 fieldId | String | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
 field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`, `match`, `sameAs`

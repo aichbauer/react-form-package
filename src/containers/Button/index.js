@@ -39,6 +39,20 @@ const Button = (props) => (
               props.onClick(createReturnState(state));
             }
           }}
+          onMouseEnter={(e) => {
+            e.preventDefault();
+
+            if (props.onMouseEnter) {
+              props.onMouseEnter(e, createReturnState(state));
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.preventDefault();
+
+            if (props.onMouseLeave) {
+              props.onMouseLeave(e, createReturnState(state));
+            }
+          }}
           disabled={validate && !props.rfpRole ? !formValid : false}
         >
           {props.children}

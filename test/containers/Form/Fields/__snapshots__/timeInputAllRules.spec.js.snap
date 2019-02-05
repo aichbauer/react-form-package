@@ -25,6 +25,8 @@ exports[`Render Form with time input | time input all rules | onChange -> error 
       disabled={false}
       id="submit"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       type="submit"
     >
       submit

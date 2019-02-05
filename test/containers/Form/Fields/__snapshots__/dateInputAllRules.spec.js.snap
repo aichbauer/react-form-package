@@ -27,6 +27,8 @@ exports[`Render Form with date input | date input all rules | onChange -> error 
       disabled={false}
       id="submit"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       type="submit"
     >
       submit

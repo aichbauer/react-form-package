@@ -1,7 +1,7 @@
 ---
 name: Button
 route: /button
-order: 5
+order: 40
 ---
 
 import { Form, Field, Button } from '../src'
@@ -49,15 +49,23 @@ Render a `<Form />` with a `<Button />` and a `<Field />` component.
         Email
       </div>
       <div>
-        <Field id="email" type="email" reuqired />
+        <Field id="email" type="email" required />
       </div>
     </div>
     <div>
-      <Button id="submit" type="submit" onClick={(state) => {
-        alert(JSON.stringify(state, null, 2));
-        alert('open the console to see the whole state...');
-        console.log(state);
-      }}>Submit</Button>
+      <Button 
+        id="submit" 
+        type="submit" 
+        onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}
+        onMouseEnter={(e, state) => consolelog(e, state)}
+        onMouseLeave={(e, state) => consolelog(e, state)}
+      >
+        Submit
+      </Button>
     </div>
   </Form>
 </Playground>
@@ -69,6 +77,8 @@ Property | Type | Required | Default | Description
 id | String | true | |
 type | String | true | | `submit`
 onClick | Func | false | | returns the state of the form
+onMouseEnter | Func | false | | returns the event and the state of the form
+onMouseLeave | Func | false | | returns the event and the state of the form (does not work on `disabled` buttons)
 rfpRole | String | false | | only needed for [dynamically added fields](/dynamic-field-2), either `addField` or `removeField`
 fieldId | String | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
 field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`, `match`, `sameAs`

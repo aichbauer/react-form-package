@@ -24,6 +24,8 @@ exports[`Render Form with datetime-local input | datetime-local input no rules 1
       disabled={false}
       id="submit"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       type="submit"
     >
       submit

@@ -42,6 +42,8 @@ exports[`Render Form with radio input | radio input no rules 1`] = `
       disabled={false}
       id="submit"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       type="submit"
     >
       submit
