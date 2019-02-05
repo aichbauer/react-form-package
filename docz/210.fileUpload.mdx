@@ -1,10 +1,11 @@
 ---
 name: File Upload
 route: /file-upload
-order: 21
+order: 210
 ---
 
 import { Form, Button, Field } from '../src';
+import { jsImageKit } from './components/helper';
 import { Playground } from 'docz';
 
 # File Upload
@@ -22,6 +23,7 @@ Use a `<Field />` with the type `file` and you will get the `FileList` object ba
     <Button
       id="submit"
       type="submit"
+      preOnChange={(value) => jsImageKit(value)}
       onClick={(state) => {
         alert(JSON.stringify(state, null, 2));
         alert('open the console to see the whole state...');
