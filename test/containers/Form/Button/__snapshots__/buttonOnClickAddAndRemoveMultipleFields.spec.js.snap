@@ -38,6 +38,8 @@ exports[`Render Form with button | add and remove fields | click button 1`] = `
       }
       id="removeField"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       rfpRole="removeField"
       type="button"
     >
@@ -64,6 +66,8 @@ exports[`Render Form with button | add and remove fields | click button 1`] = `
       }
       id="addField"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       rfpRole="addField"
       type="button"
     >

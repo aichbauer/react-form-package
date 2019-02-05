@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form (validate) with disabled button | on mouse enter button 1`] = `
+<form>
+  <div>
+    <button
+      className="rfp-button"
+      disabled={false}
+      id="submit"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      type="submit"
+    >
+      submit
+    </button>
+  </div>
+</form>
+`;

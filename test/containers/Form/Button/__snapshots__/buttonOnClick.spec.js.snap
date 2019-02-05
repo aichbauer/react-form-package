@@ -25,6 +25,8 @@ exports[`Render Form (validate) with button | click button 1`] = `
       disabled={false}
       id="submit"
       onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       type="submit"
     >
       submit
