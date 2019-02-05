@@ -1,6 +1,6 @@
 {
   "name": "react-form-package",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "description": "A declarative form component with inbuilt validation and state management",
   "main": "./lib/index.js",
   "license": "MIT",

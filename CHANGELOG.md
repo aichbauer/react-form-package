@@ -1,3 +1,8 @@
+1.13.0 - February, 05 2019
+
+* aa424c9 Docs: build docz for new button feat (#37) (Lukas Aichbauer)
+* 8ff3980 Feat: add mouse events for button (#36) (Lukas Aichbauer)
+
 1.12.2 - January, 21 2019
 
 * 514f090 Refactor: props and dependencies (#35) (Lukas Aichbauer)
