@@ -9169,7 +9169,7 @@ styled-grid-system-component@^2.0.0:
     styled-base-components "^1.3.0"
     styled-config "^2.0.0"
 
-styled-popover-component@^2.0.0:
+styled-popover-component@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/styled-popover-component/-/styled-popover-component-1.3.0.tgz#7652bc7a93b83bd98a5fae9e6faa3af80045fe86"
   integrity sha1-dlK8epO4O9mKX66eb6o6+ABF/oY=
