@@ -35,6 +35,7 @@ const RadioGroup = (props) => (
               data[props.id].rules,
               {
                 bindTo: props.bindTo,
+                bindToAllways: props.bindToAllways,
                 bindToCallback: props.bindToCallback,
                 preOnChange: props.preOnChange,
               },
