@@ -6,9 +6,7 @@ import { configure, mount } from 'enzyme';
 import {
   Form,
   Field,
-  Button,
 } from '../../../../src';
-import { textInputAllRules } from '../../../fixtures';
 
 configure({ adapter: new Adapter() });
 
