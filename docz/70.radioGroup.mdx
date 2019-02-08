@@ -71,5 +71,6 @@ errorMessage | String | false | | define your own custom error message for the i
 onFocus | Func | false | | get access to the state of the form when the user focus on the input
 onChange | Func | false | | get access to the state of the form when the user changes the input
 onBlur | Func | false | | get access to the state of the form when the user blurs the input
-bintTo | String | false | | only needed for [binding input fields](/bind-input-fields). The id of the inpu you want to manipulate
-bindToCallback | Func | false | | only needed for [binding input fields](/bind-input-fields). The callback to set the target's (`bindTo`) input value, which gets called `onChange`
+bintTo | String, Array | false | | only needed for [binding input fields](/bind-input-fields). The id/ids of the input/inputs you want to manipulate
+bintToAllways | Bool | false | | only needed for [binding input fields](/bind-input-fields-2). Only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
+bindToCallback | Func | false | | only needed for [binding input fields](/bind-input-fields). The callback to set the target's (`bindTo`) input value, which gets called `onChange` (return a single value or an array of values)

@@ -1,0 +1,100 @@
+---
+name: Bind Input Fields 2
+route: /bind-input-fields-2
+order: 191
+---
+
+import { Form, Field, Select, Button } from '../src';
+import { Playground } from 'docz';
+
+# Bind Input Fields
+
+Sometimes it is not enough to bind the the value of an input field to just one single different input field. So you can also pass an array of ids to the `bindTo` prop. As we learned in the [Bind Input Fields](/bind-input-fields) chapter, the `bindToCallback` is only triggered when the input field to which it is bound was not touched (blurred) yet. This sometimes has a problematic effect, e.g. if you have a select input to choose a email template, but everytime the user switches the select option, the template should be switched, even if the user touched one of the fields it was bound to. This can be achieved if you set a property called `bindToAlways`. If you return a single value from the `bindToCallback` every bound field will be populated with this value. If you want to have different values for each binding thn you can return an array of values. The binding will be in the same order as the order of the `bindTo` array. If the length of the array of the return value of the `bindToCallback` does not match the length of the `bindTo` ids, only the fields with an return value will be populated.
+
+## Bind an input value to another input value
+
+To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+bindTo | String, Array | false | | the `id`/`ids` of the field/fields you want to manipulate
+bindToAlways | Bool | false | | only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
+bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
+
+### Basic Usage
+
+In our example we use `Select` input to choose between different email templates.
+
+<Playground>
+  <Form>
+    <div>
+      <div>
+        Email Template:
+      </div>
+      <Select
+        id="emailTemplate"
+        bindTo={[
+          'subject',
+          'body',
+        ]}
+        bindToAlways
+        bindToCallback={(value) => {
+          if(value === 'friends') {
+            return [
+              'What\'s up?', // subject as it appears first in the `bindTo` prop
+              'Just take a look at this meme...', // body as it appears second in the `bindTo` prop
+            ];
+          }
+
+          return [
+            'Weekly report',
+            `Dear Boss,
+
+...
+...
+            `,
+          ];
+        }}
+      >
+        <option disabled value="">
+          --- Select an email template ---
+        </option>
+        <option value="friends">Friends</option>
+        <option value="boss">Boss</option>
+      </Select>
+    </div>
+    <div>
+      <div>
+        Subject:
+      </div>
+      <Field
+        id="subject"
+        type="text"
+      />
+    </div>
+    <div>
+      <div>
+        Body:
+      </div>
+      <Field
+        id="body"
+        type="textarea"
+        rows="5"
+        cols="40"
+      />
+    </div>
+    <div>
+      <Button
+        id="submit"
+        type="submit"
+        onClick={(state) => {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }}
+      >
+        Submit
+      </Button>
+    </div>
+  </Form>
+</Playground>

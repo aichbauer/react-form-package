@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Form with select input | bindTo 1`] = `
+<form>
+  <select
+    bindTo={
+      Array [
+        "subject",
+        "body",
+      ]
+    }
+    bindToAlways={true}
+    bindToCallback={[Function]}
+    className="rfp-select"
+    id="emailTemplate"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    valid={false}
+    value=""
+  >
+    <option
+      disabled={true}
+      value=""
+    >
+      --- Select an email template ---
+    </option>
+    <option
+      value="friends"
+    >
+      Friends
+    </option>
+    <option
+      value="boss"
+    >
+      Boss
+    </option>
+  </select>
+  <input
+    className="rfp-input"
+    id="subject"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    valid={false}
+    value=""
+  />
+  <textarea
+    className="rfp-textarea"
+    cols="40"
+    id="body"
+    invalid={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    rows="5"
+    type="textarea"
+    valid={false}
+    value=""
+  />
+</form>
+`;

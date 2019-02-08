@@ -6,6 +6,7 @@ import {
   createReturnState,
   getNestedChilds,
   initialState,
+  handleBindToValues,
 } from '../../helpers';
 
 class Form extends React.Component {
@@ -72,6 +73,7 @@ class Form extends React.Component {
     }, () => this.validateForm(cb));
   }
 
+
   handleOnChange(e, rules, options, cb) {
     const {
       id,
@@ -129,23 +131,7 @@ class Form extends React.Component {
       };
     }
     if (options.bindTo && myValue) {
-      const boundValue = !newData[options.bindTo].touched
-        ? options.bindToCallback(myValue)
-        : newData[options.bindTo].value;
-      const boundValid = checkFormInput(newData[options.bindTo].rules, boundValue, data);
-      const boundPristine = boundValue === newData[options.bindTo].initialValue;
-
-      newData = {
-        ...newData,
-        [options.bindTo]: {
-          ...newData[options.bindTo],
-          value: boundValue,
-          valid: boundValid,
-          invalid: !boundValid,
-          pristine: boundPristine,
-          dirty: !boundPristine,
-        },
-      };
+      newData = handleBindToValues(newData, data, myValue, options);
     }
     if (rules.sameAs) {
       newData = {

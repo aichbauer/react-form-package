@@ -24,6 +24,7 @@
 * [State](#state)
 * [State Manipulation](#state-manipulation)
 * [Custom Error Messages](#custom-error-messages)
+* [Feedback on Disabled Button](#feedback-on-disabled-button)
 * [Styling](#styling)
 * [Dynamic Fields](#dynamic-fields)
 * [Dynamic Fields 2](#dynamic-fields-2)
@@ -31,6 +32,7 @@
   * [Add new Fields onChange](#add-new-fields-onchange)
 * [Dynamic Fields 3](#dynamic-fields-3)
 * [Bind Input Fields](#bind-input-fields)
+* [Bind Input Fields 2](#bind-input-fields-2)
 * [onFocus, onChange, onBlur](#onfocus-onchange-onblur)
 * [Third Party Components](#third-party-components)
   * [Autocomplete with Downshift](#autocomplete)
@@ -244,7 +246,7 @@ onMouseEnter | Func | false | | returns the event and the state of the form
 onMouseLeave | Func | false | | returns the event and the state of the form (does not work on `disabled` buttons)
 rfpRole | String | false | | only needed for [dynamically added fields](#dynamic-field-2), either `addField` or `removeField`
 fieldId | String | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `removeField` (the id of the field to remove)
-field | Object | false | | only needed for [dynamically added fields](/dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`, `match`, `sameAs`
+field | Object | false | | only needed for [dynamically added fields](#dynamic-field-2) on a button with rfpRole `addField`. This object holds at least `id`, `type`, and may hold `min`, `max`, `required`, `match`, `sameAs`
 
 ### Field
 
@@ -830,6 +832,124 @@ If you want to display your own error messages, use the `errorMessage` property 
     <Field id="email" type="email" required errorMessage="This is a custom error message!" />
   </div>
 </Form>
+```
+
+## Feedback on Disabled Button
+
+Sometimes it is necessary to show an informal error message to the user when is hovering on a disabled button (which means the form is not valid yet).
+
+For this example we use a popover for our disabled button that gives the user a hint what should be filled.
+
+First import all the components that we need. We use [styled-bootstrap-components](https://aichbauer.github.io/styled-bootstrap-components) for our popup. You could also use a toast or something similar to indicate the user what fields are open.
+
+```js
+import {
+  Form,
+  Field,
+  Button,
+} from 'react-form-package';
+import {
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverHeader,
+} from 'styled-bootstrap-component';
+```
+
+Next we make use of the buttons `onMouseEnter` function (unfortunatly the `onMouseLeave` function does not work on disabled buttons so we can not use it to hide the popover), and a `setTimeout` to hide the popover.
+
+```js
+class PopoverHint extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      top: 0,
+      left: 0,
+      hidden: true,
+      notValidFields: '',
+    };
+
+    this.handlePopover = this.handlePopover.bind(this);
+  }
+
+  handlePopover(ev, state) {
+    const { hidden } = this.state;
+
+    let notValidFields = Object.entries(state.meta).map((entry) => {
+      if (!entry[1].valid) {
+        return entry[0];
+      }
+    });
+
+    notValidFields = notValidFields.filter((i) => i !== undefined);
+
+    if (!state.formValid) {
+      this.setState({
+        top: ev.target.offsetTop - ev.target.offsetHeight,
+        left: ev.target.offsetLeft + ev.target.offsetWidth,
+        hidden: !hidden,
+        notValidFields: notValidFields.join(),
+      }, () => {
+        const { hidden: h } = this.state;
+        setTimeout(() => this.setState({
+          hidden: !h,
+        }), 1500);
+      });
+    }
+  }
+
+  render() {
+    const {
+      top,
+      left,
+      hidden,
+      notValidFields,
+    } = this.state;
+
+    return (
+      <Form
+        validate
+        input={<FormControl />}
+        button={<Btn primary mt="3px" mb="3px" />}
+      >
+        <Field type="email" id="email" required />
+        <div>
+          <Button
+            danger
+            onClick={(state) => {
+              alert(JSON.stringify(state, null, 2));
+              alert('open the console to see the whole state...');
+              console.log(state);
+            }}
+            onMouseEnter={(e, state) => this.handlePopover(e, state)}
+          >
+            Hover button to show which fields are not valid
+          </Button>
+          <Popover
+            hidden={hidden}
+            style={{
+              top: `${top}px`,
+              left: `${left}px`,
+            }}
+            right
+          >
+            <PopoverArrow right />
+            <PopoverHeader right>You need to fill out this fields</PopoverHeader>
+            <PopoverBody right>{notValidFields}</PopoverBody>
+          </Popover>
+        </div>
+      </Form>
+    );
+  }
+}
+
+export { PopoverHint };
+```
+
+Now we render the `<PopoverHint />` and see the result.
+
+```js
+  <PopoverHint />
 ```
 
 ## Styling
@@ -1588,7 +1708,7 @@ To handle such cases there are two properties available on the `<Field />`, the 
 
 Property | Type | Required | Default | Description
 ---|---|---|---|---
-bindTo | String | false | | the `id` of the field you want to maipulate
+bindTo | String, Array | false | | the `id`/`ids` of the field/fields you want to manipulate
 bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
 
 #### Basic Usage
@@ -1646,6 +1766,94 @@ In our example we bind our first `housenumbers` input to the second `households`
       id="households"
       type="number"
       placeholder="6"
+    />
+  </div>
+  <div>
+    <Button
+      id="submit"
+      type="submit"
+      onClick={(state) => {
+        alert(JSON.stringify(state, null, 2));
+        alert('open the console to see the whole state...');
+        console.log(state);
+      }}
+    >
+      Submit
+    </Button>
+  </div>
+</Form>
+```
+
+## Bind Input Fields 2
+
+Sometimes it is not enough to bind the the value of an input field to just one single different input field. So you can also pass an array of ids to the `bindTo` prop. As we learned in the [Bind Input Fields](#bind-input-fields) chapter, the `bindToCallback` is only triggered when the input field to which it is bound was not touched (blurred) yet. This sometimes has a problematic effect, e.g. if you have a select input to choose a email template, but everytime the user switches the select option, the template should be switched, even if the user touched one of the fields it was bound to. This can be achieved if you set a property called `bindToAlways`. If you return a single value from the `bindToCallback` every bound field will be populated with this value. If you want to have different values for each binding thn you can return an array of values. The binding will be in the same order as the order of the `bindTo` array. If the length of the array of the return value of the `bindToCallback` does not match the length of the `bindTo` ids, only the fields with an return value will be populated.
+
+### Bind an input value to another input value
+
+To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
+
+Property | Type | Required | Default | Description
+---|---|---|---|---
+bindTo | String, Array | false | | the `id`/`ids` of the field/fields you want to manipulate
+bintToAllways | Bool | false | | only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
+bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
+
+### Basic Usage
+
+In our example we use `Select` input to choose between different email templates.
+
+```js
+<Form>
+  <div>
+    <div>
+      Email Template:
+    </div>
+    <Select
+      id="emailTemplate"
+      bindTo={[
+        'subject',
+        'body',
+      ]}
+      bindToAlways
+      bindToCallback={(value) => {
+        if(value === 'friends') {
+          return [
+            'What\'s up?', // subject as it appears first in the `bindTo` prop
+            'Just take a look at this meme...', // body as it appears second in the `bindTo` prop
+          ];
+        }
+
+        return [
+          'Weekly report',
+          'Dear Boss,\n\n...\n...\n...',
+        ];
+      }}
+    >
+      <option disabled value="">
+        --- Select an email template ---
+      </option>
+      <option value="friends">Friends</option>
+      <option value="boss">Boss</option>
+    </Select>
+  </div>
+  <div>
+    <div>
+      Subject:
+    </div>
+    <Field
+      id="subject"
+      type="text"
+    />
+  </div>
+  <div>
+    <div>
+      Body:
+    </div>
+    <Field
+      id="body"
+      type="textarea"
+      rows="5"
+      cols="40"
     />
   </div>
   <div>
