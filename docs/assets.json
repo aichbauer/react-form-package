@@ -1,5 +1,5 @@
 {
-  "vendors.js": "/react-form-package/static/js/vendors.45b4873f.js",
+  "vendors.js": "/react-form-package/static/js/vendors.2a924c37.js",
   "app.js": "/react-form-package/static/js/app.1c5036dd.js",
   "docz-1-index.js": "/react-form-package/static/js/docz-1-index.831ad648.js",
   "docz-10-installation.js": "/react-form-package/static/js/docz-10-installation.6306cc8d.js",
@@ -9,13 +9,13 @@
   "docz-120-state-manipulation.js": "/react-form-package/static/js/docz-120-state-manipulation.1725f161.js",
   "docz-130-custom-error-messages.js": "/react-form-package/static/js/docz-130-custom-error-messages.38c87906.js",
   "docz-140-error-feedback-disabled-button.js": "/react-form-package/static/js/docz-140-error-feedback-disabled-button.f111030d.js",
-  "docz-150-styling.css": "/react-form-package/static/css/docz-150-styling.06dac9523103b08d5b7a.css",
+  "docz-150-styling.css": "/react-form-package/static/css/docz-150-styling.bac61194235c1af7f9c6.css",
   "docz-150-styling.js": "/react-form-package/static/js/docz-150-styling.383fac9a.js",
   "docz-160-dynamic-f-ields.js": "/react-form-package/static/js/docz-160-dynamic-f-ields.3a0db0ef.js",
   "docz-170-dynamic-fields2.js": "/react-form-package/static/js/docz-170-dynamic-fields2.ea2d07f2.js",
   "docz-180-dynamic-fields3.js": "/react-form-package/static/js/docz-180-dynamic-fields3.4cbf4148.js",
   "docz-190-bind-input-fields.js": "/react-form-package/static/js/docz-190-bind-input-fields.ed4ef252.js",
-  "docz-191-bind-input-fields2.js": "/react-form-package/static/js/docz-191-bind-input-fields2.0bb17130.js",
+  "docz-191-bind-input-fields2.js": "/react-form-package/static/js/docz-191-bind-input-fields2.f3e26069.js",
   "docz-20-form.js": "/react-form-package/static/js/docz-20-form.26be5644.js",
   "docz-200-third-party-components.js": "/react-form-package/static/js/docz-200-third-party-components.86e6dcf8.js",
   "docz-210-file-upload.js": "/react-form-package/static/js/docz-210-file-upload.597cd939.js",
@@ -26,6 +26,6 @@
   "docz-70-radio-group.js": "/react-form-package/static/js/docz-70-radio-group.bdd58521.js",
   "docz-80-select.js": "/react-form-package/static/js/docz-80-select.e0358152.js",
   "docz-90-form-validation.js": "/react-form-package/static/js/docz-90-form-validation.58b99abd.js",
-  "runtime~app.js": "/react-form-package/static/js/runtime~app.06dac9523103b08d5b7a.js",
+  "runtime~app.js": "/react-form-package/static/js/runtime~app.bac61194235c1af7f9c6.js",
   "index.html": "/react-form-package/index.html"
 }

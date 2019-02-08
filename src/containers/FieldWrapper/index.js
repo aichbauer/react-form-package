@@ -48,7 +48,7 @@ const FieldWrapper = (props) => (
               dynamic: props.dynamic,
               field: props.field,
               bindTo: props.bindTo,
-              bindToAllways: props.bindToAllways,
+              bindToAlways: props.bindToAlways,
               bindToCallback: props.bindToCallback,
               preOnChange: props.preOnChange,
             },
@@ -82,7 +82,7 @@ FieldWrapper.defaultProps = {
   dynamic: false,
   field: undefined,
   bindTo: undefined,
-  bindToAllways: undefined,
+  bindToAlways: undefined,
   bindToCallback: undefined,
   preOnChange: undefined,
 };
@@ -100,7 +100,7 @@ FieldWrapper.propTypes = {
     PropTypes.object,
   ]),
   bindTo: PropTypes.string,
-  bindToAllways: PropTypes.bool,
+  bindToAlways: PropTypes.bool,
   bindToCallback: PropTypes.func,
   preOnChange: PropTypes.func,
   children: PropTypes.oneOfType([

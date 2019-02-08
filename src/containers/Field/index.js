@@ -51,7 +51,7 @@ const Field = (props) => (
                 dynamic: props.dynamic,
                 field: props.field,
                 bindTo: props.bindTo,
-                bindToAllways: props.bindToAllways,
+                bindToAlways: props.bindToAlways,
                 bindToCallback: props.bindToCallback,
                 preOnChange: props.preOnChange,
               },

@@ -33,7 +33,7 @@ test('Render Form with select input | bindTo', () => {
           'subject',
           'body',
         ]}
-        bindToAllways
+        bindToAlways
         bindToCallback={(value) => {
           if (value === 'friends') {
             return [

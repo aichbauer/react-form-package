@@ -9,7 +9,7 @@ import { Playground } from 'docz';
 
 # Bind Input Fields
 
-Sometimes it is not enough to bind the the value of an input field to just one single different input field. So you can also pass an array of ids to the `bindTo` prop. As we learned in the [Bind Input Fields](/bind-input-fields) chapter, the `bindToCallback` is only triggered when the input field to which it is bound was not touched (blurred) yet. This sometimes has a problematic effect, e.g. if you have a select input to choose a email template, but everytime the user switches the select option, the template should be switched, even if the user touched one of the fields it was bound to. This can be achieved if you set a property called `bindToAllways`. If you return a single value from the `bindToCallback` every bound field will be populated with this value. If you want to have different values for each binding thn you can return an array of values. The binding will be in the same order as the order of the `bindTo` array. If the length of the array of the return value of the `bindToCallback` does not match the length of the `bindTo` ids, only the fields with an return value will be populated.
+Sometimes it is not enough to bind the the value of an input field to just one single different input field. So you can also pass an array of ids to the `bindTo` prop. As we learned in the [Bind Input Fields](/bind-input-fields) chapter, the `bindToCallback` is only triggered when the input field to which it is bound was not touched (blurred) yet. This sometimes has a problematic effect, e.g. if you have a select input to choose a email template, but everytime the user switches the select option, the template should be switched, even if the user touched one of the fields it was bound to. This can be achieved if you set a property called `bindToAlways`. If you return a single value from the `bindToCallback` every bound field will be populated with this value. If you want to have different values for each binding thn you can return an array of values. The binding will be in the same order as the order of the `bindTo` array. If the length of the array of the return value of the `bindToCallback` does not match the length of the `bindTo` ids, only the fields with an return value will be populated.
 
 ## Bind an input value to another input value
 
@@ -18,7 +18,7 @@ To handle such cases there are two properties available on the `<Field />`, the 
 Property | Type | Required | Default | Description
 ---|---|---|---|---
 bindTo | String, Array | false | | the `id`/`ids` of the field/fields you want to manipulate
-bindToAllways | Bool | false | | only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
+bindToAlways | Bool | false | | only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
 bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
 
 ### Basic Usage
@@ -37,7 +37,7 @@ In our example we use `Select` input to choose between different email templates
           'subject',
           'body',
         ]}
-        bindToAllways
+        bindToAlways
         bindToCallback={(value) => {
           if(value === 'friends') {
             return [

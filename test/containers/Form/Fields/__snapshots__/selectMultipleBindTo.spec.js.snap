@@ -9,7 +9,7 @@ exports[`Render Form with select input | bindTo 1`] = `
         "body",
       ]
     }
-    bindToAllways={true}
+    bindToAlways={true}
     bindToCallback={[Function]}
     className="rfp-select"
     id="emailTemplate"

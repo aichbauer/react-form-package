@@ -13,7 +13,7 @@ const handleBindToValues = (newData, data, myValue, options) => {
       ? newBoundValue[idx]
       : newBoundValue;
 
-    const boundValue = options.bindToAllways || !thisNewData[bindTo].touched
+    const boundValue = options.bindToAlways || !thisNewData[bindTo].touched
       ? newBoundValue
       : thisNewData[bindTo].value;
     const boundValid = checkFormInput(thisNewData[bindTo].rules, boundValue, data);

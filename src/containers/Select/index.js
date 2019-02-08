@@ -38,7 +38,7 @@ const Select = (props) => (
               data[props.id].rules,
               {
                 bindTo: props.bindTo,
-                bindToAllways: props.bindToAllways,
+                bindToAlways: props.bindToAlways,
                 bindToCallback: props.bindToCallback,
                 preOnChange: props.preOnChange,
               },
