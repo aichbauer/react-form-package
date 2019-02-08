@@ -1,3 +1,7 @@
+1.14.0 - February, 08 2019
+
+* 522947c Feat: add bind to multiple fields and allow bind to always (#38) (Lukas Aichbauer)
+
 1.13.0 - February, 05 2019
 
 * aa424c9 Docs: build docz for new button feat (#37) (Lukas Aichbauer)
