@@ -11,11 +11,21 @@ const Error = (props) => {
     errorMessage,
     ErrorLabelComponent,
   } = props;
+
+  console.log('ErrorLabelComponent');
+  console.log(ErrorLabelComponent);
+
+  console.log('props');
+  console.log(props);
+
   return (
     data[id].invalid && data[id].touched && (
       <ErrorLabelComponent.type
         {...ErrorLabelComponent.props}
-        style={errorStyle}
+        style={{
+          ...errorStyle,
+          ...ErrorLabelComponent.props.style,
+        }}
       >
         {errorMessage || writeErrorMessage(data[id].rules)}
       </ErrorLabelComponent.type>
