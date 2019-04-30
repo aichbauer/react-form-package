@@ -12,12 +12,6 @@ const Error = (props) => {
     ErrorLabelComponent,
   } = props;
 
-  console.log('ErrorLabelComponent');
-  console.log(ErrorLabelComponent);
-
-  console.log('props');
-  console.log(props);
-
   return (
     data[id].invalid && data[id].touched && (
       <ErrorLabelComponent.type
