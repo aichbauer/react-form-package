@@ -130,7 +130,7 @@ class Form extends React.Component {
         },
       };
     }
-    if (options.bindTo && myValue) {
+    if (options.bindTo && (myValue || myValue === false)) {
       newData = handleBindToValues(newData, data, myValue, options);
     }
     if (rules.sameAs) {

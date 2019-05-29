@@ -24,6 +24,7 @@ const handleBindToValues = (newData, data, myValue, options) => {
       [bindTo]: {
         ...thisNewData[bindTo],
         value: boundValue,
+        checked: newData[bindTo].rules.type === 'checkbox' ? boundValue : undefined,
         valid: boundValid,
         invalid: !boundValid,
         pristine: boundPristine,
