@@ -33,6 +33,7 @@ const initialState = (props, data) => {
     required: props.required || false,
     match: props.match,
     sameAs: props.sameAs,
+    validate: props.validate,
   };
 
   const valid = checkFormInput(rules, value, data);

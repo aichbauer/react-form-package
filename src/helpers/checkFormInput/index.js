@@ -21,6 +21,10 @@ const checkFormInput = (rules, value, data) => {
     validateArray.push(false);
   }
 
+  if (rules.validate) {
+    validateArray.push(rules.validate(value));
+  }
+
   switch (rules.type) {
     case 'date':
       validateArray.push(inputIs.date(value, 'YYYY-MM-DD'));

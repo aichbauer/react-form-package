@@ -21,6 +21,7 @@ exports[`Render Form with text input | FieldWrapper | text input all rules 1`] =
             "required": true,
             "sameAs": undefined,
             "type": "text",
+            "validate": undefined,
           },
           "touched": false,
           "valid": false,
