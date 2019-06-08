@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Form with text input | onChange | test value, valid, invalid, pristine, dirty 1`] = `
+exports[`Render Form with text input and validate prop | onChange | test value, valid, invalid, pristine, dirty 1`] = `
 <form>
   <div>
     <div>
