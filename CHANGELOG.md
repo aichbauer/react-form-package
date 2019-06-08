@@ -1,3 +1,7 @@
+1.15.0 - June, 08 2019
+
+* 7ea280e Feat: allow writing own validations via validate prop (#40) (Lukas Aichbauer)
+
 1.14.1 - May, 29 2019
 
 * 6afdb29 Fix: checked and bindTo falsy values (#39) (Lukas Aichbauer)
