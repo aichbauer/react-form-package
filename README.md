@@ -561,8 +561,9 @@ Property | Type | Description
 `max` | String (digit or date (YYYY-MM-DD)) | `text`, `textarea`, `password`: validates if the input value is maximum `max characters long`; `number`, `date`: validates if the input value is maximum `max`
 `match` | Regex | validates if the input value matches the `regular expression`
 `sameAs` | String | validates if the input of this field has the same value as the field specified in `sameAs`
+`validate` | Func | a function that gets access to the value of the field `(value) => // write your own validation` (do not forget to write your own errorMessage)
 
-Example with the `required`, `min`, `max`, and `sameAs` properties:
+Example with the `required`, `min`, `max`, `validate`, and `sameAs` properties:
 
 ```jsx
 <Form
@@ -578,6 +579,12 @@ Example with the `required`, `min`, `max`, and `sameAs` properties:
     Number required, min, max
     <div>
       <Field type="number" id="number" min="2" max="5" required />
+    </div>
+  </div>
+  <div>
+    Text is required and has to validate the `validate` function (value === 'react')
+    <div>
+      <Field type="text" id="validate" validate={(value) => value === 'react'} errorMessage={'This field is required\\nThis field has to match "react"'}  required />
     </div>
   </div>
   <div>
