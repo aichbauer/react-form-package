@@ -9,6 +9,10 @@ const getNestedChilds = (children, data) => {
     : [];
 
   arr.forEach((child) => { // eslint-disable-line
+    if (!child) {
+      return null;
+    }
+
     const { type } = child;
     if (typeof type === 'function') {
       if (
