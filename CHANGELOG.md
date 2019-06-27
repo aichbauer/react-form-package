@@ -1,3 +1,7 @@
+1.15.1 - June, 27 2019
+
+* 2299a3a Fix: do not break on undefined child (#41) (Lukas Aichbauer)
+
 1.15.0 - June, 08 2019
 
 * 7ea280e Feat: allow writing own validations via validate prop (#40) (Lukas Aichbauer)
