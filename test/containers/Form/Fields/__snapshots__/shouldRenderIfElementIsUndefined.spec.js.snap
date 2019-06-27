@@ -33,37 +33,3 @@ exports[`Render Form even if element is undefined 1`] = `
   </div>
 </form>
 `;
-
-exports[`Render Form with tel input | tel input no rules 1`] = `
-<form>
-  <div>
-    <div>
-      tel
-    </div>
-    <input
-      className="rfp-input"
-      id="tel"
-      invalid={false}
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      type="tel"
-      valid={false}
-      value=""
-    />
-  </div>
-  <div>
-    <button
-      className="rfp-button"
-      disabled={false}
-      id="submit"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      type="submit"
-    >
-      submit
-    </button>
-  </div>
-</form>
-`;
