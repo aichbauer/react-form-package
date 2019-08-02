@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Context } from '../Context';
 import { createReturnState } from '../../helpers';
 
@@ -63,5 +64,36 @@ const Button = (props) => (
 );
 
 Button.displayName = 'Button';
+
+Button.defaultProps = {
+  rfpRole: undefined,
+  field: undefined,
+  onClick: undefined,
+  fieldId: undefined,
+  onMouseEnter: undefined,
+  onMouseLeave: undefined,
+};
+
+Button.propTypes = {
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  rfpRole: PropTypes.string,
+  field: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })),
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    }),
+  ]),
+  onClick: PropTypes.func,
+  fieldId: PropTypes.string,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  children: PropTypes.any, // eslint-disable-line
+};
+
 
 export { Button };

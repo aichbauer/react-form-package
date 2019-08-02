@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
@@ -71,5 +72,48 @@ const Field = (props) => (
 );
 
 Field.displayName = 'Field';
+
+Field.defaultProps = {
+  rows: undefined,
+  cols: undefined,
+  onFocus: undefined,
+  onBlur: undefined,
+  dynamic: false,
+  field: undefined,
+  bindTo: undefined,
+  bindToAlways: false,
+  bindToCallback: undefined,
+  preOnChange: undefined,
+  onChange: undefined,
+};
+
+Field.propTypes = {
+  id: PropTypes.string.isRequired,
+  rows: PropTypes.string,
+  cols: PropTypes.string,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  dynamic: PropTypes.bool,
+  field: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })),
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    }),
+  ]),
+  bindTo: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.arrayOf(PropTypes.string.isRequired),
+  ]),
+  bindToAlways: PropTypes.bool,
+  bindToCallback: PropTypes.func,
+  preOnChange: PropTypes.func,
+  onChange: PropTypes.func,
+  errorMessage: PropTypes.string.isRequired,
+  children: PropTypes.any, // eslint-disable-line
+};
 
 export { Field };
