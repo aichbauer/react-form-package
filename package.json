@@ -10,11 +10,11 @@
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "lint": "eslint src --fix",
-    "pretest": "yarn run lint",
+    "pretest": "npm run lint",
     "test": "jest --coverage --env=jsdom",
-    "prepush": "yarn run test",
+    "prepush": "npm run test",
     "build": "rm -rf lib; babel src --out-dir lib",
-    "prepare": "yarn run build"
+    "prepare": "npm run build"
   },
   "keywords": [
     "react",
@@ -53,7 +53,8 @@
     "@babel/preset-react": "^7.0.0",
     "autocapitalize": "^1.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.4.2",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
     "docz": "^0.11.0",
     "docz-plugin-css": "^0.11.0",
     "downshift": "^3.1.5",
@@ -65,7 +66,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "husky": "^1.1.0",
-    "jest": "^23.5.0",
+    "jest": "^24.8.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.4.2",
