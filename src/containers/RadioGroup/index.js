@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
@@ -71,5 +72,31 @@ const RadioGroup = (props) => (
 );
 
 RadioGroup.displayName = 'RadioGroup';
+
+RadioGroup.defaultProps = {
+  onFocus: undefined,
+  onBlur: undefined,
+  bindTo: undefined,
+  bindToAlways: false,
+  bindToCallback: undefined,
+  preOnChange: undefined,
+  onChange: undefined,
+};
+
+RadioGroup.propTypes = {
+  id: PropTypes.string.isRequired,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  bindTo: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.arrayOf(PropTypes.string.isRequired),
+  ]),
+  bindToAlways: PropTypes.bool,
+  bindToCallback: PropTypes.func,
+  preOnChange: PropTypes.func,
+  onChange: PropTypes.func,
+  errorMessage: PropTypes.string.isRequired,
+  children: PropTypes.any, // eslint-disable-line
+};
 
 export { RadioGroup };

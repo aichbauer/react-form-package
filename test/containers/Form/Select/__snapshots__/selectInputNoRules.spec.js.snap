@@ -7,6 +7,7 @@ exports[`Render Form with select input | select input no rules 1`] = `
       select
     </div>
     <select
+      bindToAlways={false}
       className="rfp-select"
       id="select"
       invalid={false}

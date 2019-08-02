@@ -7,8 +7,10 @@ exports[`Render Form with checkbox | checkbox all rules 1`] = `
       checkbox
     </div>
     <input
+      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
+      dynamic={false}
       id="checkbox"
       invalid={false}
       onBlur={[Function]}

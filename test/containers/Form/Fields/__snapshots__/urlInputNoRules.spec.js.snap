@@ -7,7 +7,9 @@ exports[`Render Form with url input | url input no rules 1`] = `
       url
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="url"
       invalid={false}
       onBlur={[Function]}

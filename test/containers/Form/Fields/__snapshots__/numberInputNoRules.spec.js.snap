@@ -7,7 +7,9 @@ exports[`Render Form with number input | number input no rules 1`] = `
       number
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="number"
       invalid={false}
       onBlur={[Function]}

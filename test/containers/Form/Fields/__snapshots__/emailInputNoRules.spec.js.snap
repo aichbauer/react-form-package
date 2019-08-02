@@ -7,7 +7,9 @@ exports[`Render Form with email input | email input no rules 1`] = `
       email
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="email"
       invalid={false}
       onBlur={[Function]}

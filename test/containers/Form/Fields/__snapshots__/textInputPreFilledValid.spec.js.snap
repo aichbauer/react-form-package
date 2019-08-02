@@ -3,7 +3,9 @@
 exports[`Render Form with text input and pre filled value | should be valid 1`] = `
 <form>
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="text"
     invalid={false}
     onBlur={[Function]}
@@ -15,7 +17,9 @@ exports[`Render Form with text input and pre filled value | should be valid 1`] 
     value="Test"
   />
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="text2"
     invalid={false}
     max="3"

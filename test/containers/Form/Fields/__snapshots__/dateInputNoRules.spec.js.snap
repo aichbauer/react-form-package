@@ -7,7 +7,9 @@ exports[`Render Form with date input | date input no rules 1`] = `
       date
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="date"
       invalid={false}
       onBlur={[Function]}

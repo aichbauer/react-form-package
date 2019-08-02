@@ -7,7 +7,9 @@ exports[`Render Form with text input | onChange | test value, valid, invalid, pr
       text
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="text"
       invalid={false}
       match={/react/}

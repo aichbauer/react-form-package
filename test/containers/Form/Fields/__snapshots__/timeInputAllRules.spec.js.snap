@@ -7,7 +7,9 @@ exports[`Render Form with time input | time input all rules | onChange -> error 
       time
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="time"
       invalid={false}
       onBlur={[Function]}

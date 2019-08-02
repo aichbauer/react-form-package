@@ -7,7 +7,9 @@ exports[`Render Form with file input | file input all rules | preOnChange -> sho
       email
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="file"
       invalid={false}
       onBlur={[Function]}

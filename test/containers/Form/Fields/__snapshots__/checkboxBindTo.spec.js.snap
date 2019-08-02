@@ -13,9 +13,11 @@ exports[`Render Form with 3 checkbox inputs | onChange, bindTo, bindToCallback 1
           "checkbox2",
         ]
       }
+      bindToAlways={false}
       bindToCallback={[Function]}
       checked={false}
       className="rfp-checkbox"
+      dynamic={false}
       id="checkbox"
       invalid={false}
       onBlur={[Function]}
@@ -29,8 +31,10 @@ exports[`Render Form with 3 checkbox inputs | onChange, bindTo, bindToCallback 1
       checkbox1
     </div>
     <input
+      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
+      dynamic={false}
       id="checkbox1"
       invalid={false}
       onBlur={[Function]}
@@ -44,8 +48,10 @@ exports[`Render Form with 3 checkbox inputs | onChange, bindTo, bindToCallback 1
       checkbox2
     </div>
     <input
+      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
+      dynamic={false}
       id="checkbox2"
       invalid={false}
       onBlur={[Function]}
