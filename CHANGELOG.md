@@ -1,3 +1,7 @@
+1.15.2 - August, 02 2019
+
+* 3d49678 Chore: switch from yarn to npm (#42) (Lukas Aichbauer)
+
 1.15.1 - June, 27 2019
 
 * 2299a3a Fix: do not break on undefined child (#41) (Lukas Aichbauer)
