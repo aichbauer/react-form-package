@@ -7,7 +7,9 @@ exports[`Render Form with text input | text input no rules 1`] = `
       text
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="text"
       invalid={false}
       onBlur={[Function]}

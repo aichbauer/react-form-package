@@ -7,7 +7,9 @@ exports[`Render Form with textarea | textarea all rules 1`] = `
       textarea
     </div>
     <textarea
+      bindToAlways={false}
       className="rfp-textarea"
+      dynamic={false}
       id="textarea"
       invalid={false}
       max="40"

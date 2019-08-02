@@ -10,7 +10,7 @@ import {
 
 configure({ adapter: new Adapter() });
 
-test('Render Form with two text inputs and pre filled value | sameAs | both should be valid', async () => {
+test('Render Form with two text inputs and pre filled value | sameAs | both should be valid', () => {
   const myComponent = (
     <Form>
       <Field type="text" sameAs="text2" id="text" required value="Test" />

@@ -4,6 +4,7 @@ exports[`Render Form with text input | text input all rules 1`] = `
 <form>
   <input
     bindTo="households"
+    bindToAlways={false}
     bindToCallback={
       [MockFunction] {
         "calls": Array [
@@ -13,13 +14,14 @@ exports[`Render Form with text input | text input all rules 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": undefined,
           },
         ],
       }
     }
     className="rfp-input"
+    dynamic={false}
     id="housenumbers"
     invalid={false}
     onBlur={[Function]}
@@ -31,7 +33,9 @@ exports[`Render Form with text input | text input all rules 1`] = `
     value=""
   />
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="households"
     invalid={false}
     onBlur={[Function]}

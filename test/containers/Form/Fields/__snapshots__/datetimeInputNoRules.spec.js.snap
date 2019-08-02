@@ -7,7 +7,9 @@ exports[`Render Form with datetime-local input | datetime-local input no rules 1
       datetime-local
     </div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="datetime-local"
       invalid={false}
       onBlur={[Function]}

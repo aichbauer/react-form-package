@@ -38,7 +38,9 @@ exports[`Render Form with select input | bindTo 1`] = `
     </option>
   </select>
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="subject"
     invalid={false}
     onBlur={[Function]}
@@ -49,8 +51,10 @@ exports[`Render Form with select input | bindTo 1`] = `
     value=""
   />
   <textarea
+    bindToAlways={false}
     className="rfp-textarea"
     cols="40"
+    dynamic={false}
     id="body"
     invalid={false}
     onBlur={[Function]}

@@ -3,7 +3,9 @@
 exports[`Render Form with two text inputs and pre filled value | sameAs | both should be valid 1`] = `
 <form>
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="text"
     invalid={false}
     onBlur={[Function]}
@@ -16,7 +18,9 @@ exports[`Render Form with two text inputs and pre filled value | sameAs | both s
     value="Test"
   />
   <input
+    bindToAlways={false}
     className="rfp-input"
+    dynamic={false}
     id="text2"
     invalid={false}
     onBlur={[Function]}

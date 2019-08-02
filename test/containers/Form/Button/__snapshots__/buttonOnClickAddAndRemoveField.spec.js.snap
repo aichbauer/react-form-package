@@ -4,7 +4,9 @@ exports[`Render Form with button | add and remove fields | click button 1`] = `
 <form>
   <div>
     <input
+      bindToAlways={false}
       className="rfp-input"
+      dynamic={false}
       id="company-0"
       invalid={false}
       onBlur={[Function]}
