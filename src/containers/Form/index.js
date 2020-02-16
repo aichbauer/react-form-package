@@ -15,6 +15,7 @@ class Form extends React.Component {
 
     const {
       validate,
+      form,
       input,
       checkbox,
       textarea,
@@ -26,6 +27,7 @@ class Form extends React.Component {
     } = this.props;
 
     this.state = {
+      FormComponent: form,
       InputComponent: input,
       ButtonComponent: button,
       SelectComponent: select,
@@ -173,6 +175,7 @@ class Form extends React.Component {
 
   setInitialState(children) {
     let data = {};
+
     children.forEach((child) => {
       data = {
         ...data,
@@ -292,6 +295,7 @@ class Form extends React.Component {
 
   render() {
     const {
+      FormComponent,
       InputComponent,
       ButtonComponent,
       SelectComponent,
@@ -311,6 +315,7 @@ class Form extends React.Component {
 
     return (
       <Context.Provider value={{
+        FormComponent,
         InputComponent,
         ButtonComponent,
         SelectComponent,
@@ -329,11 +334,12 @@ class Form extends React.Component {
         removeField: this.removeField,
       }}
       >
-        <form
+        <FormComponent.type
+          {...FormComponent.props}
           encType={encType}
         >
           {children}
-        </form>
+        </FormComponent.type>
       </Context.Provider>
     );
   }
@@ -341,12 +347,13 @@ class Form extends React.Component {
 
 Form.defaultProps = {
   validate: false,
+  form: <form className="rfp-form" />,
   input: <input className="rfp-input" />,
   checkbox: <input className="rfp-checkbox" />,
   radio: <input className="rfp-radio-group" />,
   radioContainer: <div className="rfp-radio-group-container" />,
   button: <button className="rfp-button" />, // eslint-disable-line
-  select: <select className="rfp-select" />,
+  select: <select className="rfp-select" />, // eslint-disable-line
   textarea: <textarea className="rfp-textarea" />,
   error: <div className="rfp-error-label" />,
   encType: undefined,
@@ -354,6 +361,7 @@ Form.defaultProps = {
 
 Form.propTypes = {
   validate: PropTypes.bool,
+  form: PropTypes.element,
   input: PropTypes.element,
   checkbox: PropTypes.element,
   radio: PropTypes.element,

@@ -45,15 +45,15 @@ test('Render Form with radio input | onFocus | onChange | onBlur', () => {
   expect(state.data.radio.valid).toBe(false);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input').at(0).simulate('blur');
+  wrapper.find('input').at(0).simulate('blur', event);
   wrapper.update();
 
   errorLabelExists = wrapper.exists('.rfp-error-label');
   expect(errorLabelExists).toBe(true);
 
-  wrapper.find('input').at(0).simulate('focus');
+  wrapper.find('input').at(0).simulate('focus', event);
   wrapper.find('input').at(0).simulate('change', event);
-  wrapper.find('input').at(0).simulate('blur');
+  wrapper.find('input').at(0).simulate('blur', event);
   wrapper.update();
 
   state = wrapper.state();

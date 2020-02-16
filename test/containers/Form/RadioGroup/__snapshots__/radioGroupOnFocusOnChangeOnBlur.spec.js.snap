@@ -1,22 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with radio input | onFocus | onChange | onBlur 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       radio
     </div>
     <div
-      bindToAlways={false}
       className="rfp-radio-group"
       id="radio"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="radio"
-      valid={false}
     >
       <input
         className="rfp-radio-group"

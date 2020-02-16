@@ -45,9 +45,9 @@ test('Render Form with text input | text input all rules', () => {
   const tree = renderer.create(myComponent).toJSON();
   const wrapper = mount(myComponent);
 
-  wrapper.find('input#housenumbers').simulate('focus');
+  wrapper.find('input#housenumbers').simulate('focus', event, rules);
   wrapper.find('input#housenumbers').simulate('change', event, rules);
-  wrapper.find('input#housenumbers').simulate('blur');
+  wrapper.find('input#housenumbers').simulate('blur', event, rules);
 
   expect(mock).toBeCalledTimes(1);
   expect(tree).toMatchSnapshot();

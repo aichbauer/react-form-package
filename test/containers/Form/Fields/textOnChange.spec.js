@@ -44,9 +44,9 @@ test('Render Form with text input | onChange | test value, valid, invalid, prist
   expect(state.data.text.valid).toBe(true);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');

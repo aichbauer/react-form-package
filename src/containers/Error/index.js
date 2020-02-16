@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   errorStyle,
   writeErrorMessage,
@@ -21,6 +22,15 @@ const Error = (props) => {
       </ErrorLabelComponent.type>
     )
   );
+};
+
+Error.defaultProps = {};
+
+Error.propTypes = {
+  id: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  ErrorLabelComponent: PropTypes.element.isRequired,
+  data: PropTypes.any, // eslint-disable-line
 };
 
 export { Error };

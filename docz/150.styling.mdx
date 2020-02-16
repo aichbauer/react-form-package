@@ -5,11 +5,10 @@ order: 150
 ---
 
 import { Playground } from 'docz';
-import { Form, Field, Button, Select, RadioGroup } from '../src';
-import { Label } from 'styled-base-components';
+import { Form, Field, Button, Select, RadioGroup } from '../src';
 import { FormGroup, FormControl, FormCheck, FormCheckInput } from 'styled-form-component';
-import { Column } from 'styled-grid-system-component';
-import { Button as Btn } from 'styled-button-component';
+import { Column } from 'styled-grid-system-component';
+import { Button as Btn } from 'styled-button-component';
 import { MyButton } from './style/MyButton';
 import { MyInput } from './style/MyInput';
 import { MyClassNameButton } from './style/MyClassNameButton';
@@ -27,14 +26,13 @@ First you have to import the this library and the Form Components you want to us
 
 ```jsx
 import {
- Form, 
+ Form, 
  Field, 
  Button, 
  Select, 
  RadioGroup,
 } from 'react-form-package';
 import {
-  Label,
   FormGroup,
   FormControl,
   FormCheck,
@@ -47,6 +45,7 @@ import {
 The next step is to create you form and pass the styled components as props to the `<Form />` component.
 
 <Playground>
+
   <Form
     validate
     input={<FormControl />}
@@ -56,94 +55,174 @@ The next step is to create you form and pass the styled components as props to t
     radio={<FormCheckInput />}
     error={<div style={{ color: 'red' }}/>}
   >
+
     <FormGroup row nomb>
+
       <Column sm={6}>
+
         <FormGroup>
-          <Label>Email</Label>
+
+          <label>Email</label>
+
           <Field id="email" type="email" placeholder="Email" />
+
         </FormGroup>
+
       </Column>
+
       <Column sm={6}>
+
         <FormGroup>
-          <Label>Password</Label>
+
+          <label>Password</label>
+
           <Field id="password" type="password" placeholder="Password" />
+
         </FormGroup>
+
       </Column>
+
     </FormGroup>
+
     <FormGroup row nomb>
+
       <Column sm={12}>
+
         <FormGroup>
-          <Label>Address</Label>
+
+          <label>Address</label>
+
           <Field id="address" type="text" placeholder="1234 Main St" />
+
         </FormGroup>
+
       </Column>
+
     </FormGroup>
+
     <FormGroup row>
+
       <Column sm={12}>
+
         <FormGroup>
-          <Label>Address 2</Label>
+
+          <label>Address 2</label>
+
           <Field id="address2" type="text" placeholder="Apartment, Studio, or floor" />
+
         </FormGroup>
+  
       </Column>
+
     </FormGroup>
+
     <FormGroup row nomb>
+
       <Column sm={6}>
+
         <FormGroup>
-          <Label>City</Label>
+
+          <label>City</label>
+
           <Field id="city" type="text" />
+
         </FormGroup>
+
       </Column>
+
       <Column sm={4}>
+
         <FormGroup>
-          <Label>State</Label>
+
+          <label>State</label>
+
           <Select id="state" type="select">
             <option disabled value="">--- Choose a state ---</option>
             <option value="austria">Austria</option>
             <option value="germany">Germany</option>
             <option value="swiss">Swiss</option>
           </Select>
+
         </FormGroup>
+
       </Column>
+
       <Column sm={2}>
+
         <FormGroup>
-          <Label>Zip</Label>
+
+          <label>Zip</label>
+
           <Field id="zip" type="text" />
+
         </FormGroup>
+
       </Column>
+
     </FormGroup>
+
     <FormGroup row>
+
       <Column sm={12}>
+
         <FormCheck ml="20px">
+
           <Field id="checkbox" type="checkbox" />
-          <Label>Accept Terms and Conditions</Label>
+
+          <label>Accept Terms and Conditions</label>
+
         </FormCheck>
+
       </Column>
+
     </FormGroup>
+
     <FormGroup row>
+
       <Column sm={12}>
-        <Label>Choose an option</Label>
+
+        <label>Choose an option</label>
+
         <RadioGroup type="radio" id="radio" required>
+
           <FormCheck>
+
             <FormCheckInput type="radio" name="radio" id="test" />
-            <Label>Option 1</Label>
+
+            <label>Option 1</label>
+
           </FormCheck>
+
           <FormCheck>
+
             <FormCheckInput type="radio" name="radio" id="test2" />
-            <Label>Option 2</Label>
+
+            <label>Option 2</label>
+
           </FormCheck>
+
         </RadioGroup>
+
       </Column>
+
     </FormGroup>
+
     <FormGroup row nomb>
+
       <Column sm={12}>
+
         <Button id="submit" type="submit" onClick={(state) => {
           alert(JSON.stringify(state, null, 2));
           alert('open the console to see the whole state...');
           console.log(state);
         }} primary>Submit</Button>
+
       </Column>
+
     </FormGroup>
+
   </Form>
+
 </Playground>
 
 ## style prop
@@ -192,6 +271,7 @@ const MyInput = (props) => (
 The next step is to create you form and pass the styled components as props to the `<Form />` component.
 
 <Playground>
+
   <Form
     button={<MyButton />}
     input={<MyInput />}
@@ -206,6 +286,7 @@ The next step is to create you form and pass the styled components as props to t
       console.log(state);
     }}>Submit</Button>
   </Form>
+
 </Playground>
 
 ## CSS and className
@@ -260,6 +341,7 @@ const MyClassNameInput = (props) => (
 The next step is to create you form and pass the styled components as props to the `<Form />` component.
 
 <Playground>
+
   <Form
     button={<MyClassNameButton />}
     input={<MyClassNameInput />}
@@ -274,6 +356,7 @@ The next step is to create you form and pass the styled components as props to t
       console.log(state);
     }}>Submit</Button>
   </Form>
+
 </Playground>
 
 ## Passing props
@@ -292,7 +375,7 @@ Prop | HTML | Props | Info
 input | input | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
 checkbox | input | `id`,`type`, `onChange`, `onBlur`, `onFocus` |
 radio | div | `id`,`type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<input type="radio" value="someValue" name="theIdRadioGroup" />` and handles their state
-button | input | `id`, `type`, `onClick`, `children` |
+button | input | `id`, `type`, `onClick`, `children` |
 select | select | `id`, `type`, `onChange`, `onBlur`, `onFocus`, `children` | this is a wrapper that renders every child, and watch out for `<option value="someValue" />` and handles their state
 textarea | textarea | `id`, `type`, `onChange`, `onBlur`, `onFocus` |
 

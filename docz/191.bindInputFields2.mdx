@@ -15,7 +15,7 @@ Sometimes it is not enough to bind the the value of an input field to just one s
 
 To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
 
-Property | Type | Required | Default | Description
+Property | Type | Required | Default | Description
 ---|---|---|---|---
 bindTo | String, Array | false | | the `id`/`ids` of the field/fields you want to manipulate
 bindToAlways | Bool | false | | only needed if you want that the bindToCallback is triggered even the bound input field was already touched (blurred)
@@ -26,11 +26,15 @@ bindToCallback | Func | false | | the callback to set the target's (`bindTo`) in
 In our example we use `Select` input to choose between different email templates.
 
 <Playground>
+
   <Form>
+
     <div>
+
       <div>
         Email Template:
       </div>
+
       <Select
         id="emailTemplate"
         bindTo={[
@@ -48,11 +52,7 @@ In our example we use `Select` input to choose between different email templates
 
           return [
             'Weekly report',
-            `Dear Boss,
-
-...
-...
-            `,
+            'Dear Boss,',
           ];
         }}
       >
@@ -62,28 +62,39 @@ In our example we use `Select` input to choose between different email templates
         <option value="friends">Friends</option>
         <option value="boss">Boss</option>
       </Select>
+
     </div>
+
     <div>
+
       <div>
         Subject:
       </div>
+
       <Field
         id="subject"
         type="text"
       />
+
     </div>
+
     <div>
+
       <div>
         Body:
       </div>
+
       <Field
         id="body"
         type="textarea"
         rows="5"
         cols="40"
       />
+
     </div>
+
     <div>
+
       <Button
         id="submit"
         type="submit"
@@ -95,6 +106,9 @@ In our example we use `Select` input to choose between different email templates
       >
         Submit
       </Button>
+
     </div>
+
   </Form>
+
 </Playground>

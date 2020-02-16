@@ -4,72 +4,88 @@ import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
 
-const RadioGroup = (props) => (
-  <Context.Consumer>
-    {(state) => {
-      const {
-        data,
-        validate,
-        RadioGroupComponent,
-        RadioGroupContainerComponent,
-        ErrorLabelComponent,
-        handleOnFocus,
-        handleOnChange,
-        handleOnBlur,
-      } = state;
+const RadioGroup = (props) => {
+  const {
+    id,
+    onFocus,
+    onBlur,
+    bindTo,
+    bindToAlways,
+    bindToCallback,
+    preOnChange,
+    onChange,
+    errorMessage,
+    sameAs,
+    validate,
+    children: c,
+    ...rest
+  } = props;
 
-      if (!isDataValid(data, props)) {
-        return null;
-      }
+  return (
+    <Context.Consumer>
+      {(state) => {
+        const {
+          data,
+          RadioGroupComponent,
+          RadioGroupContainerComponent,
+          ErrorLabelComponent,
+          handleOnFocus,
+          handleOnChange,
+          handleOnBlur,
+        } = state;
 
-      return (
-        <React.Fragment>
-          <RadioGroupContainerComponent.type
-            {...RadioGroupComponent.props}
-            {...props}
-            valid={validate && data[props.id].touched && data[props.id].valid}
-            invalid={validate && data[props.id].touched && data[props.id].invalid}
-            onFocus={(e) => handleOnFocus(e, props.onFocus)}
-            onBlur={(e) => handleOnBlur(e, props.onBlur)}
-            onChange={(e) => handleOnChange(
-              e,
-              data[props.id].rules,
-              {
-                bindTo: props.bindTo,
-                bindToAlways: props.bindToAlways,
-                bindToCallback: props.bindToCallback,
-                preOnChange: props.preOnChange,
-              },
-              props.onChange,
-            )}
-          >
-            {props.children.map((child) => {
-              if (child.type === 'input') {
-                return (
-                  <RadioGroupComponent.type
-                    tabIndex="0"
-                    key={child.props.id}
-                    {...RadioGroupComponent.props}
-                    {...child.props}
-                    value={child.props.id}
-                  />
-                );
-              }
+        if (!isDataValid(data, props)) {
+          return null;
+        }
 
-              return child;
-            })}
-          </RadioGroupContainerComponent.type>
-          <Error
-            data={data}
-            id={props.id}
-            errorMessage={props.errorMessage}
-            ErrorLabelComponent={ErrorLabelComponent}
-          />
-        </React.Fragment>
-      );
-    }}
-  </Context.Consumer>
-);
+        return (
+          <>
+            <RadioGroupContainerComponent.type
+              {...RadioGroupComponent.props}
+              {...rest}
+              id={id}
+              onFocus={(e) => handleOnFocus(e, onFocus)}
+              onBlur={(e) => handleOnBlur(e, onBlur)}
+              onChange={(e) => handleOnChange(
+                e,
+                data[id].rules,
+                {
+                  bindTo,
+                  bindToAlways,
+                  bindToCallback,
+                  preOnChange,
+                },
+                onChange,
+              )}
+            >
+              {c.map((child) => {
+                if (child.type === 'input') {
+                  return (
+                    <RadioGroupComponent.type
+                      {...RadioGroupComponent.props}
+                      {...child.props}
+                      tabIndex="0"
+                      key={child.props.id}
+                      value={child.props.id}
+                    />
+                  );
+                }
+
+                return child;
+              })}
+            </RadioGroupContainerComponent.type>
+            <Error
+              data={data}
+              id={id}
+              errorMessage={errorMessage}
+              ErrorLabelComponent={ErrorLabelComponent}
+            />
+          </>
+        );
+      }}
+    </Context.Consumer>
+  );
+};
 
 RadioGroup.displayName = 'RadioGroup';
 
@@ -81,6 +97,9 @@ RadioGroup.defaultProps = {
   bindToCallback: undefined,
   preOnChange: undefined,
   onChange: undefined,
+  sameAs: undefined,
+  validate: undefined,
+  errorMessage: '',
 };
 
 RadioGroup.propTypes = {
@@ -88,14 +107,16 @@ RadioGroup.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   bindTo: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.arrayOf(PropTypes.string.isRequired),
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   bindToAlways: PropTypes.bool,
   bindToCallback: PropTypes.func,
   preOnChange: PropTypes.func,
   onChange: PropTypes.func,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  sameAs: PropTypes.string,
+  validate: PropTypes.func,
   children: PropTypes.any, // eslint-disable-line
 };
 

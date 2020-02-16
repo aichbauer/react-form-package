@@ -4,72 +4,94 @@ import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
 
-const Field = (props) => (
-  <Context.Consumer>
-    {(state) => {
-      const {
-        data,
-        validate,
-        InputComponent,
-        CheckboxComponent,
-        TextareaComponent,
-        ErrorLabelComponent,
-        handleOnFocus,
-        handleOnChange,
-        handleOnBlur,
-      } = state;
-      let MyInputComponent;
+const Field = (props) => {
+  const {
+    id,
+    type,
+    rows,
+    cols,
+    onFocus,
+    onBlur,
+    dynamic,
+    field,
+    bindTo,
+    bindToAlways,
+    bindToCallback,
+    preOnChange,
+    onChange,
+    errorMessage,
+    children,
+    sameAs,
+    validate,
+    ...rest
+  } = props;
 
-      if (!isDataValid(data, props)) {
-        return null;
-      }
+  return (
+    <Context.Consumer>
+      {(state) => {
+        const {
+          data,
+          InputComponent,
+          CheckboxComponent,
+          TextareaComponent,
+          ErrorLabelComponent,
+          handleOnFocus,
+          handleOnChange,
+          handleOnBlur,
+        } = state;
+        let MyInputComponent;
 
-      if (data[props.id].rules.type === 'checkbox') {
-        MyInputComponent = CheckboxComponent;
-      } else if (data[props.id].rules.type === 'textarea') {
-        MyInputComponent = TextareaComponent;
-      } else {
-        MyInputComponent = InputComponent;
-      }
+        if (!isDataValid(data, props)) {
+          return null;
+        }
 
-      return (
-        <React.Fragment>
-          <MyInputComponent.type
-            {...MyInputComponent.props}
-            {...props}
-            checked={data[props.id].checked}
-            value={data[props.id].value}
-            rows={props.rows}
-            cols={props.cols}
-            valid={validate && data[props.id].touched && data[props.id].valid}
-            invalid={validate && data[props.id].touched && data[props.id].invalid}
-            onFocus={(e) => handleOnFocus(e, props.onFocus)}
-            onBlur={(e) => handleOnBlur(e, props.onBlur)}
-            onChange={(e) => handleOnChange(
-              e,
-              data[props.id].rules,
-              {
-                dynamic: props.dynamic,
-                field: props.field,
-                bindTo: props.bindTo,
-                bindToAlways: props.bindToAlways,
-                bindToCallback: props.bindToCallback,
-                preOnChange: props.preOnChange,
-              },
-              props.onChange,
-            )}
-          />
-          <Error
-            data={data}
-            id={props.id}
-            errorMessage={props.errorMessage}
-            ErrorLabelComponent={ErrorLabelComponent}
-          />
-        </React.Fragment>
-      );
-    }}
-  </Context.Consumer>
-);
+        if (data[id].rules.type === 'checkbox') {
+          MyInputComponent = CheckboxComponent;
+        } else if (data[id].rules.type === 'textarea') {
+          MyInputComponent = TextareaComponent;
+        } else {
+          MyInputComponent = InputComponent;
+        }
+
+        return (
+          <>
+            <MyInputComponent.type
+              {...MyInputComponent.props}
+              {...rest}
+              id={id}
+              type={type}
+              checked={data[id].checked}
+              value={data[id].value}
+              rows={rows}
+              cols={cols}
+              onFocus={(e) => handleOnFocus(e, onFocus)}
+              onBlur={(e) => handleOnBlur(e, onBlur)}
+              onChange={(e) => handleOnChange(
+                e,
+                data[id].rules,
+                {
+                  dynamic,
+                  field,
+                  bindTo,
+                  bindToAlways,
+                  bindToCallback,
+                  preOnChange,
+                },
+                onChange,
+              )}
+            />
+            <Error
+              data={data}
+              id={id}
+              errorMessage={errorMessage}
+              ErrorLabelComponent={ErrorLabelComponent}
+            />
+          </>
+        );
+      }}
+    </Context.Consumer>
+  );
+};
 
 Field.displayName = 'Field';
 
@@ -78,6 +100,7 @@ Field.defaultProps = {
   cols: undefined,
   onFocus: undefined,
   onBlur: undefined,
+  validate: undefined,
   dynamic: false,
   field: undefined,
   bindTo: undefined,
@@ -85,34 +108,39 @@ Field.defaultProps = {
   bindToCallback: undefined,
   preOnChange: undefined,
   onChange: undefined,
+  sameAs: undefined,
+  errorMessage: '',
 };
 
 Field.propTypes = {
   id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   rows: PropTypes.string,
   cols: PropTypes.string,
+  sameAs: PropTypes.string,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  validate: PropTypes.func,
   dynamic: PropTypes.bool,
   field: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      type: PropTypes.string,
     })),
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      type: PropTypes.string,
     }),
   ]),
   bindTo: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.arrayOf(PropTypes.string.isRequired),
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   bindToAlways: PropTypes.bool,
   bindToCallback: PropTypes.func,
   preOnChange: PropTypes.func,
   onChange: PropTypes.func,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
   children: PropTypes.any, // eslint-disable-line
 };
 

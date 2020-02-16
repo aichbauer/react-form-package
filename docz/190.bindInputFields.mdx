@@ -15,7 +15,7 @@ Sometimes a input value depends on another input value, e.g. the use inputs a ra
 
 To handle such cases there are two properties available on the `<Field />`, the `<RadioGroup />`, and the `<Select />` component.
 
-Property | Type | Required | Default | Description
+Property | Type | Required | Default | Description
 ---|---|---|---|---
 bindTo | String | false | | the `id` of the field you want to manipulate
 bindToCallback | Func | false | | the callback to set the target's (`bindTo`) input value, which gets called `onChange`
@@ -25,11 +25,15 @@ bindToCallback | Func | false | | the callback to set the target's (`bindTo`) in
 In our example we bind our first `housenumbers` input to the second `households` input. As long as the bound input field (`bindTo`, in our example the households field) is untouched (not blurred) the `binToCallback` will be executed `onChange` of the field where we have the `bindTo` and `bindToCallback` properties. The `bindToCallback` expects a String as return value, and gets the input value of the current input field `housenumbers`.
 
 <Playground>
+
   <Form>
+
     <div>
+
       <div>
         House numbers:
       </div>
+
       <Field 
         id="housenumbers" 
         type="text" 
@@ -67,16 +71,20 @@ In our example we bind our first `housenumbers` input to the second `households`
         }
       />
     </div>
+
     <div>
+
       <div>
         Households:
       </div>
+
       <Field 
         id="households"
         type="number"
         placeholder="6"
       />
     </div>
+
     <div>
       <Button
         id="submit"
@@ -89,8 +97,11 @@ In our example we bind our first `housenumbers` input to the second `households`
       >
         Submit
       </Button>
+
     </div>
+
   </Form>
+
 </Playground>
 
 

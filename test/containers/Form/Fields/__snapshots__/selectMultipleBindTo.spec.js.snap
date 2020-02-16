@@ -1,23 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with select input | bindTo 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <select
-    bindTo={
-      Array [
-        "subject",
-        "body",
-      ]
-    }
-    bindToAlways={true}
-    bindToCallback={[Function]}
     className="rfp-select"
     id="emailTemplate"
-    invalid={false}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
-    valid={false}
     value=""
   >
     <option
@@ -38,31 +30,23 @@ exports[`Render Form with select input | bindTo 1`] = `
     </option>
   </select>
   <input
-    bindToAlways={false}
     className="rfp-input"
-    dynamic={false}
     id="subject"
-    invalid={false}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     type="text"
-    valid={false}
     value=""
   />
   <textarea
-    bindToAlways={false}
     className="rfp-textarea"
     cols="40"
-    dynamic={false}
     id="body"
-    invalid={false}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     rows="5"
     type="textarea"
-    valid={false}
     value=""
   />
 </form>

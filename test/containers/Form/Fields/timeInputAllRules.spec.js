@@ -47,9 +47,9 @@ test('Render Form with time input | time input all rules | onChange -> error lab
   expect(state).toEqual(timeInputAllRules);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');

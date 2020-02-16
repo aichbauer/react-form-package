@@ -1,23 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with text input and validate prop | onChange | test value, valid, invalid, pristine, dirty 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       text
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="text"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="text"
-      valid={false}
-      validate={[Function]}
       value=""
     />
   </div>

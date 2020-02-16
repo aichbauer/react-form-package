@@ -1,17 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with text input | text input all rules 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       text
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="text"
-      invalid={false}
       match={/react/}
       max="8"
       min="3"
@@ -20,7 +19,6 @@ exports[`Render Form with text input | text input all rules 1`] = `
       onFocus={[Function]}
       required={true}
       type="text"
-      valid={false}
       value=""
     />
   </div>

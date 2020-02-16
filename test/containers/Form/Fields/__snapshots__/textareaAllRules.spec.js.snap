@@ -1,17 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with textarea | textarea all rules 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       textarea
     </div>
     <textarea
-      bindToAlways={false}
       className="rfp-textarea"
-      dynamic={false}
       id="textarea"
-      invalid={false}
       max="40"
       min="30"
       onBlur={[Function]}
@@ -19,7 +18,6 @@ exports[`Render Form with textarea | textarea all rules 1`] = `
       onFocus={[Function]}
       required={true}
       type="textarea"
-      valid={false}
       value=""
     />
   </div>

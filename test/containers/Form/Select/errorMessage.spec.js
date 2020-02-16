@@ -10,6 +10,13 @@ import {
 configure({ adapter: new Adapter() });
 
 test('Render Form with select input and custom errorMessage | onBlur -> errorMessage', () => {
+  const event = {
+    target: {
+      id: 'select',
+      type: 'select',
+    },
+  };
+
   const myComponent = (
     <Form>
       <div>
@@ -25,7 +32,7 @@ test('Render Form with select input and custom errorMessage | onBlur -> errorMes
 
   const wrapper = mount(myComponent);
 
-  wrapper.find('select').simulate('blur');
+  wrapper.find('select').simulate('blur', event);
   wrapper.update();
 
   const errorMessage = wrapper.find('.rfp-error-label').text();
