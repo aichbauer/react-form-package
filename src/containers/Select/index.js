@@ -4,59 +4,75 @@ import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
 
-const Select = (props) => (
-  <Context.Consumer>
-    {(state) => {
-      const {
-        data,
-        validate,
-        SelectComponent,
-        ErrorLabelComponent,
-        handleOnFocus,
-        handleOnChange,
-        handleOnBlur,
-      } = state;
+const Select = (props) => {
+  const {
+    id,
+    onFocus,
+    onBlur,
+    bindTo,
+    bindToAlways,
+    bindToCallback,
+    preOnChange,
+    onChange,
+    errorMessage,
+    children: c,
+    sameAs,
+    validate,
+    ...rest
+  } = props;
 
-      if (!isDataValid(data, props)) {
-        return null;
-      }
+  return (
+    <Context.Consumer>
+      {(state) => {
+        const {
+          data,
+          SelectComponent,
+          ErrorLabelComponent,
+          handleOnFocus,
+          handleOnChange,
+          handleOnBlur,
+        } = state;
 
-      return (
-        <React.Fragment>
-          <SelectComponent.type
-            {...SelectComponent.props}
-            {...props}
-            checked={data[props.id].checked}
-            value={data[props.id].value}
-            valid={validate && data[props.id].touched && data[props.id].valid}
-            invalid={validate && data[props.id].touched && data[props.id].invalid}
-            onFocus={(e) => handleOnFocus(e, props.onFocus)}
-            onBlur={(e) => handleOnBlur(e, props.onBlur)}
-            onChange={(e) => handleOnChange(
-              e,
-              data[props.id].rules,
-              {
-                bindTo: props.bindTo,
-                bindToAlways: props.bindToAlways,
-                bindToCallback: props.bindToCallback,
-                preOnChange: props.preOnChange,
-              },
-              props.onChange,
-            )}
-          >
-            {props.children}
-          </SelectComponent.type>
-          <Error
-            data={data}
-            id={props.id}
-            errorMessage={props.errorMessage}
-            ErrorLabelComponent={ErrorLabelComponent}
-          />
-        </React.Fragment>
-      );
-    }}
-  </Context.Consumer>
-);
+        if (!isDataValid(data, props)) {
+          return null;
+        }
+
+        return (
+          <>
+            <SelectComponent.type
+              {...SelectComponent.props}
+              {...rest}
+              id={id}
+              checked={data[id].checked}
+              value={data[id].value}
+              onFocus={(e) => handleOnFocus(e, onFocus)}
+              onBlur={(e) => handleOnBlur(e, onBlur)}
+              onChange={(e) => handleOnChange(
+                e,
+                data[id].rules,
+                {
+                  bindTo,
+                  bindToAlways,
+                  bindToCallback,
+                  preOnChange,
+                },
+                onChange,
+              )}
+            >
+              {c}
+            </SelectComponent.type>
+            <Error
+              data={data}
+              id={id}
+              errorMessage={errorMessage}
+              ErrorLabelComponent={ErrorLabelComponent}
+            />
+          </>
+        );
+      }}
+    </Context.Consumer>
+  );
+};
 
 Select.displayName = 'Select';
 
@@ -68,6 +84,9 @@ Select.defaultProps = {
   bindToCallback: undefined,
   preOnChange: undefined,
   onChange: undefined,
+  sameAs: undefined,
+  validate: undefined,
+  errorMessage: '',
 };
 
 Select.propTypes = {
@@ -75,14 +94,16 @@ Select.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   bindTo: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.arrayOf(PropTypes.string.isRequired),
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   bindToAlways: PropTypes.bool,
   bindToCallback: PropTypes.func,
   preOnChange: PropTypes.func,
   onChange: PropTypes.func,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  sameAs: PropTypes.string,
+  validate: PropTypes.func,
   children: PropTypes.any, // eslint-disable-line
 };
 

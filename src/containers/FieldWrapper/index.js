@@ -4,74 +4,97 @@ import { Error } from '../Error';
 import { Context } from '../Context';
 import { isDataValid } from '../../helpers';
 
-const FieldWrapper = (props) => (
-  <Context.Consumer>
-    {(state) => {
-      const {
-        data,
-        ErrorLabelComponent,
-        handleOnFocus,
-        handleOnChange,
-        handleOnBlur,
-      } = state;
+const FieldWrapper = (props) => {
+  const {
+    id,
+    type,
+    onFocus,
+    onBlur,
+    dynamic,
+    field,
+    bindTo,
+    bindToAlways,
+    bindToCallback,
+    preOnChange,
+    onChange,
+    errorMessage,
+    sameAs,
+    validate,
+    children: c,
+    ...rest
+  } = props;
 
-      if (!isDataValid(data, props)) {
-        return null;
-      }
+  return (
+    <Context.Consumer>
+      {(state) => {
+        const {
+          data,
+          ErrorLabelComponent,
+          handleOnFocus,
+          handleOnChange,
+          handleOnBlur,
+        } = state;
 
-      const e = (input) => ({
-        target:
-        {
-          id: props.id,
-          value: input,
-          checked: props.type === 'checkbox' ? input : undefined,
-          type: props.type,
-        },
-      });
+        if (!isDataValid(data, props)) {
+          return null;
+        }
 
-      const children = React.Children.map(props.children, (child) => (
-        React.cloneElement(child, {
-          ...props,
-          ...child.props,
-          onFocus: (input) => handleOnFocus(
-            e(input),
-            props.onFocus,
-          ),
-          onBlur: (input) => handleOnBlur(
-            e(input),
-            props.onBlur,
-          ),
-          onChange: (input) => handleOnChange(
-            e(input),
-            data[props.id].rules,
-            {
-              dynamic: props.dynamic,
-              field: props.field,
-              bindTo: props.bindTo,
-              bindToAlways: props.bindToAlways,
-              bindToCallback: props.bindToCallback,
-              preOnChange: props.preOnChange,
-            },
-            props.onChange,
-          ),
-          meta: data[props.id],
-        })
-      ));
+        const e = (input) => ({
+          target:
+          {
+            id,
+            value: input,
+            checked: type === 'checkbox' ? input : undefined,
+            type,
+          },
+        });
 
-      return (
-        <React.Fragment>
-          {children}
-          <Error
-            data={data}
-            id={props.id}
-            errorMessage={props.errorMessage}
-            ErrorLabelComponent={ErrorLabelComponent}
-          />
-        </React.Fragment>
-      );
-    }}
-  </Context.Consumer>
-);
+        const children = React.Children.map(c, (child) => (
+          React.cloneElement(child, {
+            ...rest,
+            ...child.props,
+            id,
+            key: id,
+            onFocus: (input) => handleOnFocus(
+              e(input),
+              onFocus,
+            ),
+            onBlur: (input) => handleOnBlur(
+              e(input),
+              onBlur,
+            ),
+            onChange: (input) => handleOnChange(
+              e(input),
+              data[id].rules,
+              {
+                dynamic,
+                field,
+                bindTo,
+                bindToAlways,
+                bindToCallback,
+                preOnChange,
+              },
+              onChange,
+            ),
+            meta: data[id],
+          })
+        ));
+
+        return (
+          <>
+            {children}
+            <Error
+              data={data}
+              id={id}
+              errorMessage={errorMessage}
+              ErrorLabelComponent={ErrorLabelComponent}
+            />
+          </>
+        );
+      }}
+    </Context.Consumer>
+  );
+};
 
 FieldWrapper.displayName = 'FieldWrapper';
 
@@ -81,28 +104,36 @@ FieldWrapper.defaultProps = {
   onFocus: undefined,
   dynamic: false,
   field: undefined,
+  sameAs: undefined,
+  validate: undefined,
   bindTo: undefined,
   bindToAlways: undefined,
   bindToCallback: undefined,
   preOnChange: undefined,
+  errorMessage: '',
 };
 
 FieldWrapper.propTypes = {
-  errorMessage: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   dynamic: PropTypes.bool,
+  sameAs: PropTypes.string,
+  validate: PropTypes.func,
   field: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.object),
     PropTypes.object,
   ]),
-  bindTo: PropTypes.string,
+  bindTo: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
   bindToAlways: PropTypes.bool,
   bindToCallback: PropTypes.func,
   preOnChange: PropTypes.func,
+  onChange: PropTypes.func,
+  errorMessage: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
