@@ -47,7 +47,7 @@ test('Render Form with select input | onFocus | onBlur', () => {
   expect(state.data.select.valid).toBe(false);
 
   wrapper.find('select').simulate('focus', event, rules);
-  wrapper.find('select').simulate('blur');
+  wrapper.find('select').simulate('blur', event, rules);
   wrapper.update();
 
   state = wrapper.state();

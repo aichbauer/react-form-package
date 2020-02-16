@@ -1,24 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with checkbox | checkbox all rules 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       checkbox
     </div>
     <input
-      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
-      dynamic={false}
       id="checkbox"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="checkbox"
-      valid={false}
       value={false}
     />
   </div>

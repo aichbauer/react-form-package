@@ -34,9 +34,9 @@ test('Render Form with email input and custom errorMessage | email input all rul
 
   const wrapper = mount(myComponent);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
   wrapper.update();
 
   const errorMessage = wrapper.find('.rfp-error-label').text();

@@ -47,9 +47,9 @@ test('Render Form with datetime-local input | datetime-local input all rules | o
   expect(state).toEqual(datetimeInputAllRules);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
   wrapper.update();
 
   state = wrapper.state();

@@ -9,7 +9,15 @@ import {
 
 configure({ adapter: new Adapter() });
 
-test('Render Form with radio input and custom errorMessage | radio input all rules | onChange -> errorMessage', () => {
+test('Render Form with radio input and custom errorMessage | radio input all rules | onChange -> errorMessage', () => {
+  const event = {
+    target: {
+      id: 'radio1',
+      name: 'radio',
+      type: 'radio',
+    },
+  };
+
   const myComponent = (
     <Form>
       <div>
@@ -26,7 +34,7 @@ test('Render Form with radio input and custom errorMessage | radio input all rul
 
   const wrapper = mount(myComponent);
 
-  wrapper.find('input').at(0).simulate('blur');
+  wrapper.find('input').at(0).simulate('blur', event);
   wrapper.update();
 
   const errorMessage = wrapper.find('.rfp-error-label').text();

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const baseComponents = {
+  FormComponent: <form className="rfp-form" />, // eslint-disable-line
   ButtonComponent: <button className="rfp-button" />, // eslint-disable-line
   CheckboxComponent: <input className="rfp-checkbox" />,
   InputComponent: <input className="rfp-input" />,

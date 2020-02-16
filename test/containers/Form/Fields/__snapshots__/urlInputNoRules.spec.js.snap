@@ -1,22 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with url input | url input no rules 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       url
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="url"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="url"
-      valid={false}
       value=""
     />
   </div>

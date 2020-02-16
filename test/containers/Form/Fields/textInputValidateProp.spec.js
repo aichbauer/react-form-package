@@ -47,9 +47,9 @@ test('Render Form with text input and validate prop | onChange | test value, val
   expect(state.data.text.valid).toBe(true);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');
@@ -61,9 +61,9 @@ test('Render Form with text input and validate prop | onChange | test value, val
   expect(state.data.text.pristine).toBe(false);
   expect(state.data.text.dirty).toBe(true);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event2, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form (validate) with disabled button | on mouse enter button 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <button
       className="rfp-button"

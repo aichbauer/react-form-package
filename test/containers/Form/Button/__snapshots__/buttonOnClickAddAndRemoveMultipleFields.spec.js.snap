@@ -1,50 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with button | add and remove fields | click button 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="street-0"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="text"
-      valid={false}
       value=""
     />
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="housenumber-0"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="number"
-      valid={false}
       value=""
     />
     <button
       className="rfp-button"
       disabled={false}
-      fieldId={
-        Array [
-          "street-0",
-          "housenumber-0",
-        ]
-      }
       id="removeField"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      rfpRole="removeField"
       type="button"
     >
       Remove Company
@@ -54,25 +41,10 @@ exports[`Render Form with button | add and remove fields | click button 1`] = `
     <button
       className="rfp-button"
       disabled={false}
-      field={
-        Array [
-          Object {
-            "id": "street-1",
-            "required": true,
-            "type": "text",
-          },
-          Object {
-            "id": "housnumber-1",
-            "required": true,
-            "type": "number",
-          },
-        ]
-      }
       id="addField"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      rfpRole="addField"
       type="button"
     >
       Add Company

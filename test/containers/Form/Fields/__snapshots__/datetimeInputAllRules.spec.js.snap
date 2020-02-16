@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with datetime-local input | datetime-local input all rules | onChange -> error label 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       datetime-local
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="datetime-local"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="datetime-local"
-      valid={false}
       value=""
     />
   </div>

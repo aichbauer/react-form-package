@@ -23,33 +23,36 @@ test('Render Form with button | add and remove fields | click button', () => {
 
   const myComponent = (
     <Form>
-      {streets.map((street) => (
-        <div>
-          <Field
-            id={street.id}
-            type="text"
-            required
-          />
-          <Field
-            id={`housenumber-${street.id.split('-')[1]}`}
-            type="number"
-            required
-          />
-          <Button
-            id="removeField"
-            rfpRole="removeField"
-            type="button"
-            fieldId={[
-              street.id,
-              `housenumber-${street.id.split('-')[1]}`,
-            ]}
-            onClick={onClickMockRemoveField}
+      <>
+        {streets.map((street) => (
+          <div
+            key={street.id}
           >
-            Remove Company
-          </Button>
-        </div>
-      ))
-      }
+            <Field
+              id={street.id}
+              type="text"
+              required
+            />
+            <Field
+              id={`housenumber-${street.id.split('-')[1]}`}
+              type="number"
+              required
+            />
+            <Button
+              id="removeField"
+              rfpRole="removeField"
+              type="button"
+              fieldId={[
+                street.id,
+                `housenumber-${street.id.split('-')[1]}`,
+              ]}
+              onClick={onClickMockRemoveField}
+            >
+              Remove Company
+            </Button>
+          </div>
+        ))}
+      </>
       <div>
         <Button
           id="addField"

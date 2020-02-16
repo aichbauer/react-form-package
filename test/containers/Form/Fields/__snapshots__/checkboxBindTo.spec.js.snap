@@ -1,64 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with 3 checkbox inputs | onChange, bindTo, bindToCallback 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       checkbox
     </div>
     <input
-      bindTo={
-        Array [
-          "checkbox1",
-          "checkbox2",
-        ]
-      }
-      bindToAlways={false}
-      bindToCallback={[Function]}
       checked={false}
       className="rfp-checkbox"
-      dynamic={false}
       id="checkbox"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="checkbox"
-      valid={false}
       value={false}
     />
     <div>
       checkbox1
     </div>
     <input
-      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
-      dynamic={false}
       id="checkbox1"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="checkbox"
-      valid={false}
       value={false}
     />
     <div>
       checkbox2
     </div>
     <input
-      bindToAlways={false}
       checked={false}
       className="rfp-checkbox"
-      dynamic={false}
       id="checkbox2"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="checkbox"
-      valid={false}
       value={false}
     />
   </div>

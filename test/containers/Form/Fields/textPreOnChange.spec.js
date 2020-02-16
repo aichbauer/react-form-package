@@ -37,9 +37,9 @@ test('Render Form with text input | preOnChange | manipulate the input value to 
 
   expect(state.data.text.value).toBe('');
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
 

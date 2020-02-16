@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with time input | time input all rules | onChange -> error label 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       time
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={false}
       id="time"
-      invalid={false}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       required={true}
       type="time"
-      valid={false}
       value=""
     />
   </div>

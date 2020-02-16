@@ -24,7 +24,7 @@ test('Render Form with button | add and remove fields | click button', () => {
   const myComponent = (
     <Form>
       {companies.map((company) => (
-        <div>
+        <div key={company.id}>
           <Field
             id={company.id}
             placeholder={`Company ${company.id.split('-')[1]}`}

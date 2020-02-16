@@ -63,9 +63,9 @@ test('Render Form with text input | FieldWrapper | text input all rules', () => 
   expect(state.data.text.value).toBe('');
   expect(state.data.text.valid).toBe(false);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
   wrapper.update();
 
   state = wrapper.state();

@@ -48,9 +48,9 @@ test('Render Form with password input | onChange | test if input has to match sa
   expect(state.data.password2.valid).toBe(true);
   expect(errorLabelExists).toBe(false);
 
-  wrapper.find('input#password2').simulate('focus');
+  wrapper.find('input#password2').simulate('focus', event, rules);
   wrapper.find('input#password2').simulate('change', event, rules);
-  wrapper.find('input#password2').simulate('blur');
+  wrapper.find('input#password2').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');
@@ -61,9 +61,9 @@ test('Render Form with password input | onChange | test if input has to match sa
   expect(state.data.password2.valid).toBe(false);
   expect(errorLabelExists).toBe(true);
 
-  wrapper.find('input#password2').simulate('focus');
+  wrapper.find('input#password2').simulate('focus', event, rules);
   wrapper.find('input#password2').simulate('change', event2, rules);
-  wrapper.find('input#password2').simulate('blur');
+  wrapper.find('input#password2').simulate('blur', event, rules);
 
   state = wrapper.state();
   errorLabelExists = wrapper.exists('.rfp-error-label');

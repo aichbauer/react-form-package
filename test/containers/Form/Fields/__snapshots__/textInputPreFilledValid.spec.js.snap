@@ -1,33 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with text input and pre filled value | should be valid 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <input
-    bindToAlways={false}
     className="rfp-input"
-    dynamic={false}
     id="text"
-    invalid={false}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     required={true}
     type="text"
-    valid={false}
     value="Test"
   />
   <input
-    bindToAlways={false}
     className="rfp-input"
-    dynamic={false}
     id="text2"
-    invalid={false}
     max="3"
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     type="text"
-    valid={false}
     value="Test2"
   />
 </form>

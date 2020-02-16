@@ -52,9 +52,9 @@ test('Render Form with text input | add new Field onChange', () => {
 
   expect(Object.keys(state.data).length).toBe(1);
 
-  wrapper.find('input').simulate('focus');
+  wrapper.find('input').simulate('focus', event, rules);
   wrapper.find('input').simulate('change', event, rules);
-  wrapper.find('input').simulate('blur');
+  wrapper.find('input').simulate('blur', event, rules);
 
   state = wrapper.state();
   expect(Object.keys(state.data).length).toBe(2);

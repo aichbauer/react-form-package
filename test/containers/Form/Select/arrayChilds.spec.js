@@ -30,8 +30,8 @@ test('Render Form with select input | select input all rules', () => {
         <div>select</div>
         <Select type="select" id="select" required>
           <option disabled value="">-- choose one option --</option>
-          {data.map((option) => (
-            <option value={option.value}>{option.name}</option>
+          {data.map((option, i) => (
+            <option key={`key-${(() => i)()}`} value={option.value}>{option.name}</option>
           ))}
         </Select>
       </div>

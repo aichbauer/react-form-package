@@ -1,29 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render Form with text input | add new Field onChange 1`] = `
-<form>
+<form
+  className="rfp-form"
+>
   <div>
     <div>
       text
     </div>
     <input
-      bindToAlways={false}
       className="rfp-input"
-      dynamic={true}
-      field={
-        Object {
-          "id": "text-1",
-        }
-      }
       id="text"
-      invalid={false}
       max="8"
       min="3"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       type="text"
-      valid={false}
       value=""
     />
   </div>
