@@ -22,6 +22,8 @@ const passwordInputAllRules = {
   },
   validate: false,
   formValid: false,
+  validateOnClick: false,
+  buttonClicked: false,
 };
 
 export {

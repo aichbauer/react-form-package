@@ -38,6 +38,8 @@ const Field = (props) => {
           handleOnFocus,
           handleOnChange,
           handleOnBlur,
+          validateOnClick,
+          buttonClicked,
         } = state;
         let MyInputComponent;
 
@@ -85,6 +87,8 @@ const Field = (props) => {
               id={id}
               errorMessage={errorMessage}
               ErrorLabelComponent={ErrorLabelComponent}
+              validateOnClick={validateOnClick}
+              buttonClicked={buttonClicked}
             />
           </>
         );

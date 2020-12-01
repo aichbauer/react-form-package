@@ -23,9 +23,11 @@ const Button = (props) => {
         const {
           formValid,
           validate,
+          validateOnClick,
           ButtonComponent,
           addField,
           removeField,
+          setButtonClicked,
         } = state;
 
         return (
@@ -36,6 +38,10 @@ const Button = (props) => {
             type={type}
             onClick={(e) => {
               e.preventDefault();
+
+              if (validate && validateOnClick && !formValid) {
+                return setButtonClicked();
+              }
 
               if (rfpRole === 'addField') {
                 addField(field);
@@ -53,6 +59,8 @@ const Button = (props) => {
               if (!rfpRole) {
                 onClick(createReturnState(state));
               }
+
+              return null;
             }}
             onMouseEnter={(e) => {
               e.preventDefault();
@@ -68,7 +76,7 @@ const Button = (props) => {
                 onMouseLeave(e, createReturnState(state));
               }
             }}
-            disabled={validate && !rfpRole ? !formValid : false}
+            disabled={validate && !rfpRole && !validateOnClick ? !formValid : false}
           >
             {children}
           </ButtonComponent.type>

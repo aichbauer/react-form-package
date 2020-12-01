@@ -15,6 +15,7 @@ class Form extends React.Component {
 
     const {
       validate,
+      validateOnClick,
       form,
       input,
       checkbox,
@@ -38,7 +39,9 @@ class Form extends React.Component {
       ErrorLabelComponent: error,
       data: {},
       validate,
+      validateOnClick,
       formValid: false,
+      buttonClicked: false,
     };
 
     this.handleOnFocus = this.handleOnFocus.bind(this);
@@ -49,10 +52,18 @@ class Form extends React.Component {
     this.validateForm = this.validateForm.bind(this);
     this.addField = this.addField.bind(this);
     this.removeField = this.removeField.bind(this);
+    this.setButtonClicked = this.setButtonClicked.bind(this);
   }
 
   componentDidMount() {
     this.updateState();
+  }
+
+
+  setButtonClicked() {
+    this.setState({
+      buttonClicked: true,
+    });
   }
 
   handleOnFocus(e, cb) {
@@ -306,7 +317,9 @@ class Form extends React.Component {
       ErrorLabelComponent,
       data,
       validate,
+      validateOnClick,
       formValid,
+      buttonClicked,
     } = this.state;
     const {
       children,
@@ -326,12 +339,15 @@ class Form extends React.Component {
         ErrorLabelComponent,
         data,
         validate,
+        validateOnClick,
         formValid,
+        buttonClicked,
         handleOnFocus: this.handleOnFocus,
         handleOnChange: this.handleOnChange,
         handleOnBlur: this.handleOnBlur,
         addField: this.addField,
         removeField: this.removeField,
+        setButtonClicked: this.setButtonClicked,
       }}
       >
         <FormComponent.type
@@ -347,6 +363,7 @@ class Form extends React.Component {
 
 Form.defaultProps = {
   validate: false,
+  validateOnClick: false,
   form: <form className="rfp-form" />,
   input: <input className="rfp-input" />,
   checkbox: <input className="rfp-checkbox" />,
@@ -361,6 +378,7 @@ Form.defaultProps = {
 
 Form.propTypes = {
   validate: PropTypes.bool,
+  validateOnClick: PropTypes.bool,
   form: PropTypes.element,
   input: PropTypes.element,
   checkbox: PropTypes.element,

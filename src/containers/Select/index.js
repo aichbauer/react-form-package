@@ -31,6 +31,8 @@ const Select = (props) => {
           handleOnFocus,
           handleOnChange,
           handleOnBlur,
+          validateOnClick,
+          buttonClicked,
         } = state;
 
         if (!isDataValid(data, props)) {
@@ -66,6 +68,8 @@ const Select = (props) => {
               id={id}
               errorMessage={errorMessage}
               ErrorLabelComponent={ErrorLabelComponent}
+              validateOnClick={validateOnClick}
+              buttonClicked={buttonClicked}
             />
           </>
         );

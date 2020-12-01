@@ -32,6 +32,8 @@ const RadioGroup = (props) => {
           handleOnFocus,
           handleOnChange,
           handleOnBlur,
+          validateOnClick,
+          buttonClicked,
         } = state;
 
         if (!isDataValid(data, props)) {
@@ -79,6 +81,8 @@ const RadioGroup = (props) => {
               id={id}
               errorMessage={errorMessage}
               ErrorLabelComponent={ErrorLabelComponent}
+              validateOnClick={validateOnClick}
+              buttonClicked={buttonClicked}
             />
           </>
         );

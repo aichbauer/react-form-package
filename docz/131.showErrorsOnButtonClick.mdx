@@ -1,21 +1,24 @@
 ---
-name: Custom Error Messages
-route: /custom-error-messages
-order: 130
+name: Show Errors on Button Click
+route: /show-errors-on-button-click
+order: 131
 ---
 
 import { Form, Button, Field } from '../src';
 import { Playground } from 'docz';
 
-# Custom Error Messages
+# Show Errors on Button Click
 
-If you want to display your own error messages, use the `errorMessage` property on the `<Field />`, `<Select/>`, or `<RadioGroup/>` component.
+If you want to display the the erros on the button click you need to add the prop `validateOnClick` to the form.
 
 <Playground>
-  <Form>
+  <Form
+    validate
+    validateOnClick
+  >
     <div>
       <div>Email</div>
-      <Field id="email" type="email" required errorMessage="This is a custom error message!" />
+      <Field id="email" type="email" required />
     </div>
     <div>
       <Button type="submit" id="submit" onClick={(state) => {

@@ -22,6 +22,7 @@ export default {
     'onFocus onChange onBlur',
     'State Manipulation',
     'Custom Error Messages',
+    'Show Errors on Button Click',
     'Feedback on disabled Button',
     'Styling',
     'Dynamic Fields',

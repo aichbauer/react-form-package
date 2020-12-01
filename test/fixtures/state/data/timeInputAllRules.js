@@ -20,6 +20,8 @@ const timeInputAllRules = {
   },
   validate: false,
   formValid: false,
+  validateOnClick: false,
+  buttonClicked: false,
 };
 
 export {

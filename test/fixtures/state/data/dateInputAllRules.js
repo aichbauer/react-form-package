@@ -22,6 +22,8 @@ const dateInputAllRules = {
   },
   validate: false,
   formValid: false,
+  validateOnClick: false,
+  buttonClicked: false,
 };
 
 export {

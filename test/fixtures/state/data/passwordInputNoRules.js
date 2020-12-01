@@ -20,6 +20,8 @@ const passwordInputNoRules = {
   },
   validate: false,
   formValid: true,
+  validateOnClick: false,
+  buttonClicked: false,
 };
 
 export {

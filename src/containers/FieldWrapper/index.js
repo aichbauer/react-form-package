@@ -33,6 +33,8 @@ const FieldWrapper = (props) => {
           handleOnFocus,
           handleOnChange,
           handleOnBlur,
+          validateOnClick,
+          buttonClicked,
         } = state;
 
         if (!isDataValid(data, props)) {
@@ -88,6 +90,8 @@ const FieldWrapper = (props) => {
               id={id}
               errorMessage={errorMessage}
               ErrorLabelComponent={ErrorLabelComponent}
+              validateOnClick={validateOnClick}
+              buttonClicked={buttonClicked}
             />
           </>
         );

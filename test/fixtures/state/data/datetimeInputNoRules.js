@@ -20,6 +20,8 @@ const datetimeInputNoRules = {
   },
   validate: false,
   formValid: true,
+  validateOnClick: false,
+  buttonClicked: false,
 };
 
 export {
