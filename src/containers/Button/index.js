@@ -40,7 +40,7 @@ const Button = (props) => {
               e.preventDefault();
 
               if (validate && validateOnClick && !formValid) {
-                return setButtonClicked();
+                setButtonClicked();
               }
 
               if (rfpRole === 'addField') {
@@ -59,8 +59,6 @@ const Button = (props) => {
               if (!rfpRole) {
                 onClick(createReturnState(state));
               }
-
-              return null;
             }}
             onMouseEnter={(e) => {
               e.preventDefault();

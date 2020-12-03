@@ -10,6 +10,8 @@ import { Playground } from 'docz';
 # Show Errors on Button Click
 
 If you want to display the the erros on the button click you need to add the prop `validateOnClick` to the form.
+When using the prop `validateOnClick` the state is also returned in the `onClick` function. You can check with
+`state.formValid` if the data is valid and here you can start your request or whatever you need todo with the information.
 
 <Playground>
   <Form
@@ -22,9 +24,13 @@ If you want to display the the erros on the button click you need to add the pro
     </div>
     <div>
       <Button type="submit" id="submit" onClick={(state) => {
-          alert(JSON.stringify(state, null, 2));
-          alert('open the console to see the whole state...');
-          console.log(state);
+          if (state.formValid) {
+            alert(JSON.stringify(state, null, 2));
+            alert('open the console to see the whole state...');
+            console.log(state);
+          }
+
+          // do something else if form data is not valid
         }}>
         Submit
       </Button>
