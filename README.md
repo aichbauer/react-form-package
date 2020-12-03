@@ -24,6 +24,7 @@
 * [State](#state)
 * [State Manipulation](#state-manipulation)
 * [Custom Error Messages](#custom-error-messages)
+* [Show Errors on Button Click](#show-errors-on-button-click)
 * [Feedback on Disabled Button](#feedback-on-disabled-button)
 * [Styling](#styling)
 * [Dynamic Fields](#dynamic-fields)
@@ -193,6 +194,7 @@ const myForm = (props) => (
 Property | Type | Required | Default | Description
 ---|---|---|---|---
 validate| Bool | false | |
+validateOnClick| Bool | false | If you want to show the errors of a form on the click of the button |
 input | Element |  `<input className="rfp-input" />` | |
 checkbox | Element |  `<input className="rfp-checkbox" />` | |
 radio | Element |  `<input className="rfp-radio-group" />` | |
@@ -837,6 +839,37 @@ If you want to display your own error messages, use the `errorMessage` property 
   <div>
     <div>Email</div>
     <Field id="email" type="email" required errorMessage="This is a custom error message!" />
+  </div>
+</Form>
+```
+
+## Show Errors on Button Click
+
+If you want to display the the erros on the button click you need to add the prop `validateOnClick` to the form.
+When using the prop `validateOnClick` the state is also returned in the `onClick` function. You can check with
+`state.formValid` if the data is valid and here you can start your request or whatever you need todo with the information.
+
+```jsx
+<Form
+  validate
+  validateOnClick
+>
+  <div>
+    <div>Email</div>
+    <Field id="email" type="email" required />
+  </div>
+  <div>
+    <Button type="submit" id="submit" onClick={(state) => {
+        if (state.formValid) {
+          alert(JSON.stringify(state, null, 2));
+          alert('open the console to see the whole state...');
+          console.log(state);
+        }
+
+        // do something else if form data is not valid
+      }}>
+      Submit
+    </Button>
   </div>
 </Form>
 ```
