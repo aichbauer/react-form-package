@@ -22,7 +22,7 @@ test('Render Form (validate, validateOnClick) with button | click button | show
         <Field type="email" id="email" required errorMessage="error" />
       </div>
       <div>
-        <Button id="submit" type="submit">submit</Button>
+        <Button id="submit" type="submit" onClick={() => {}}>submit</Button>
       </div>
     </Form>
   );
