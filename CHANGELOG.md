@@ -1,3 +1,10 @@
+1.16.0 - December, 03 2020
+
+* 9d94e9c Test: fix onclick (aichbauer)
+* c497ca3 Docs: update readme for new feature validateOnClick (aichbauer)
+* fccb3ca Feat: allow access to state if using validateOnClick (aichbauer)
+* 90305f7 Feat: add show erros on button click/submit (aichbauer)
+
 1.15.3 - February, 16 2020
 
 * eabbaa9 Fix: rm props from dom (#43) (Lukas Aichbauer)
